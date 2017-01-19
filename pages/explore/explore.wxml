@@ -1,0 +1,5 @@
+<!--explore.wxml-->
+<view class="container">
+  <button class="btn" bindtap="transitionToApplication">申请列表</button>
+  <button class="btn" bindtap="transitionToCandidate">候选人列表</button>
+</view>

@@ -1,0 +1,31 @@
+<view>
+    <form>
+        <view class="section">
+            <input
+                    name="name"
+                    value="{{name}}"
+                    bindinput="updateName"
+                    placeholder="姓名"
+            />
+        </view>
+        <view class="section">
+            <input
+                    name="github"
+                    value="{{githubAccount}}"
+                    bindinput="updateGithub"
+                    placeholder="GitHub账号"
+            />
+        </view>
+        <view class="section">
+            <textarea
+                    name="details"
+                    value="{{details}}"
+                    bindinput="updateDetails"
+                    placeholder="更多信息"
+                    auto-height="true"
+            />
+        </view>
+        <button bindtap="addApplication" class="submit-btn" wx:if="{{role !== 'HR'}}">申请</button>
+        <button bindtap="transitionToApplications" class="submit-btn" wx:if="{{role === 'HR'}}">返回</button>
+    </form>
+</view>

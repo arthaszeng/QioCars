@@ -1,0 +1,13 @@
+<view>
+    <view wx:for="{{applications}}" wx:for-item="application" wx:key="{{objectId}}" class="job">
+        <view class="left">
+            <view>{{application.name}}</view>
+            <view>{{application.github}}</view>
+            <view>{{application.details}}</view>
+        </view>
+        <view class="right">
+            <button size="mini" bindtap="transitionToUpdate" data-id="{{application.objectId}}">查看</button>
+            <button size="mini" type="warn" data-id="{{application.objectId}}" bindtap="deleteJobs">删除</button>
+        </view>
+    </view>
+</view>
