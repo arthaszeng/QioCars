@@ -6,9 +6,9 @@ Page({
     data: {
         positions: []
     },
-    
+
     fetchPositions: function () {
-        new AV.Query('Position')
+        return new AV.Query('Position')
             .descending('createdAt')
             .find()
             .then(this.setPositions)
@@ -18,7 +18,7 @@ Page({
     onPullDownRefresh: function () {
         this.fetchPositions().then(wx.stopPullDownRefresh);
     },
-    
+
     setPositions: function (positions) {
         this.setData({
             positions,
@@ -53,7 +53,7 @@ Page({
             wx.showToast({
                 title: "删除成功",
                 mask: true,
-                duration: 1000  
+                duration: 1000
             });
             this.fetchPositions();
         }).catch(()=> {

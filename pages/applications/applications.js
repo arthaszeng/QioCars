@@ -9,7 +9,7 @@ Page({
     },
 
     fetchApplications: function () {
-        new AV.Query('Application')
+        return new AV.Query('Application')
             .descending('createdAt')
             .find()
             .then(this.setApplications)
@@ -17,7 +17,9 @@ Page({
     },
 
     onPullDownRefresh: function () {
-        this.fetchApplications().then(wx.stopPullDownRefresh);
+        this.fetchApplications().then(() => {
+            wx.stopPullDownRefresh()
+        });
     },
 
     setApplications: function (applications) {
