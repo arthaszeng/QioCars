@@ -3,7 +3,7 @@ const Position = require('../../model/position');
 
 
 Page({
-
+//g671o88g0fyvk27igbdocgtt6
     data: {
         positions: []
     },

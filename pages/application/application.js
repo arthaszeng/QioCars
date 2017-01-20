@@ -5,7 +5,16 @@ Page({
     data: {
         name: '',
         githubAccount: '',
+        phoneNumber: '',
+        email: '',
         details: '',
+
+        oldName: '',
+        oldGithubAccount: '',
+        oldPhoneNumber: '',
+        oldEmail: '',
+        oldDetails: '',
+
         positionId: '',
         applicationId: ''
     },
@@ -23,9 +32,16 @@ Page({
             application.fetch()
                 .then(
                     application => this.setData({
+                        oldGithubAccount: application.get('github'),
                         githubAccount: application.get('github'),
+                        oldDetails: application.get('details'),
                         details: application.get('details'),
+                        oldName: application.get('name'),
                         name: application.get('name'),
+                        oldEmail: application.get('email'),
+                        email: application.get('email'),
+                        oldPhoneNumber: application.get('phone'),
+                        phoneNumber: application.get('phone'),
                         applicationId: application.get('objectId'),
                         positionId: application.get('positionId')
                     }))
@@ -41,17 +57,22 @@ Page({
         var name = this.data.name && this.data.name.trim();
         var githubAccount = this.data.githubAccount && this.data.githubAccount.trim();
         var details = this.data.details && this.data.details.trim();
+        var email = this.data.email && this.data.email.trim();
+        var phone = this.data.phoneNumber && this.data.phoneNumber.trim();
 
-        if (!githubAccount || !details || !details) {
+        if (!githubAccount || !details || !details || !email || !phone) {
             return;
         }
 
-        this.chooseAFileL()
+        if (!this.isFieldChanged()) {
+            return;
+        }
 
-        //TODO: after confirming it's changed then save
         new Application({
             name: name,
             github: githubAccount,
+            phone: phone,
+            email: email,
             details: details,
             positionId: this.data.positionId
         }).save().then(() => {
@@ -60,8 +81,11 @@ Page({
                 mask: true,
                 duration: 1000
             });
-
-            this.transitionToPosition();
+            this.sendEmail(() => {
+                this.transitionToPosition()
+            }).catch((error) => {
+                //Todo: parse error
+            })
         }).catch(()=> {
             wx.showToast({
                 title: '提交失败',
@@ -71,21 +95,11 @@ Page({
         })
     },
 
-    chooseAFileL: function () {
-        wx.chooseImage({
-            count: 1,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
-            success: function(res) {
-                var tempFilePath = res.tempFilePaths[0];
-                new AV.File('file-name', {
-                    blob: {
-                        uri: tempFilePath
-                    },
-                }).save().then(
-                    file => console.log(file.url())
-                ).catch(console.error);
-            }
+    sendEmail: function () {
+        AV.User.requestEmailVerify(`${this.data.email}`).then(function (result) {
+            console.log(JSON.stringify(result));
+        }, function (error) {
+            console.log(JSON.stringify(error));
         });
     },
 
@@ -109,6 +123,26 @@ Page({
             githubAccount: value
         });
     },
+    updateEmail: function ({
+        detail: {
+            value
+        }
+    }) {
+        if (!value) return;
+        this.setData({
+            email: value
+        });
+    },
+    updatePhoneNumber: function ({
+        detail: {
+            value
+        }
+    }) {
+        if (!value) return;
+        this.setData({
+            phoneNumber: value
+        });
+    },
     updateDetails: function ({
         detail: {
             value
@@ -120,14 +154,21 @@ Page({
         });
     },
 
-    transitionToPosition(){
+    isFieldChanged: function () {
+        return this.data.oldDetails !== this.data.details ||
+            this.data.oldName !== this.data.name ||
+            this.data.oldPhoneNumber !== this.data.phoneNumber ||
+            this.data.oldGithubAccount !== this.data.githubAccount ||
+            this.data.oldEmail !== this.data.email
+    },
+
+    transitionToPosition: function () {
         wx.redirectTo({
             url: `../position/position?id=${this.data.positionId}`
         });
-    }
-    ,
+    },
 
-    transitionToApplications(){
+    transitionToApplications: function () {
         wx.navigateTo({
             url: `../applications/applications`
         });

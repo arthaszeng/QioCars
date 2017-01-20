@@ -17,6 +17,22 @@
             />
         </view>
         <view class="section">
+            <input
+                    name="email"
+                    value="{{email}}"
+                    bindinput="updateEmail"
+                    placeholder="邮箱"
+            />
+        </view>
+        <view class="section">
+            <input
+                    name="phoneNumber"
+                    value="{{phoneNumber}}"
+                    bindinput="updatePhoneNumber"
+                    placeholder="电话号码"
+            />
+        </view>
+        <view class="section">
             <textarea
                     name="details"
                     value="{{details}}"
@@ -25,8 +41,9 @@
                     auto-height="true"
             />
         </view>
-
-        <button bindtap="addApplication" class="submit-btn" wx:if="{{role !== 'HR'}}">申请</button>
+        <!--<button bindtap="addApplication" class="submit-btn" wx:if="{{role !== 'HR'}}">申请</button>-->
+        <button bindtap="addApplication" class="submit-btn">申请</button>
         <button bindtap="transitionToApplications" class="submit-btn" wx:if="{{role === 'HR'}}">返回</button>
+        <button bindtap="transitionToApplications" class="submit-btn">返回</button>
     </form>
 </view>
