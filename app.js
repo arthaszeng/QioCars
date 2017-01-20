@@ -34,13 +34,18 @@ App({
             } else {
                 wx.setStorageSync('role', 'USER');
 
-                var refereeRole = new AV.Role('referee');
-                var relation = refereeRole.getUsers();
-                relation.add(AV.User.current());
+                // var refereeRole = new AV.Role('referee');
+                var refereeRole = AV.Query(AV.Role);
+                refereeRole.equalTo('name', 'referee');
+                refereeRole.equalTo('user', AV.User.current())
+                    .find().then(function (results) {
+                    if (results.length = 0) {
+                        relation.add(AV.User.current());
+                    }
+                });
                 return refereeRole.save();
             }
         }).then().catch(function (error) {
-            console.log(error);
         });
     },
 

@@ -74,14 +74,9 @@ Page({
                 mask: true,
                 duration: 1000
             });
-            this.setupEvent(() => {
+            this.setupEvent();
+            this.transitionToPosition();
 
-            });
-            this.sendEmail(() => {
-                this.transitionToPosition()
-            }).catch((error) => {
-                //Todo: parse error
-            })
         }).catch(()=> {
             wx.showToast({
                 title: '提交失败',
@@ -92,11 +87,19 @@ Page({
     },
 
     setupEvent: function () {
-        app.globalData.user.set('correlationId', this.data.applicationId);
-        app.globalData.user.save();
+        //TODO: NEED TO CHECK IF THE USER EXISTS
+        var applicant = new AV.User();
+        applicant.setUsername(`${this.data.name}`);
+        applicant.setPassword('applicant');
+        applicant.setEmail(`${this.data.email}`);
+        applicant.setMobilePhoneNumber(`${this.data.phoneNumber}`);
+        applicant.set('correlationID', AV.User.current().getObjectId());
+        applicant.signUp().then(function () {
+        }, function (error) {
+        });
     },
 
-    sendEmail: function () {
+    resendEmail: function () {
         AV.User.requestEmailVerify(`${this.data.email}`).then(function (result) {
             console.log(JSON.stringify(result));
         }, function (error) {
