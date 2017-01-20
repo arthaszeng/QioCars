@@ -26,7 +26,6 @@ Page({
         const positionId = query.positionId;
         const applicationId = query.applicationId;
 
-
         if (positionId == null) {
             var application = AV.Object.createWithoutData('Application', applicationId);
             application.fetch()

@@ -3,6 +3,8 @@
         <view class="left">
             <view>{{application.name}}</view>
             <view>{{application.github}}</view>
+            <view>{{application.phone}}</view>
+            <view>{{application.email}}</view>
             <view>{{application.details}}</view>
         </view>
         <view class="right">

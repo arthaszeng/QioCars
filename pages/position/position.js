@@ -7,23 +7,23 @@ Page({
         positionName: '',
         positionLocation: '',
         positionDescription: '',
+        
+        oldPositionName: '',
+        oldPositionLocation: '',
+        oldPositionDescription: '',
+        
         positionId: ''
     },
 
     addPosition: function () {
-        var positionName = this.data.positionName && this.data.positionName.trim();
-        var positionLocation = this.data.positionLocation && this.data.positionLocation.trim();
-        var positionDescription = this.data.positionDescription && this.data.positionDescription.trim();
-
-        if (!positionLocation || !positionDescription || !positionDescription) {
+        if (this.isNoFieldChanged() || this.isAnyFieldBlank()) {
             return;
         }
 
-        //TODO: after confirming it's changed then save
         new Position({
-            name: positionName,
-            location: positionLocation,
-            description: positionDescription,
+            name: this.data.positionName,
+            location: this.data.positionLocation,
+            description: this.data.positionDescription,
         }).save().then(() => {
             wx.showToast({
                 title: "提交成功",
@@ -32,7 +32,7 @@ Page({
             this.transitionToPositions();
         }).catch(()=> {
             wx.showToast({
-                title: '请勿重复提交',
+                title: '提交失败',
                 mask: true,
                 duration: 1000
             })
@@ -84,9 +84,22 @@ Page({
                     positionLocation: position.get('location'),
                     positionDescription: position.get('description'),
                     positionName: position.get('name'),
+                    oldPositionLocation: position.get('location'),
+                    oldPositionDescription: position.get('description'),
+                    oldPositionName: position.get('name'),
                     positionId: position.get('objectId')
                 }))
             .catch(console.error);
+    },
+
+    isNoFieldChanged: function () {
+        return this.data.positionDescription === this.data.oldPositionDescription &&
+            this.data.positionName === this.data.oldPositionName &&
+            this.data.positionLocation === this.data.oldPositionLocation
+    },
+
+    isAnyFieldBlank: function () {
+        return !this.data.positionDescription || !this.data.positionName || !this.data.positionLocation
     },
 
     transitionToPositions(){

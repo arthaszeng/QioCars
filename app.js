@@ -9,15 +9,24 @@ AV.init({
 App({
     onLaunch: function () {
 
-        var logs = wx.getStorageSync('logs') || []
-        logs.unshift(Date.now())
-        wx.setStorageSync('logs', logs)
-        wx.setStorageSync('role', 'HR')
+        var logs = wx.getStorageSync('logs') || [];
+        logs.unshift(Date.now());
+        wx.setStorageSync('logs', logs);
+        wx.setStorageSync('role', 'HR');
         // wx.setStorageSync('role', 'USER')
+
+        AV.Promise.resolve(AV.User.current()).then(user =>
+            user ? (user.isAuthenticated().then(authed => authed ? user : null)) : null
+        ).then(user =>
+            user ? user : AV.User.loginWithWeapp()
+        ).then((user) => {
+            this.globalData.user = user
+        }).catch(error => console.error(error.message));
+
     },
 
     getUserInfo: function (cb) {
-        var that = this
+        var that = this;
         if (this.globalData.userInfo) {
             typeof cb == "function" && cb(this.globalData.userInfo)
         } else {
@@ -26,7 +35,7 @@ App({
                 success: function () {
                     wx.getUserInfo({
                         success: function (res) {
-                            that.globalData.userInfo = res.userInfo
+                            that.globalData.userInfo = res.userInfo;
                             typeof cb == "function" && cb(that.globalData.userInfo)
                         }
                     })
@@ -37,4 +46,4 @@ App({
     globalData: {
         userInfo: null
     }
-})
+});

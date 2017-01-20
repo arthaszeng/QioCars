@@ -3,27 +3,20 @@ const Position = require('../../model/position');
 
 
 Page({
-//g671o88g0fyvk27igbdocgtt6
     data: {
         positions: []
     },
     
-    loginAndFetchPositions: function () {
-        return AV.Promise.resolve(AV.User.current()).then(user =>
-            user ? (user.isAuthenticated().then(authed => authed ? user : null)) : null
-        ).then(user =>
-            user ? user : AV.User.loginWithWeapp()
-        ).then((user) => {
-            return new AV.Query('Position')
-                .descending('createdAt')
-                .find()
-                .then(this.setPositions)
-                .catch(console.error);
-        }).catch(error => console.error(error.message));
+    fetchPositions: function () {
+        new AV.Query('Position')
+            .descending('createdAt')
+            .find()
+            .then(this.setPositions)
+            .catch(console.error);
     },
 
     onPullDownRefresh: function () {
-        this.loginAndFetchPositions().then(wx.stopPullDownRefresh);
+        this.fetchPositions().then(wx.stopPullDownRefresh);
     },
     
     setPositions: function (positions) {
@@ -33,7 +26,7 @@ Page({
     },
 
     onShow() {
-        this.loginAndFetchPositions();
+        this.fetchPositions();
     },
 
     onLoad() {
@@ -62,7 +55,7 @@ Page({
                 mask: true,
                 duration: 1000  
             });
-            this.loginAndFetchPositions();
+            this.fetchPositions();
         }).catch(()=> {
             wx.showToast({
                 title: '失败',
