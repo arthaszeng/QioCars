@@ -1,5 +1,6 @@
 const AV = require('../../utils/leancloud-storage');
 const Application = require('../../model/application');
+var app = getApp();
 
 Page({
     data: {
@@ -20,8 +21,8 @@ Page({
     },
 
     onLoad(query){
-        const role = wx.getStorageSync('role')
-        this.setData({role})
+        const role = wx.getStorageSync('role');
+        this.setData({role});
 
         const positionId = query.positionId;
         const applicationId = query.applicationId;
@@ -73,6 +74,9 @@ Page({
                 mask: true,
                 duration: 1000
             });
+            this.setupEvent(() => {
+
+            });
             this.sendEmail(() => {
                 this.transitionToPosition()
             }).catch((error) => {
@@ -85,6 +89,11 @@ Page({
                 duration: 1000
             })
         })
+    },
+
+    setupEvent: function () {
+        app.globalData.user.set('correlationId', this.data.applicationId);
+        app.globalData.user.save();
     },
 
     sendEmail: function () {
