@@ -33,15 +33,17 @@ Page({
                 .then(
                     application => this.setData({
                         oldGithubAccount: application.get('github'),
-                        githubAccount: application.get('github'),
                         oldDetails: application.get('details'),
-                        details: application.get('details'),
                         oldName: application.get('name'),
-                        name: application.get('name'),
                         oldEmail: application.get('email'),
-                        email: application.get('email'),
                         oldPhoneNumber: application.get('phone'),
+
+                        githubAccount: application.get('github'),
+                        details: application.get('details'),
+                        name: application.get('name'),
+                        email: application.get('email'),
                         phoneNumber: application.get('phone'),
+
                         applicationId: application.get('objectId'),
                         positionId: application.get('positionId')
                     }))
@@ -54,26 +56,17 @@ Page({
     },
 
     addApplication: function () {
-        var name = this.data.name && this.data.name.trim();
-        var githubAccount = this.data.githubAccount && this.data.githubAccount.trim();
-        var details = this.data.details && this.data.details.trim();
-        var email = this.data.email && this.data.email.trim();
-        var phone = this.data.phoneNumber && this.data.phoneNumber.trim();
 
-        if (!githubAccount || !details || !details || !email || !phone) {
-            return;
-        }
-
-        if (!this.isFieldChanged()) {
+        if (this.isNoFieldChanged() || this.isAnyFieldBlank()) {
             return;
         }
 
         new Application({
-            name: name,
-            github: githubAccount,
-            phone: phone,
-            email: email,
-            details: details,
+            name: this.data.name,
+            github: this.data.githubAccount,
+            phone: this.data.phoneNumber,
+            email: this.data.email,
+            details: this.data.details,
             positionId: this.data.positionId
         }).save().then(() => {
             wx.showToast({
@@ -154,12 +147,16 @@ Page({
         });
     },
 
-    isFieldChanged: function () {
-        return this.data.oldDetails !== this.data.details ||
-            this.data.oldName !== this.data.name ||
-            this.data.oldPhoneNumber !== this.data.phoneNumber ||
-            this.data.oldGithubAccount !== this.data.githubAccount ||
-            this.data.oldEmail !== this.data.email
+    isNoFieldChanged: function () {
+        return this.data.oldDetails === this.data.details &&
+            this.data.oldName === this.data.name &&
+            this.data.oldPhoneNumber === this.data.phoneNumber &&
+            this.data.oldGithubAccount === this.data.githubAccount &&
+            this.data.oldEmail === this.data.email
+    },
+
+    isAnyFieldBlank: function () {
+        return !this.data.githubAccount || !this.data.details || !this.data.name || !this.data.email || !this.data.phoneNumber
     },
 
     transitionToPosition: function () {
