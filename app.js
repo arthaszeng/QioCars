@@ -12,8 +12,6 @@ App({
         var logs = wx.getStorageSync('logs') || [];
         logs.unshift(Date.now());
         wx.setStorageSync('logs', logs);
-        // wx.setStorageSync('role', 'HR');
-        // wx.setStorageSync('role', 'USER')
 
         AV.Promise.resolve(AV.User.current()).then(user =>
             user ? (user.isAuthenticated().then(authed => authed ? user : null)) : null
@@ -26,16 +24,14 @@ App({
 
     },
 
-    judgeRole: function (user) {
+    judgeRole: function () {
         var roleQuery = new AV.Query(AV.Role);
         roleQuery.equalTo('name', 'hr');
         roleQuery.equalTo('users', AV.User.current());
         roleQuery.find().then(function (results) {
             if (results.length > 0) {
-                // 当前用户已经具备了 Administrator 角色，因此不需要做任何操作
                 wx.setStorageSync('role', 'HR');
             } else {
-                // 当前用户不具备 Administrator，因此你需要把当前用户添加到 Role 的 Users 中
                 wx.setStorageSync('role', 'USER');
 
                 var refereeRole = new AV.Role('referee');
@@ -43,10 +39,7 @@ App({
                 relation.add(AV.User.current());
                 return refereeRole.save();
             }
-        }).then(function () {
-            //此时 administratorRole 已经包含了当前用户
-        }).catch(function (error) {
-            // 输出错误
+        }).then().catch(function (error) {
             console.log(error);
         });
     },
@@ -56,7 +49,6 @@ App({
         if (this.globalData.userInfo) {
             typeof cb == "function" && cb(this.globalData.userInfo)
         } else {
-            //调用登录接口
             wx.login({
                 success: function () {
                     wx.getUserInfo({
