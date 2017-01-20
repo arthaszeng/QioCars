@@ -25,6 +25,7 @@
                     auto-height="true"
             />
         </view>
+
         <button bindtap="addApplication" class="submit-btn" wx:if="{{role !== 'HR'}}">申请</button>
         <button bindtap="transitionToApplications" class="submit-btn" wx:if="{{role === 'HR'}}">返回</button>
     </form>

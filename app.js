@@ -1,8 +1,8 @@
 const AV = require('./utils/leancloud-storage');
 
 AV.init({
-    appId: 'A8Hd5F2XM2UEqYLmourvVJkq-gzGzoHsz',
-    appKey: 'C1rD26ukkgTHVItkrc4rXGeT',
+    appId: 'pULF0bTlab2WCP9u9uIkPPyh-gzGzoHsz',
+    appKey: '1KOCNbRo4wenO5Vdwci38uS3'
 });
 
 App({
