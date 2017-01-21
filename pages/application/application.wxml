@@ -1,7 +1,11 @@
 <view>
     <form>
         <view class="section">
-            <input name="name" value="{{name}}" bindinput="updateName" placeholder="姓名" auto-focus/>
+            <input name="name"
+                   value="{{name}}"
+                   bindinput="updateName"
+                   placeholder="姓名"
+            />
         </view>
         <view class="section">
             <input
@@ -26,10 +30,8 @@
                    placeholder="电话号码"
                    maxlength="11"
                    auto-height="true"
-            >
-                <button style="display: {{role === 'HR' ? 'inline': 'none'}}" class="add tappable" bindtap="callPhone">Call</button>
-            </input>
-
+            />
+            <button style="display: {{role === 'HR' ? 'inline': 'none'}}" class="add tappable" bindtap="callPhone">Call</button>
         </view>
         <view class="section">
             <textarea
@@ -40,10 +42,7 @@
                     auto-height="true"
             />
         </view>
-        <!--disabled="{{role=='HR' ? true : false}}"-->
-
-        <button bindtap="addApplication" class="submit-btn">申请</button>
-        <!--<button bindtap="transitionToApplications" class="submit-btn" wx:if="{{role === 'HR'}}">返回</button>-->
+        <button bindtap="prepareForApplication" class="submit-btn">申请</button>
         <button bindtap="transitionToApplications" class="submit-btn">返回</button>
     </form>
 </view>

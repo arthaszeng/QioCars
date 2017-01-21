@@ -41,6 +41,7 @@ Page({
 
     transitionToUpdate(e){
         wx.navigateTo({
+            redirect: "true",
             url: `../application/application?applicationId=${e.target.dataset.id}`
         });
     },

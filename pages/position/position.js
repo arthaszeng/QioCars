@@ -107,8 +107,8 @@ Page({
     },
 
     transitionToApply() {
-        console.log(this.data.positionId);
         wx.navigateTo({
+            redirect: "true",
             url: `../application/application?positionId=${this.data.positionId}`
         })
     },

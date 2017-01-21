@@ -2,15 +2,16 @@ let app = getApp();
 
 Page({
     onLoad() {
-        const role = wx.getStorageSync('role')
+        const role = wx.getStorageSync('role');
         this.setData({
             role
-        })
+        });
         app.candidatesRef.bindAsArray(this, 'candidates');
     },
 
     transitionToUpdate(e){
         wx.navigateTo({
+            redirect: "true",
             url: `../candidate/candidate?id=${e.target.dataset.id}`,
         });
     },
@@ -26,7 +27,7 @@ Page({
             title: '提交中...',
             icon: 'loading',
             mask: true
-        })
+        });
 
         const id = e.target.dataset.id;
         app.positionsRef.child(id).remove().then(()=> {

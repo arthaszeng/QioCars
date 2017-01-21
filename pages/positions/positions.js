@@ -38,12 +38,14 @@ Page({
 
     transitionToUpdate(e){
         wx.navigateTo({
+            redirect: "true",
             url: `../position/position?id=${e.target.dataset.id}`
         });
     },
 
     transitionToPosition(){
         wx.navigateTo({
+            redirect: "true",
             url: '../position/position'
         });
     },

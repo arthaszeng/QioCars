@@ -20,9 +20,9 @@ Page({
         applicationId: '',
 
         isRecommended: true,
-        emailExistence: false,
-        nameExistence: false,
-        phoneNumberExistence: false
+        emailExistence: true,
+        nameExistence: true,
+        phoneNumberExistence: true
     },
 
     onLoad(query){
@@ -32,7 +32,6 @@ Page({
         const positionId = query.positionId;
         const applicationId = query.applicationId;
 
-        //If posintionId is equal to null, then it's from old application request
         if (positionId == null && applicationId !== null) {
             var application = AV.Object.createWithoutData('Application', applicationId);
             application.fetch()
@@ -61,7 +60,7 @@ Page({
         }
     },
 
-    addApplication: function () {
+    prepareForApplication: function () {
         if (!this.isNoFieldBlank()) {
             wx.showToast({
                 title: "请填写完毕喔",
@@ -82,31 +81,26 @@ Page({
             return;
         }
 
-        if (!this.checkExistence()) {
-            this.setData({
-                isRecommended: false
-            })
-        }
-
         if (this.data.isRecommended) {
             wx.showModal({
                 title: "啊喔!",
                 confirmText: "我再想想",
                 content: `${this.data.name}已经被推荐了喔,请再确认一下!`,
                 confirmColor: "#e33f0f",
-                showCancel: false,
+                showCancel: false
             });
-            return;
         } else {
             wx.showToast({
-                title: "抢滩成功",
+                title: "验证成功",
                 icon: "success",
                 mask: true,
-                duration: 1000
-            })
+                duration: 1000,
+            });
+            this.createAnApplication()
         }
+    },
 
-
+    createAnApplication: function () {
         new Application({
             name: this.data.name,
             github: this.data.githubAccount,
@@ -145,45 +139,42 @@ Page({
         applicant.set('applicationId', this.data.applicationId);
 
         applicant.signUp().then(function () {
-            AV.User.logOut();
-            app.loginWithLCAndWeapp()
+            AV.User.logOut().then(function () {
+                app.loginWithLCAndWeapp()
+            })
         }, function (error) {
         });
-    },
-
-    checkExistence: function () {
-        return this.checkEmailExistence() || this.checkNameExistence() || this.checkPhoneNumberExistence()
     },
 
     checkEmailExistence: function () {
         var userQuery = new AV.Query(AV.User);
         userQuery.equalTo('email', `${this.data.email}`);
-        userQuery.find().then((results) => {
+        return userQuery.find().then((results) => {
             this.setData({
-                emailExistence: results.length > 0
+                emailExistence: results.length > 0,
+                isRecommended: this.data.nameExistence || this.data.phoneNumberExistence || this.data.emailExistence
             })
         });
-        return this.data.emailExistence
     },
     checkNameExistence: function () {
         var userQuery = new AV.Query(AV.User);
         userQuery.equalTo('name', `${this.data.name}`);
-        userQuery.find().then((results) => {
+        return userQuery.find().then((results) => {
             this.setData({
-                nameExistence: results.length > 0
+                nameExistence: results.length > 0,
+                isRecommended: this.data.nameExistence || this.data.phoneNumberExistence || this.data.emailExistence
             })
         });
-        return this.data.nameExistence
     },
     checkPhoneNumberExistence: function () {
         var userQuery = new AV.Query(AV.User);
         userQuery.equalTo('phone', `${this.data.phoneNumber}`);
-        userQuery.find().then((results) => {
+        return userQuery.find().then((results) => {
             this.setData({
-                phoneNumberExistence: results.length > 0
+                phoneNumberExistence: results.length > 0,
+                isRecommended: this.data.nameExistence || this.data.phoneNumberExistence || this.data.emailExistence
             })
         });
-        return this.data.phoneNumberExistence
     },
 
     resendEmail: function () {
@@ -202,29 +193,37 @@ Page({
         }
     },
 
-    isValidPhoneNumber: function () {
-        return true
+    checkPhoneNumberValidation: function () {
+        this.checkPhoneNumberExistence()
     },
-
+    checkNameValidation: function () {
+        this.checkNameExistence()
+    },
+    checkEmailValidation: function () {
+        this.checkEmailExistence()
+    },
 
     updateName: function (e) {
         this.setData({
             name: e.detail.value
-        })
-    },
-    updateGithub: function (e) {
-        this.setData({
-            githubAccount: e.detail.value
-        })
+        });
+        this.checkNameValidation()
     },
     updateEmail: function (e) {
         this.setData({
             email: e.detail.value
-        })
+        });
+        this.checkEmailValidation()
     },
     updatePhoneNumber: function (e) {
         this.setData({
             phoneNumber: e.detail.value
+        });
+        this.checkPhoneNumberValidation()
+    },
+    updateGithub: function (e) {
+        this.setData({
+            githubAccount: e.detail.value
         })
     },
     updateDetails: function (e) {
@@ -233,27 +232,31 @@ Page({
         })
     },
 
-
     isNoFieldChanged: function () {
         return this.data.oldDetails === this.data.details &&
             this.data.oldName === this.data.name &&
             this.data.oldPhoneNumber === this.data.phoneNumber &&
             this.data.oldGithubAccount === this.data.githubAccount &&
             this.data.oldEmail === this.data.email
-    },
+    }
+    ,
 
     isNoFieldBlank: function () {
         return this.data.githubAccount && this.data.details && this.data.name && this.data.email && this.data.phoneNumber
-    },
+    }
+    ,
 
     transitionToPosition: function () {
         wx.redirectTo({
+            redirect: "true",
             url: `../position/position?id=${this.data.positionId}`
         });
-    },
+    }
+    ,
 
     transitionToApplications: function () {
         wx.navigateTo({
+            redirect: "true",
             url: `../applications/applications`
         });
     }
