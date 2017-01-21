@@ -19,7 +19,10 @@ Page({
         positionId: '',
         applicationId: '',
 
-        isRecommended: true
+        isRecommended: true,
+        emailExistence: false,
+        nameExistence: false,
+        phoneNumberExistence: false
     },
 
     onLoad(query){
@@ -29,7 +32,8 @@ Page({
         const positionId = query.positionId;
         const applicationId = query.applicationId;
 
-        if (positionId == null) {
+        //If posintionId is equal to null, then it's from old application request
+        if (positionId == null && applicationId !== null) {
             var application = AV.Object.createWithoutData('Application', applicationId);
             application.fetch()
                 .then(
@@ -52,17 +56,37 @@ Page({
                 .catch(console.error);
         } else {
             this.setData({
-                positionId: positionId
+                positionId: positionId,
             })
         }
     },
 
     addApplication: function () {
-        if (this.isNoFieldChanged() || this.isAnyFieldBlank()) {
+        if (!this.isNoFieldBlank()) {
+            wx.showToast({
+                title: "请填写完毕喔",
+                icon: "loading",
+                mask: true,
+                duration: 1000
+            });
             return;
         }
 
-        this.checkIsRecommended();
+        if (this.isNoFieldChanged()) {
+            wx.showToast({
+                title: "请勿重复申请",
+                icon: "loading",
+                mask: true,
+                duration: 1000
+            });
+            return;
+        }
+
+        if (!this.checkExistence()) {
+            this.setData({
+                isRecommended: false
+            })
+        }
 
         if (this.data.isRecommended) {
             wx.showModal({
@@ -71,9 +95,8 @@ Page({
                 content: `${this.data.name}已经被推荐了喔,请再确认一下!`,
                 confirmColor: "#e33f0f",
                 showCancel: false,
-                success: function (res) {
-                }
-            })
+            });
+            return;
         } else {
             wx.showToast({
                 title: "抢滩成功",
@@ -83,9 +106,6 @@ Page({
             })
         }
 
-        if (this.data.isRecommended) {
-            return;
-        }
 
         new Application({
             name: this.data.name,
@@ -94,15 +114,17 @@ Page({
             email: this.data.email,
             details: this.data.details,
             positionId: this.data.positionId
-        }).save().then(() => {
+        }).save().then(application => {
             wx.showToast({
                 title: "提交成功",
                 mask: true,
                 duration: 1000
             });
             this.setupEvent();
+            this.setData({
+                applicationId: application.get('objectId')
+            });
             this.transitionToPosition();
-
         }).catch(()=> {
             wx.showToast({
                 title: '提交失败',
@@ -113,70 +135,54 @@ Page({
     },
 
     setupEvent: function () {
-        var applicant = this.checkExistence();
+        var applicant = new AV.User;
 
         applicant.setUsername(`${this.data.name}`);
         applicant.setPassword('applicant');
         applicant.setEmail(`${this.data.email}`);
         applicant.setMobilePhoneNumber(`${this.data.phoneNumber}`);
         applicant.set('correlationId', AV.User.current().getObjectId());
+        applicant.set('applicationId', this.data.applicationId);
+
         applicant.signUp().then(function () {
+            //TODO: confirming of
         }, function (error) {
         });
     },
 
-    checkIsRecommended: function () {
-        var userQuery = new AV.Query(AV.User);
-        userQuery.equalTo('email', `${this.data.email}`);
-        userQuery.find().then((results)=> {
-            if (results.length > 0) {
-                return true
-            } else {
-                userQuery.equalTo('phone', `${this.data.phoneNumber}`);
-                userQuery.find().then((results)=> {
-                    if (results.length > 0) {
-                        return true
-                    } else {
-                        userQuery.equalTo('name', `${this.data.name}`);
-                        userQuery.find.then((results)=> {
-                            if (results.length > 0) {
-                                return true
-                            } else {
-                                this.setData({
-                                    isRecommended: false
-                                });
-                                return false
-                            }
-                        })
-                    }
-                })
-            }
-        });
+    checkExistence: function () {
+        return this.checkEmailExistence() || this.checkNameExistence() || this.checkPhoneNumberExistence()
     },
 
-    checkExistence: function () {
+    checkEmailExistence: function () {
         var userQuery = new AV.Query(AV.User);
         userQuery.equalTo('email', `${this.data.email}`);
-        userQuery.find().then((results)=> {
-            if (results.length == 1) {
-                return results[0]
-            } else {
-                userQuery.equalTo('phone', `${this.data.phoneNumber}`);
-                userQuery.find().then((results)=> {
-                    if (results.length == 1) {
-                        return results[0]
-                    } else {
-                        userQuery.equalTo('name', `${this.data.name}`);
-                        userQuery.find.then((results)=> {
-                            if (results.length == 1) {
-                                return results[0]
-                            }
-                        })
-                    }
-                })
-            }
+        userQuery.find().then((results) => {
+            this.setData({
+                emailExistence: results.length > 0
+            })
         });
-        return new AV.User
+        return this.data.emailExistence
+    },
+    checkNameExistence: function () {
+        var userQuery = new AV.Query(AV.User);
+        userQuery.equalTo('name', `${this.data.name}`);
+        userQuery.find().then((results) => {
+            this.setData({
+                nameExistence: results.length > 0
+            })
+        });
+        return this.data.nameExistence
+    },
+    checkPhoneNumberExistence: function () {
+        var userQuery = new AV.Query(AV.User);
+        userQuery.equalTo('phone', `${this.data.phoneNumber}`);
+        userQuery.find().then((results) => {
+            this.setData({
+                phoneNumberExistence: results.length > 0
+            })
+        });
+        return this.data.phoneNumberExistence
     },
 
     resendEmail: function () {
@@ -200,61 +206,32 @@ Page({
     },
 
 
-    updateName: function ({
-        detail: {
-            value
-        }
-    }) {
-        if (!value) return;
+    updateName: function (e) {
         this.setData({
-            name: value
-        });
-    }
-    ,
-    updateGithub: function ({
-        detail: {
-            value
-        }
-    }) {
-        if (!value) return;
+            name: e.detail.value
+        })
+    },
+    updateGithub: function (e) {
         this.setData({
-            githubAccount: value
-        });
-    }
-    ,
-    updateEmail: function ({
-        detail: {
-            value
-        }
-    }) {
-        if (!value) return;
+            githubAccount: e.detail.value
+        })
+    },
+    updateEmail: function (e) {
         this.setData({
-            email: value
-        });
-    }
-    ,
-    updatePhoneNumber: function ({
-        detail: {
-            value
-        }
-    }) {
-        if (!value) return;
+            email: e.detail.value
+        })
+    },
+    updatePhoneNumber: function (e) {
         this.setData({
-            phoneNumber: value
-        });
-    }
-    ,
-    updateDetails: function ({
-        detail: {
-            value
-        }
-    }) {
-        if (!value) return;
+            phoneNumber: e.detail.value
+        })
+    },
+    updateDetails: function (e) {
         this.setData({
-            details: value
-        });
-    }
-    ,
+            details: e.detail.value
+        })
+    },
+
 
     isNoFieldChanged: function () {
         return this.data.oldDetails === this.data.details &&
@@ -262,20 +239,17 @@ Page({
             this.data.oldPhoneNumber === this.data.phoneNumber &&
             this.data.oldGithubAccount === this.data.githubAccount &&
             this.data.oldEmail === this.data.email
-    }
-    ,
+    },
 
-    isAnyFieldBlank: function () {
-        return !this.data.githubAccount || !this.data.details || !this.data.name || !this.data.email || !this.data.phoneNumber
-    }
-    ,
+    isNoFieldBlank: function () {
+        return this.data.githubAccount && this.data.details && this.data.name && this.data.email && this.data.phoneNumber
+    },
 
     transitionToPosition: function () {
         wx.redirectTo({
             url: `../position/position?id=${this.data.positionId}`
         });
-    }
-    ,
+    },
 
     transitionToApplications: function () {
         wx.navigateTo({

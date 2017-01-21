@@ -5,7 +5,7 @@
                     name="name"
                     value="{{positionName}}"
                     disabled="{{role=='HR' ? false : true}}"
-                    bindinput="updateName"
+                    bindInput="updateName"
                     placeholder="职位名称"
             />
         </view>
@@ -14,7 +14,7 @@
                     name="location"
                     value="{{positionLocation}}"
                     disabled="{{role=='HR' ? false : true}}"
-                    bindinput="updateLocation"
+                    bindInput="updateLocation"
                     placeholder="所在位置"
             />
         </view>
@@ -23,7 +23,7 @@
                     name="description"
                     value="{{positionDescription}}"
                     disabled="{{role=='HR' ? false : true}}"
-                    bindinput="updateDescription"
+                    bindInput="updateDescription"
                     placeholder="职位描述"
                     auto-height="true"
             />

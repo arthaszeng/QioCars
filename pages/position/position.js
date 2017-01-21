@@ -16,7 +16,7 @@ Page({
     },
 
     addPosition: function () {
-        if (this.isNoFieldChanged() || this.isAnyFieldBlank()) {
+        if (this.isNoFieldChanged() || this.isNoFieldBlank()) {
             return;
         }
 
@@ -74,8 +74,8 @@ Page({
     onLoad(query){
         const id = query.id;
 
-        const role = wx.getStorageSync('role')
-        this.setData({ role })
+        const role = wx.getStorageSync('role');
+        this.setData({ role });
 
         var position = AV.Object.createWithoutData('Position', id);
         position.fetch()
@@ -98,7 +98,7 @@ Page({
             this.data.positionLocation === this.data.oldPositionLocation
     },
 
-    isAnyFieldBlank: function () {
+    isNoFieldBlank: function () {
         return !this.data.positionDescription || !this.data.positionName || !this.data.positionLocation
     },
 
@@ -107,7 +107,7 @@ Page({
     },
 
     transitionToApply() {
-        console.log(this.data.positionId)
+        console.log(this.data.positionId);
         wx.navigateTo({
             url: `../application/application?positionId=${this.data.positionId}`
         })
