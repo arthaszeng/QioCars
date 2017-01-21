@@ -12,7 +12,11 @@ App({
         var logs = wx.getStorageSync('logs') || [];
         logs.unshift(Date.now());
         wx.setStorageSync('logs', logs);
-
+        
+        this.loginWithLCAndWeapp()
+    },
+    
+    loginWithLCAndWeapp: function () {
         AV.Promise.resolve(AV.User.current()).then(user =>
             user ? (user.isAuthenticated().then(authed => authed ? user : null)) : null
         ).then(user =>
@@ -21,7 +25,6 @@ App({
             this.judgeRole();
             this.globalData.user = user
         }).catch(error => console.error(error.message));
-
     },
 
     judgeRole: function () {

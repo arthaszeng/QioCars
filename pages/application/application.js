@@ -120,7 +120,7 @@ Page({
                 mask: true,
                 duration: 1000
             });
-            this.setupEvent();
+            this.createAnApplicant();
             this.setData({
                 applicationId: application.get('objectId')
             });
@@ -134,7 +134,7 @@ Page({
         })
     },
 
-    setupEvent: function () {
+    createAnApplicant: function () {
         var applicant = new AV.User;
 
         applicant.setUsername(`${this.data.name}`);
@@ -145,7 +145,8 @@ Page({
         applicant.set('applicationId', this.data.applicationId);
 
         applicant.signUp().then(function () {
-            //TODO: confirming of
+            AV.User.logOut();
+            app.loginWithLCAndWeapp()
         }, function (error) {
         });
     },

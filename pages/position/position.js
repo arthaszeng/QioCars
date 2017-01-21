@@ -7,19 +7,35 @@ Page({
         positionName: '',
         positionLocation: '',
         positionDescription: '',
-        
+
         oldPositionName: '',
         oldPositionLocation: '',
         oldPositionDescription: '',
-        
+
         positionId: ''
     },
 
     addPosition: function () {
-        if (this.isNoFieldChanged() || this.isNoFieldBlank()) {
+        if (!this.isNoFieldBlank()) {
+            wx.showToast({
+                title: "请填写完毕喔",
+                icon: "loading",
+                mask: true,
+                duration: 1000
+            });
             return;
         }
 
+        if (this.isNoFieldChanged()) {
+            wx.showToast({
+                title: "请勿重复申请",
+                icon: "loading",
+                mask: true,
+                duration: 1000
+            });
+            return;
+        }
+        
         new Position({
             name: this.data.positionName,
             location: this.data.positionLocation,
@@ -39,43 +55,27 @@ Page({
         })
     },
 
-
-    updateName: function ({
-        detail: {
-            value
-        }
-    }) {
-        if (!value) return;
+    updateName: function (e) {
         this.setData({
-            positionName: value
+            positionName: e.detail.value
         });
     },
-    updateLocation: function ({
-        detail: {
-            value
-        }
-    }) {
-        if (!value) return;
+    updateLocation: function (e) {
         this.setData({
-            positionLocation: value
-        });
+            positionLocation: e.detail.value
+        })
     },
-    updateDescription: function ({
-        detail: {
-            value
-        }
-    }) {
-        if (!value) return;
+    updateDescription: function (e) {
         this.setData({
-            positionDescription: value
-        });
+            positionDescription: e.detail.value
+        })
     },
 
     onLoad(query){
         const id = query.id;
 
         const role = wx.getStorageSync('role');
-        this.setData({ role });
+        this.setData({role});
 
         var position = AV.Object.createWithoutData('Position', id);
         position.fetch()
@@ -99,7 +99,7 @@ Page({
     },
 
     isNoFieldBlank: function () {
-        return !this.data.positionDescription || !this.data.positionName || !this.data.positionLocation
+        return this.data.positionDescription && this.data.positionName && this.data.positionLocation
     },
 
     transitionToPositions(){

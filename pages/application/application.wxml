@@ -1,13 +1,13 @@
 <view>
     <form>
         <view class="section">
-            <input name="name" value="{{name}}" bindInput="updateName" placeholder="姓名" auto-focus/>
+            <input name="name" value="{{name}}" bindinput="updateName" placeholder="姓名" auto-focus/>
         </view>
         <view class="section">
             <input
                     name="github"
                     value="{{githubAccount}}"
-                    bindInput="updateGithub"
+                    bindinput="updateGithub"
                     placeholder="GitHub账号"
             />
         </view>
@@ -15,14 +15,14 @@
             <input
                     name="email"
                     value="{{email}}"
-                    bindInput="updateEmail"
+                    bindinput="updateEmail"
                     placeholder="邮箱"
             />
         </view>
         <view class="section">
             <input name="phoneNumber"
                    value="{{phoneNumber}}"
-                   bindInput="updatePhoneNumber"
+                   bindinput="updatePhoneNumber"
                    placeholder="电话号码"
                    maxlength="11"
                    auto-height="true"
@@ -35,7 +35,7 @@
             <textarea
                     name="details"
                     value="{{details}}"
-                    bindInput="updateDetails"
+                    bindinput="updateDetails"
                     placeholder="更多信息"
                     auto-height="true"
             />
