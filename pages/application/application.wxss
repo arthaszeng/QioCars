@@ -9,3 +9,14 @@
     color: #fff;
     margin: 40rpx 80rpx 40rpx 80rpx;
 }
+.add {
+    color: #FFF;
+    background-color: #1aad19;
+    font-size: 16px;
+    line-height: 53px;
+    padding: 0 16px;
+}
+
+.tappable:hover {
+    opacity: .6;
+}

@@ -17,7 +17,9 @@ Page({
         oldDetails: '',
 
         positionId: '',
-        applicationId: ''
+        applicationId: '',
+
+        isRecommended: true
     },
 
     onLoad(query){
@@ -56,8 +58,32 @@ Page({
     },
 
     addApplication: function () {
-
         if (this.isNoFieldChanged() || this.isAnyFieldBlank()) {
+            return;
+        }
+
+        this.checkIsRecommended();
+
+        if (this.data.isRecommended) {
+            wx.showModal({
+                title: "啊喔!",
+                confirmText: "我再想想",
+                content: `${this.data.name}已经被推荐了喔,请再确认一下!`,
+                confirmColor: "#e33f0f",
+                showCancel: false,
+                success: function (res) {
+                }
+            })
+        } else {
+            wx.showToast({
+                title: "抢滩成功",
+                icon: "success",
+                mask: true,
+                duration: 1000
+            })
+        }
+
+        if (this.data.isRecommended) {
             return;
         }
 
@@ -87,16 +113,70 @@ Page({
     },
 
     setupEvent: function () {
-        //TODO: NEED TO CHECK IF THE USER EXISTS
-        var applicant = new AV.User();
+        var applicant = this.checkExistence();
+
         applicant.setUsername(`${this.data.name}`);
         applicant.setPassword('applicant');
         applicant.setEmail(`${this.data.email}`);
         applicant.setMobilePhoneNumber(`${this.data.phoneNumber}`);
-        applicant.set('correlationID', AV.User.current().getObjectId());
+        applicant.set('correlationId', AV.User.current().getObjectId());
         applicant.signUp().then(function () {
         }, function (error) {
         });
+    },
+
+    checkIsRecommended: function () {
+        var userQuery = new AV.Query(AV.User);
+        userQuery.equalTo('email', `${this.data.email}`);
+        userQuery.find().then((results)=> {
+            if (results.length > 0) {
+                return true
+            } else {
+                userQuery.equalTo('phone', `${this.data.phoneNumber}`);
+                userQuery.find().then((results)=> {
+                    if (results.length > 0) {
+                        return true
+                    } else {
+                        userQuery.equalTo('name', `${this.data.name}`);
+                        userQuery.find.then((results)=> {
+                            if (results.length > 0) {
+                                return true
+                            } else {
+                                this.setData({
+                                    isRecommended: false
+                                });
+                                return false
+                            }
+                        })
+                    }
+                })
+            }
+        });
+    },
+
+    checkExistence: function () {
+        var userQuery = new AV.Query(AV.User);
+        userQuery.equalTo('email', `${this.data.email}`);
+        userQuery.find().then((results)=> {
+            if (results.length == 1) {
+                return results[0]
+            } else {
+                userQuery.equalTo('phone', `${this.data.phoneNumber}`);
+                userQuery.find().then((results)=> {
+                    if (results.length == 1) {
+                        return results[0]
+                    } else {
+                        userQuery.equalTo('name', `${this.data.name}`);
+                        userQuery.find.then((results)=> {
+                            if (results.length == 1) {
+                                return results[0]
+                            }
+                        })
+                    }
+                })
+            }
+        });
+        return new AV.User
     },
 
     resendEmail: function () {
@@ -107,6 +187,19 @@ Page({
         });
     },
 
+    callPhone: function () {
+        if (this.isValidPhoneNumber()) {
+            wx.makePhoneCall({
+                phoneNumber: `${this.data.phoneNumber}`
+            })
+        }
+    },
+
+    isValidPhoneNumber: function () {
+        return true
+    },
+
+
     updateName: function ({
         detail: {
             value
@@ -116,7 +209,8 @@ Page({
         this.setData({
             name: value
         });
-    },
+    }
+    ,
     updateGithub: function ({
         detail: {
             value
@@ -126,7 +220,8 @@ Page({
         this.setData({
             githubAccount: value
         });
-    },
+    }
+    ,
     updateEmail: function ({
         detail: {
             value
@@ -136,7 +231,8 @@ Page({
         this.setData({
             email: value
         });
-    },
+    }
+    ,
     updatePhoneNumber: function ({
         detail: {
             value
@@ -146,7 +242,8 @@ Page({
         this.setData({
             phoneNumber: value
         });
-    },
+    }
+    ,
     updateDetails: function ({
         detail: {
             value
@@ -156,7 +253,8 @@ Page({
         this.setData({
             details: value
         });
-    },
+    }
+    ,
 
     isNoFieldChanged: function () {
         return this.data.oldDetails === this.data.details &&
@@ -164,17 +262,20 @@ Page({
             this.data.oldPhoneNumber === this.data.phoneNumber &&
             this.data.oldGithubAccount === this.data.githubAccount &&
             this.data.oldEmail === this.data.email
-    },
+    }
+    ,
 
     isAnyFieldBlank: function () {
         return !this.data.githubAccount || !this.data.details || !this.data.name || !this.data.email || !this.data.phoneNumber
-    },
+    }
+    ,
 
     transitionToPosition: function () {
         wx.redirectTo({
             url: `../position/position?id=${this.data.positionId}`
         });
-    },
+    }
+    ,
 
     transitionToApplications: function () {
         wx.navigateTo({
