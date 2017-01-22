@@ -1,17 +1,19 @@
 const AV = require('../../utils/leancloud-storage');
 const Application = require('../../model/application');
+const leancloudApis = require('../../utils/leancloud-apis');
+
 var app = getApp();
 
 Page({
     data: {
         name: '',
-        githubAccount: '',
+        github: '',
         phoneNumber: '',
         email: '',
         details: '',
 
         oldName: '',
-        oldGithubAccount: '',
+        oldGithub: '',
         oldPhoneNumber: '',
         oldEmail: '',
         oldDetails: '',
@@ -38,13 +40,13 @@ Page({
             application.fetch()
                 .then(
                     application => this.setData({
-                        oldGithubAccount: application.get('github'),
+                        oldGithub: application.get('github'),
                         oldDetails: application.get('details'),
                         oldName: application.get('name'),
                         oldEmail: application.get('email'),
                         oldPhoneNumber: application.get('phone'),
 
-                        githubAccount: application.get('github'),
+                        github: application.get('github'),
                         details: application.get('details'),
                         name: application.get('name'),
                         email: application.get('email'),
@@ -109,36 +111,26 @@ Page({
         });
 
     },
-    //
-    // callback: function () {
-    //     if (this.data.nameExistence || this.data.phoneNumberExistence || this.data.emailExistence) {
-    //         wx.showModal({
-    //             title: "啊喔!",
-    //             confirmText: "我再想想",
-    //             content: `${this.data.name}已经被推荐了喔,请再确认一下!`,
-    //             confirmColor: "#e33f0f",
-    //             showCancel: false
-    //         });
-    //     } else {
-    //         this.createAnApplication()
-    //     }
-    // },
+
+    modifyApplication: function (e) {
+    },
 
     createAnApplication: function () {
+        const {name,github,phoneNumber,email,details,positionId} = this.data;
         new Application({
-            name: this.data.name,
-            github: this.data.githubAccount,
-            phone: this.data.phoneNumber,
-            email: this.data.email,
-            details: this.data.details,
-            positionId: this.data.positionId
+            name,
+            github,
+            phone:phoneNumber,
+            email,
+            details,
+            positionId
         }).save().then(application => {
             wx.showToast({
                 title: "提交成功",
                 mask: true,
                 duration: 1000
             });
-            this.createAnApplicant();
+            leancloudApis.createApplicant(this.data);
             this.setData({
                 applicationId: application.get('objectId')
             });
@@ -150,24 +142,6 @@ Page({
                 duration: 1000
             })
         })
-    },
-
-    createAnApplicant: function () {
-        var applicant = new AV.User;
-
-        applicant.setUsername(`${this.data.name}`);
-        applicant.setPassword('applicant');
-        applicant.setEmail(`${this.data.email}`);
-        applicant.setMobilePhoneNumber(`${this.data.phoneNumber}`);
-        applicant.set('correlationId', AV.User.current().getObjectId());
-        applicant.set('applicationId', this.data.applicationId);
-
-        applicant.signUp().then(function () {
-            AV.User.logOut().then(function () {
-                app.loginWithLCAndWeapp()
-            })
-        }, function (error) {
-        });
     },
 
     checkEmailExistence: function () {
@@ -252,7 +226,7 @@ Page({
     },
     updateGithub: function (e) {
         this.setData({
-            githubAccount: e.detail.value
+            github: e.detail.value
         })
     },
     updateDetails: function (e) {
@@ -265,13 +239,13 @@ Page({
         return this.data.oldDetails === this.data.details &&
             this.data.oldName === this.data.name &&
             this.data.oldPhoneNumber === this.data.phoneNumber &&
-            this.data.oldGithubAccount === this.data.githubAccount &&
+            this.data.oldGithub === this.data.github &&
             this.data.oldEmail === this.data.email
     }
     ,
 
     isNoFieldBlank: function () {
-        return this.data.githubAccount && this.data.details && this.data.name && this.data.email && this.data.phoneNumber
+        return this.data.github && this.data.details && this.data.name && this.data.email && this.data.phoneNumber
     }
     ,
 
