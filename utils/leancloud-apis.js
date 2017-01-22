@@ -18,3 +18,9 @@ export function createApplicant({name, email,phoneNumber,applicationId}) {
         //TODO: Handle error
     });
 }
+
+export function getApplications() {
+    return new AV.Query('Application')
+        .descending('createdAt')
+        .find();
+}

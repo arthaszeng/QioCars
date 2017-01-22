@@ -1,19 +1,53 @@
 const AV = require('../../utils/leancloud-storage');
 const Application = require('../../model/application');
+const leancloudApis = require('../../utils/leancloud-apis');
+const redux = require('../../utils/redux');
 
+
+const requestApplications = () => {
+    return {
+        type: 'GET_APPLICATIONS',
+        payload:{}
+    }
+};
+
+const getApplicationsSuccess = (applications)=> {
+  return {
+      type:'ADD_APPLICATIONS_SUCCESS',
+      payload: applications
+  }
+};
+
+const getApplications = ()=>{
+    return (dispatch) => {
+        dispatch(requestApplications());
+
+        console.log('fetching');
+       return leancloudApis.getApplications().then(applications => {
+           console.log('success');
+
+           dispatch(getApplicationsSuccess(applications));
+        });
+    }
+};
+
+
+const reducer = (state=[],action) =>{
+    switch(action.type){
+        case 'ADD_APPLICATIONS_SUCCESS':
+            return {applications: state.concat(action.payload)};
+        default:
+            return state;
+    }
+};
+
+const store = redux.createStore(reducer);
+console.log(store,'store');
 
 Page({
 
     data: {
         applications: []
-    },
-
-    fetchApplications: function () {
-        return new AV.Query('Application')
-            .descending('createdAt')
-            .find()
-            .then(this.setApplications)
-            .catch(console.error);
     },
 
     onPullDownRefresh: function () {
@@ -22,14 +56,17 @@ Page({
         });
     },
 
-    setApplications: function (applications) {
-        this.setData({
-            applications,
-        });
-    },
-
     onShow() {
-        this.fetchApplications();
+        leancloudApis.getApplications().then(applications => {
+
+            this.setData({
+                applications: applications
+            });
+        });
+
+        store.dispatch(getApplications()).then(()=>{
+            console.log(store.getState(),'store.state');
+        });
     },
 
     onLoad() {

@@ -43,7 +43,7 @@
                     auto-focus="true"
             />
         </view>
-        <button bindtap="prepareForApplication" class="submit-btn" wx:if="{{!applicationId}}">申请</button>
+        <button bindtap="onSubmit" class="submit-btn" wx:if="{{!applicationId}}">申请</button>
         <button bindtap="modifyApplication" class="submit-btn" wx:if="{{!!applicationId}}">修改</button>
         <button bindtap="transitionToApplications" class="submit-btn">返回</button>
     </form>

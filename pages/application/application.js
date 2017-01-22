@@ -63,7 +63,7 @@ Page({
         }
     },
 
-    prepareForApplication: function () {
+    onSubmit: function () {
         var that = this;
 
         if (!this.isNoFieldBlank()) {
@@ -104,7 +104,7 @@ Page({
                             showCancel: false
                         });
                     } else {
-                        that.createAnApplication()
+                        that.createApplication()
                     }
                 }
             }
@@ -112,15 +112,17 @@ Page({
 
     },
 
-    modifyApplication: function (e) {
+    modifyApplication: function () {
+        this.addApplication();
+        //TODO: complete impl
     },
 
-    createAnApplication: function () {
-        const {name,github,phoneNumber,email,details,positionId} = this.data;
+    createApplication: function () {
+        const {name, github, phoneNumber, email, details, positionId} = this.data;
         new Application({
             name,
             github,
-            phone:phoneNumber,
+            phone: phoneNumber,
             email,
             details,
             positionId
@@ -143,7 +145,7 @@ Page({
             })
         })
     },
-
+    //TODO: confirm is other impl and business process
     checkEmailExistence: function () {
         var userQuery = new AV.Query(AV.User);
         userQuery.equalTo('email', `${this.data.email}`);
@@ -151,10 +153,6 @@ Page({
             this.setData({
                 emailExistence: results.length > 0
             });
-
-            console.log(this.data.nameExistence);
-            console.log(this.data.emailExistence);
-            console.log(this.data.phoneNumberExistence)
         });
     },
     checkNameExistence: function () {
@@ -241,13 +239,11 @@ Page({
             this.data.oldPhoneNumber === this.data.phoneNumber &&
             this.data.oldGithub === this.data.github &&
             this.data.oldEmail === this.data.email
-    }
-    ,
+    },
 
     isNoFieldBlank: function () {
         return this.data.github && this.data.details && this.data.name && this.data.email && this.data.phoneNumber
-    }
-    ,
+    },
 
     transitionToPosition: function () {
         wx.redirectTo({
