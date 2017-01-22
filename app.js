@@ -51,7 +51,7 @@ App({
         }).then().catch(function (error) {
         });
     },
-
+//TODO: Understand Why It Uses Callback func here
     getUserInfo: function (cb) {
         var that = this;
         if (this.globalData.userInfo) {

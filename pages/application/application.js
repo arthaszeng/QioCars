@@ -19,10 +19,11 @@ Page({
         positionId: '',
         applicationId: '',
 
-        isRecommended: true,
         emailExistence: true,
         nameExistence: true,
-        phoneNumberExistence: true
+        phoneNumberExistence: true,
+
+        modalHidden: true
     },
 
     onLoad(query){
@@ -61,6 +62,8 @@ Page({
     },
 
     prepareForApplication: function () {
+        var that = this;
+
         if (!this.isNoFieldBlank()) {
             wx.showToast({
                 title: "请填写完毕喔",
@@ -68,7 +71,7 @@ Page({
                 mask: true,
                 duration: 1000
             });
-            return;
+            return
         }
 
         if (this.isNoFieldChanged()) {
@@ -78,27 +81,48 @@ Page({
                 mask: true,
                 duration: 1000
             });
-            return;
+            return
         }
 
-        if (this.data.isRecommended) {
-            wx.showModal({
-                title: "啊喔!",
-                confirmText: "我再想想",
-                content: `${this.data.name}已经被推荐了喔,请再确认一下!`,
-                confirmColor: "#e33f0f",
-                showCancel: false
-            });
-        } else {
-            wx.showToast({
-                title: "验证成功",
-                icon: "success",
-                mask: true,
-                duration: 1000,
-            });
-            this.createAnApplication()
-        }
+        wx.showModal({
+            title: "啊喔!",
+            confirmText: "我决定啦",
+            cancelText: "我再想想",
+            content: `提交后会自动给被推荐人发送邮件喔!\n亲,确定要提交吗?`,
+            confirmColor: "#e33f0f",
+            showCancel: true,
+            success: function (res) {
+                if (res.confirm) {
+                    if (that.data.nameExistence || that.data.phoneNumberExistence || that.data.emailExistence) {
+                        wx.showModal({
+                            title: "啊喔!",
+                            confirmText: "我再想想",
+                            content: `${that.data.name}已经被推荐了喔,请再确认一下!`,
+                            confirmColor: "#e33f0f",
+                            showCancel: false
+                        });
+                    } else {
+                        that.createAnApplication()
+                    }
+                }
+            }
+        });
+
     },
+    //
+    // callback: function () {
+    //     if (this.data.nameExistence || this.data.phoneNumberExistence || this.data.emailExistence) {
+    //         wx.showModal({
+    //             title: "啊喔!",
+    //             confirmText: "我再想想",
+    //             content: `${this.data.name}已经被推荐了喔,请再确认一下!`,
+    //             confirmColor: "#e33f0f",
+    //             showCancel: false
+    //         });
+    //     } else {
+    //         this.createAnApplication()
+    //     }
+    // },
 
     createAnApplication: function () {
         new Application({
@@ -151,9 +175,12 @@ Page({
         userQuery.equalTo('email', `${this.data.email}`);
         return userQuery.find().then((results) => {
             this.setData({
-                emailExistence: results.length > 0,
-                isRecommended: this.data.nameExistence || this.data.phoneNumberExistence || this.data.emailExistence
-            })
+                emailExistence: results.length > 0
+            });
+
+            console.log(this.data.nameExistence);
+            console.log(this.data.emailExistence);
+            console.log(this.data.phoneNumberExistence)
         });
     },
     checkNameExistence: function () {
@@ -161,9 +188,11 @@ Page({
         userQuery.equalTo('name', `${this.data.name}`);
         return userQuery.find().then((results) => {
             this.setData({
-                nameExistence: results.length > 0,
-                isRecommended: this.data.nameExistence || this.data.phoneNumberExistence || this.data.emailExistence
-            })
+                nameExistence: results.length > 0
+            });
+            console.log(this.data.nameExistence);
+            console.log(this.data.emailExistence);
+            console.log(this.data.phoneNumberExistence)
         });
     },
     checkPhoneNumberExistence: function () {
@@ -171,9 +200,11 @@ Page({
         userQuery.equalTo('phone', `${this.data.phoneNumber}`);
         return userQuery.find().then((results) => {
             this.setData({
-                phoneNumberExistence: results.length > 0,
-                isRecommended: this.data.nameExistence || this.data.phoneNumberExistence || this.data.emailExistence
-            })
+                phoneNumberExistence: results.length > 0
+            });
+            console.log(this.data.nameExistence);
+            console.log(this.data.emailExistence);
+            console.log(this.data.phoneNumberExistence)
         });
     },
 
@@ -186,11 +217,9 @@ Page({
     },
 
     callPhone: function () {
-        if (this.isValidPhoneNumber()) {
-            wx.makePhoneCall({
-                phoneNumber: `${this.data.phoneNumber}`
-            })
-        }
+        wx.makePhoneCall({
+            phoneNumber: `${this.data.phoneNumber}`
+        })
     },
 
     checkPhoneNumberValidation: function () {
@@ -251,15 +280,14 @@ Page({
             redirect: "true",
             url: `../position/position?id=${this.data.positionId}`
         });
-    }
-    ,
+    },
 
     transitionToApplications: function () {
         wx.navigateTo({
             redirect: "true",
             url: `../applications/applications`
         });
-    }
+    },
 
 })
 ;

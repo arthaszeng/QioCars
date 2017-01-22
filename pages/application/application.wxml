@@ -3,7 +3,7 @@
         <view class="section">
             <input name="name"
                    value="{{name}}"
-                   bindinput="updateName"
+                   bindblur="updateName"
                    placeholder="姓名"
             />
         </view>
@@ -11,7 +11,7 @@
             <input
                     name="github"
                     value="{{githubAccount}}"
-                    bindinput="updateGithub"
+                    bindblur="updateGithub"
                     placeholder="GitHub账号"
             />
         </view>
@@ -19,14 +19,14 @@
             <input
                     name="email"
                     value="{{email}}"
-                    bindinput="updateEmail"
+                    bindblur="updateEmail"
                     placeholder="邮箱"
             />
         </view>
         <view class="section">
             <input name="phoneNumber"
                    value="{{phoneNumber}}"
-                   bindinput="updatePhoneNumber"
+                   bindblur="updatePhoneNumber"
                    placeholder="电话号码"
                    maxlength="11"
                    auto-height="true"
@@ -37,9 +37,10 @@
             <textarea
                     name="details"
                     value="{{details}}"
-                    bindinput="updateDetails"
+                    bindblur="updateDetails"
                     placeholder="更多信息"
                     auto-height="true"
+                    auto-focus="true"
             />
         </view>
         <button bindtap="prepareForApplication" class="submit-btn">申请</button>
