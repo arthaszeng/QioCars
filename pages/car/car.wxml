@@ -1,0 +1,34 @@
+<view>
+    <form bindsubmit="onSubmit">
+        <view class="section">
+            <input
+                    name="name"
+                    value="{{positionName}}"
+                    disabled="{{role=='HR' ? false : true}}"
+                    bindinput="updateName"
+                    placeholder="职位名称"
+            />
+        </view>
+        <view class="section">
+            <input
+                    name="location"
+                    value="{{positionLocation}}"
+                    disabled="{{role=='HR' ? false : true}}"
+                    bindinput="updateLocation"
+                    placeholder="所在位置"
+            />
+        </view>
+        <view class="section">
+            <textarea
+                    name="description"
+                    value="{{positionDescription}}"
+                    disabled="{{role=='HR' ? false : true}}"
+                    bindinput="updateDescription"
+                    placeholder="职位描述"
+                    auto-height="true"
+            />
+        </view>
+        <button bindtap="addPosition" class="submit-btn" wx:if="{{role === 'HR'}}">提交</button>
+        <button bindtap="transitionToApply" class="submit-btn" data-id="{{positionId}}">申请</button>
+    </form>
+</view>

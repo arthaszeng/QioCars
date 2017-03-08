@@ -1,0 +1,25 @@
+<view>
+    <swiper autoplay>
+        <block wx:for="{{imgUrls}}">
+            <swiper-item>
+                <image src="{{item}}" class="slide-image" mode="aspectFill"/>
+            </swiper-item>
+        </block>
+    </swiper>
+    <div class="hot-brand">
+        <div class="hot-vender-cont">
+            <image class="hot-brand-image" src="http://tianche-playground.oss-cn-hangzhou.aliyuncs.com/top_brands/%E5%A5%94%E9%A9%B0.png"/>
+            <image class="hot-brand-image" src="http://tianche-playground.oss-cn-hangzhou.aliyuncs.com/top_brands/%E5%AE%9D%E9%A9%AC.png"/>
+            <image class="hot-brand-image" src="http://tianche-playground.oss-cn-hangzhou.aliyuncs.com/top_brands/%E5%A5%A5%E8%BF%AA.png"/>
+            <image class="hot-brand-image" src="http://tianche-playground.oss-cn-hangzhou.aliyuncs.com/top_brands/%E5%A4%A7%E4%BC%97.png"/>
+            <image class="hot-brand-image" src="http://tianche-playground.oss-cn-hangzhou.aliyuncs.com/top_brands/%E8%B7%AF%E8%99%8E.png"/>
+            <a class="hot-brand-image"/>
+        </div>
+    </div>
+    <image src="http://asset.ibanquan.com/middle/26633/c/265/571f66a7f294396bf60022a8/index-special-1?design_theme_id=0&v=1461675687" mode="aspectFit"></image>
+    <image src="http://asset.ibanquan.com/middle/26633/c/265/571f66a8f294396bf60022ac/index-special-2?design_theme_id=0&v=1461675688" mode="aspectFit"></image>
+
+    <div>
+        <div class="company-bg-img" backgrandUrl="http://asset.ibanquan.com/middle/26633/c/265/571f66a7f294396bf60022a5/index-company-bg?design_theme_id=0&amp;v=1461675687"></div>
+    </div>
+</view>

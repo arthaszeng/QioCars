@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/hot/hot",
+    "pages/car/car",
+    "pages/list/list",
+    "pages/me/me",
+    "pages/promotion/promotion"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#2DBE60",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "成都锦宏二手名车",
+    "backgroundColor": "#f6f8f9",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "position": "bottom",
+    "color": "gray",
+    "selectedColor": "#2DBE60",
+    "backgroundColor": "#f6f8f9",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/hot/hot",
+        "text": "热门",
+        "iconPath": "icons/home.png",
+        "selectedIconPath": "icons/home_green.png"
+      },
+      {
+        "pagePath": "pages/promotion/promotion",
+        "text": "活动",
+        "iconPath": "icons/compass.png",
+        "selectedIconPath": "icons/compass_green.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我",
+        "iconPath": "icons/person.png",
+        "selectedIconPath": "icons/person_green.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}
