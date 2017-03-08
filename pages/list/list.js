@@ -4,29 +4,29 @@ const AV = require('../../libs/av-weapp-min.js');
 
 Page({
     data: {
-        positions: []
+        cars: []
     },
 
-    fetchPositions: function () {
-        return new AV.Query('Position')
+    fetchCars: function () {
+        return new AV.Query('Car')
             .descending('createdAt')
             .find()
-            .then(this.setPositions)
+            .then(this.setCars)
             .catch(console.error);
     },
 
     onPullDownRefresh: function () {
-        this.fetchPositions().then(wx.stopPullDownRefresh);
+        this.fetchCars().then(wx.stopPullDownRefresh);
     },
 
-    setPositions: function (positions) {
+    setCars: function (cars) {
         this.setData({
-            positions,
+            cars,
         });
     },
 
     onShow() {
-        this.fetchPositions();
+        this.fetchCars();
     },
 
     onLoad() {
@@ -39,25 +39,25 @@ Page({
     transitionToUpdate(e){
         wx.navigateTo({
             redirect: "true",
-            url: `../position/position?id=${e.target.dataset.id}`
+            url: `../car/car?id=${e.target.dataset.id}`
         });
     },
 
-    transitionToPosition(){
+    transitionToCar(){
         wx.navigateTo({
             redirect: "true",
-            url: '../position/position'
+            url: '../car/car'
         });
     },
 
-    deleteJobs(e){
-        AV.Query.doCloudQuery(`delete from Position where objectId="${e.target.dataset.id}"`).then(()=> {
+    deleteCar(e){
+        AV.Query.doCloudQuery(`delete from Car where objectId="${e.target.dataset.id}"`).then(()=> {
             wx.showToast({
                 title: "删除成功",
                 mask: true,
                 duration: 1000
             });
-            this.fetchPositions();
+            this.fetchCars();
         }).catch(()=> {
             wx.showToast({
                 title: '失败',

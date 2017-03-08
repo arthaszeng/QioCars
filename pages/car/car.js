@@ -1,20 +1,21 @@
 const AV = require('../../libs/av-weapp-min.js');
-
+const Car = require('../../model/car');
 
 Page({
     data: {
-        positionName: '',
-        positionLocation: '',
-        positionDescription: '',
+        model: '',
+        brand: '',
+        price: '',
+        url: '',
 
-        oldPositionName: '',
-        oldPositionLocation: '',
-        oldPositionDescription: '',
+        oldModel: '',
+        oldBrand: '',
+        oldPrice: '',
 
-        positionId: ''
+        carId: ''
     },
 
-    addPosition: function () {
+    addCar: function () {
         if (!this.isNoFieldBlank()) {
             wx.showToast({
                 title: "请填写完毕喔",
@@ -34,11 +35,13 @@ Page({
             });
             return;
         }
-        
-        new Position({
-            name: this.data.positionName,
-            location: this.data.positionLocation,
-            description: this.data.positionDescription,
+        console.log(this.data.url);
+
+        new Car({
+            model: this.data.model,
+            brand: this.data.brand,
+            price: this.data.price,
+            url: this.data.url
         }).save().then(() => {
             wx.showToast({
                 title: "提交成功",
@@ -54,19 +57,44 @@ Page({
         })
     },
 
-    updateName: function (e) {
-        this.setData({
-            positionName: e.detail.value
+    addImage: function () {
+        var that = this;
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: function (res) {
+                var tempFilePath = res.tempFilePaths[0];
+                new AV.File('file-name', {
+                    blob: {
+                        uri: tempFilePath
+                    }
+                }).save().then(
+                    file => {
+                        console.log(file.url() + that.data.url)
+                        that.setData({
+                            url: file.url()
+                        })
+                    }
+                ).catch(console.error);
+
+            }
         });
     },
-    updateLocation: function (e) {
+
+    updateModel: function (e) {
         this.setData({
-            positionLocation: e.detail.value
+            model: e.detail.value
+        });
+    },
+    updateBrand: function (e) {
+        this.setData({
+            brand: e.detail.value
         })
     },
-    updateDescription: function (e) {
+    updatePrice: function (e) {
         this.setData({
-            positionDescription: e.detail.value
+            price: e.detail.value
         })
     },
 
@@ -76,39 +104,33 @@ Page({
         const role = wx.getStorageSync('role');
         this.setData({role});
 
-        var position = AV.Object.createWithoutData('Position', id);
-        position.fetch()
+        var car = AV.Object.createWithoutData('Car', id);
+        car.fetch()
             .then(
-                position => this.setData({
-                    positionLocation: position.get('location'),
-                    positionDescription: position.get('description'),
-                    positionName: position.get('name'),
-                    oldPositionLocation: position.get('location'),
-                    oldPositionDescription: position.get('description'),
-                    oldPositionName: position.get('name'),
-                    positionId: position.get('objectId')
+                car => this.setData({
+                    brand: car.get('brand'),
+                    model: car.get('model'),
+                    price: car.get('price'),
+                    url: car.get('url'),
+                    oldBrand: car.get('brand'),
+                    oldModel: car.get('model'),
+                    oldPrice: car.get('price'),
+                    carId: car.get('objectId')
                 }))
             .catch(console.error);
     },
 
     isNoFieldChanged: function () {
-        return this.data.positionDescription === this.data.oldPositionDescription &&
-            this.data.positionName === this.data.oldPositionName &&
-            this.data.positionLocation === this.data.oldPositionLocation
+        return this.data.price === this.data.oldPrice &&
+            this.data.model === this.data.oldModel &&
+            this.data.brand === this.data.oldBrand
     },
 
     isNoFieldBlank: function () {
-        return this.data.positionDescription && this.data.positionName && this.data.positionLocation
+        return this.data.price && this.data.model && this.data.brand
     },
 
     transitionToPositions(){
         wx.navigateBack();
-    },
-
-    transitionToApply() {
-        wx.navigateTo({
-            redirect: "true",
-            url: `../application/application?positionId=${this.data.positionId}`
-        })
-    },
+    }
 });

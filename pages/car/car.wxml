@@ -2,33 +2,30 @@
     <form bindsubmit="onSubmit">
         <view class="section">
             <input
-                    name="name"
-                    value="{{positionName}}"
-                    disabled="{{role=='HR' ? false : true}}"
-                    bindinput="updateName"
-                    placeholder="职位名称"
+                    name="brand"
+                    value="{{brand}}"
+                    bindinput="updateBrand"
+                    placeholder="品牌"
             />
         </view>
         <view class="section">
             <input
-                    name="location"
-                    value="{{positionLocation}}"
-                    disabled="{{role=='HR' ? false : true}}"
-                    bindinput="updateLocation"
-                    placeholder="所在位置"
+                    name="model"
+                    value="{{model}}"
+                    bindinput="updateModel"
+                    placeholder="Model"
             />
         </view>
         <view class="section">
             <textarea
-                    name="description"
-                    value="{{positionDescription}}"
-                    disabled="{{role=='HR' ? false : true}}"
-                    bindinput="updateDescription"
-                    placeholder="职位描述"
+                    name="price"
+                    value="{{price}}"
+                    bindinput="updatePrice"
+                    placeholder="Price"
                     auto-height="true"
             />
         </view>
-        <button bindtap="addPosition" class="submit-btn" wx:if="{{role === 'HR'}}">提交</button>
-        <button bindtap="transitionToApply" class="submit-btn" data-id="{{positionId}}">申请</button>
+        <button bindtap="addImage" class="submit-btn">Add Image</button>
+        <button bindtap="addCar" class="submit-btn">Add</button>
     </form>
 </view>

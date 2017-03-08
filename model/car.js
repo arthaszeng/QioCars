@@ -1,5 +1,7 @@
+const AV = require('../libs/av-weapp-min.js');
 
-class Position extends AV.Object {
+
+class Car extends AV.Object {
   get done() {
     return this.get('done');
   }
@@ -15,5 +17,5 @@ class Position extends AV.Object {
   }
 }
 
-AV.Object.register(Position, 'Position');
-module.exports = Position;
+AV.Object.register(Car, 'Car');
+module.exports = Car;

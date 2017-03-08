@@ -1,4 +1,4 @@
-{
+  {
   "pages": [
     "pages/hot/hot",
     "pages/car/car",
@@ -28,16 +28,16 @@
         "selectedIconPath": "icons/home_green.png"
       },
       {
+        "pagePath": "pages/list/list",
+        "text": "车库",
+        "iconPath": "icons/person.png",
+        "selectedIconPath": "icons/person_green.png"
+      },
+      {
         "pagePath": "pages/promotion/promotion",
         "text": "活动",
         "iconPath": "icons/compass.png",
         "selectedIconPath": "icons/compass_green.png"
-      },
-      {
-        "pagePath": "pages/me/me",
-        "text": "我",
-        "iconPath": "icons/person.png",
-        "selectedIconPath": "icons/person_green.png"
       }
     ]
   },
