@@ -1,4 +1,4 @@
-<view>
+<view class="page">
     <swiper autoplay>
         <block wx:for="{{imgUrls}}">
             <swiper-item>
@@ -23,3 +23,4 @@
         <div class="company-bg-img" backgrandUrl="http://asset.ibanquan.com/middle/26633/c/265/571f66a7f294396bf60022a5/index-company-bg?design_theme_id=0&amp;v=1461675687"></div>
     </div>
 </view>
+

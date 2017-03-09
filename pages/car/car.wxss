@@ -14,3 +14,7 @@
 .detail-box {
     margin: 80rpx 80rpx auto 80rpx;
 }
+
+.hot-vender-cont {
+  margin-bottom: 44%;
+}

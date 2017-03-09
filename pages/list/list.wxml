@@ -1,6 +1,13 @@
-<view>
-    <view wx:for="{{cars}}" wx:for-item="car" wx:key="{{objectId}}" class="job">
+<view class="page">
+    <view wx:for="{{cars}}" wx:for-item="car" wx:key="{{objectId}}">
         <div>
+            <swiper indicator-dots="true" >
+                <block wx:for="{{car.url}}">
+                    <swiper-item>
+                        <image src="{{item}}" class="slide-image" mode="aspectFit"/>
+                    </swiper-item>
+                </block>
+            </swiper>
             <view class="left">
                 <view>{{car.brand}}</view>
                 <view>{{car.model}}</view>
@@ -9,10 +16,6 @@
             <view class="right">
                 <button size="mini" bindtap="transitionToUpdate" data-id="{{car.objectId}}">编辑</button>
                 <button size="mini" type="warn" data-id="{{car.objectId}}" bindtap="deleteCar">删除</button>
-            </view>
-            <!--<image src="{{car.url}}" mode="aspectFill"/>-->
-            <view wx:for="{{car.url}}" wx:for-item="url" wx:key="{{objectId}}" class="job">
-                <image src="{{url}}" mode="aspectFill"/>
             </view>
         </div>
     </view>

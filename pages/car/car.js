@@ -6,7 +6,8 @@ Page({
         model: '',
         brand: '',
         price: '',
-        url: '',
+        url: [],
+        files: [],
 
         oldModel: '',
         oldBrand: '',
@@ -37,48 +38,72 @@ Page({
         }
         console.log(this.data.url);
 
-        new Car({
-            model: this.data.model,
-            brand: this.data.brand,
-            price: this.data.price,
-            url: this.data.url
-        }).save().then(() => {
-            wx.showToast({
-                title: "提交成功",
-                duration: 1000
+        this.data.files.map(tempFilePath => () => new AV.File('filename', {
+            blob: {
+                uri: tempFilePath,
+            },
+        }).save()).reduce(
+            (m, p) => m.then(v => AV.Promise.all([...v, p()])),
+            AV.Promise.resolve([])
+        ).then(files => {
+            this.setData({
+                url: files.map(file => file.url())
             });
-            this.transitionToPositions();
-        }).catch(()=> {
-            wx.showToast({
-                title: '提交失败',
-                mask: true,
-                duration: 1000
+            new Car({
+                model: this.data.model,
+                brand: this.data.brand,
+                price: this.data.price,
+                url: this.data.url
+            }).save().then(() => {
+                wx.showToast({
+                    title: "提交成功",
+                    duration: 1000
+                });
+                this.transitionToPositions();
+            }).catch(()=> {
+                wx.showToast({
+                    title: '提交失败',
+                    mask: true,
+                    duration: 1000
+                })
             })
-        })
+        }).catch(console.error);
     },
 
     addImage: function () {
+        this.data.files.map(tempFilePath => () => new AV.File('filename', {
+            blob: {
+                uri: tempFilePath,
+            },
+        }).save()).reduce(
+            (m, p) => m.then(v => AV.Promise.all([...v, p()])),
+            AV.Promise.resolve([])
+        ).then(files => {
+            this.setData({
+                url: files.map(file => file.url())
+            });
+        }).catch(console.error);
+    },
+
+    chooseImage: function (e) {
         var that = this;
-        var urlBuffer = [];
         wx.chooseImage({
-            count: 9,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
             success: function (res) {
-                res.tempFilePaths.map(tempFilePath => () => new AV.File('filename', {
-                    blob: {
-                        uri: tempFilePath,
-                    },
-                }).save()).reduce(
-                    (m, p) => m.then(v => AV.Promise.all([...v, p()])),
-                    AV.Promise.resolve([])
-                ).then(files => {
-                    that.setData({
-                        url: files.map(file => file.url())
-                    });
-                }).catch(console.error);
+                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+                that.setData({
+                    files: that.data.files.concat(res.tempFilePaths)
+                });
             }
-        });
+        })
+    },
+
+    previewImage: function (e) {
+        wx.previewImage({
+            current: e.currentTarget.id, // 当前显示图片的http链接
+            urls: this.data.files // 需要预览的图片http链接列表
+        })
     },
 
     updateModel: function (e) {
