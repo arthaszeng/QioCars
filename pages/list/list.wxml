@@ -1,32 +1,129 @@
-<view class="page">
-    <view class="page__hd">
-        <view class="page__title">Car List</view>
-    </view>
-    <view class="page__bd">
-        <view class="weui-article">
-            <view class="weui-article__section">
-                <view class="weui-article__section" wx:for="{{cars}}" wx:for-item="car" wx:key="{{objectId}}">
-                    <view class="weui-article__p">
-                        <view>{{car.brand}}</view>
-                        <view>{{car.model}}</view>
-                        <view>{{car.price}}</view>
-                    </view>
-                    <view class="weui-article__p">
-                        <swiper indicator-dots="true">
-                            <block wx:for="{{car.url}}">
-                                <swiper-item>
-                                    <image src="{{item}}" mode="aspectFit"/>
-                                </swiper-item>
-                            </block>
-                        </swiper>
-                    </view>
-                    <view class="right">
-                        <button size="mini" bindtap="transitionToUpdate" data-id="{{car.objectId}}">编辑</button>
-                        <button size="mini" type="warn" data-id="{{car.objectId}}" bindtap="deleteCar">删除</button>
-                    </view>
-                </view>
-                <button class="btn" bindtap="transitionToCar">Add Car</button>
-            </view>
+<view class="bottomGrayboder topSearchbar" >
+<view class="topsearchWrap" >
+    <view class="wx-view_cc8qyh" >
+        <input class="c-block c-fullwidth wx-input_aN3YXL" name="input1" placeholder="◎搜索爱车" placeholder-class="placeholderstyle" type="text"/>
+        <view class="_other_text_BWlAnA" >
+            取消
         </view>
     </view>
 </view>
+</view>
+<scroll-view class="Wrapscroll-view" lower-threshold="50" scroll-y="True" style="overflow-x: hidden; overflow-y: auto; " upper-threshold="50">
+<swiper autoplay="True" class="wx-swiper_1NANrl" lower-threshold="50">
+    <swiper-item class="c-full" >
+        <navigator class="wx-navigator_oHb4kO2" hover-class="navigator-hover"/>
+    </swiper-item>
+    <swiper-item class="c-full" >
+        <navigator class="wx-navigator_oHb4kO" hover-class="navigator-hover"/>
+    </swiper-item>
+    <swiper-item class="c-full wx-swiper-item_PQD5ZA" >
+        <navigator class="wx-navigator_oHb4kO3" hover-class="navigator-hover"/>
+    </swiper-item>
+</swiper>
+<view class="classifyiconWrap" >
+    <view class="classifyicongrid" >
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/8.png"/>
+            <text class="wx-text_DGqVdA" >宝马</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/8.png"/>
+            <text class="wx-text_DGqVdA" >奔驰</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/10.png"/>
+            <text class="wx-text_DGqVdA" >悍马</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/18.png"/>
+            <text class="wx-text_DGqVdA" >牧马人</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/21.png"/>
+            <text class="wx-text_DGqVdA" >奥迪</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/25.png"/>
+            <text class="wx-text_DGqVdA" >路虎</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/34e153450034ebbd9166b38702e38f36e65a9e69/images/category-icon/12.png"/>
+            <text class="wx-text_DGqVdA" >保时捷</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/13.png"/>
+            <text class="wx-text_DGqVdA" >捷豹</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/14.png"/>
+            <text class="wx-text_DGqVdA" >特斯拉</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/20.png"/>
+            <text class="wx-text_DGqVdA" >大众</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/26.png"/>
+            <text class="wx-text_DGqVdA" >本田</text>
+        </navigator>
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/37.png"/>
+            <text class="wx-text_DGqVdA" >福特</text>
+        </navigator>
+    </view>
+</view>
+<view class="PanellistWrap" >
+    <view class="_other_text_LxtT2c" >
+        车情前沿
+    </view>
+    <navigator class="bottomGrayboder Panellistitem" hover-class="navigator-hover">
+        <view class="wx-view_zjJ9We" >
+            <image class="wx-image_SidGqw" mode="aspectFill" src="http://ac-7MQo5Kkn.clouddn.com/2a4d9d506bf07e923195.JPG" style="background-size: cover; background-position: center center; background-repeat: no-repeat; "/>
+        </view>
+        <view class="c-minheight wx-view_WUvt7O" >
+            <text class="wx-text_JkhshF" >奔驰 奔驰S级 2012款 S 300 L 商务型 Grand Edition</text>
+            <text class="wx-text_3YNNM3" >奔驰 奔驰S级 2012款 S 300 L 商务型 Grand Edition
+                奔驰 奔驰S级 2012款 S 300 L 商务型 Grand Edition
+            </text>
+        </view>
+    </navigator>
+    <navigator class="bottomGrayboder Panellistitem" hover-class="navigator-hover">
+        <view class="wx-view_zjJ9We" >
+            <image class="wx-image_SidGqw" mode="aspectFill" src="http://ac-7MQo5Kkn.clouddn.com/c5b40476640a7e2b731b.JPG" style="background-size: cover; background-position: center center; background-repeat: no-repeat; "/>
+        </view>
+        <view class="c-minheight wx-view_WUvt7O" >
+            <text class="wx-text_JkhshF" >奔驰 奔驰GLK级(进口) 2011款 GLK 300 4MATIC 豪华型</text>
+            <text class="wx-text_3YNNM3" >奔驰 奔驰GLK级(进口) 2011款 GLK 300 4MATIC 豪华型
+                奔驰 奔驰GLK级(进口) 2011款 GLK 300 4MATIC 豪华型
+            </text>
+        </view>
+    </navigator>
+    <navigator class="bottomGrayboder Panellistitem" hover-class="navigator-hover">
+        <view class="wx-view_zjJ9We" >
+            <image class="wx-image_SidGqw" mode="aspectFill" src="http://ac-7MQo5Kkn.clouddn.com/a33b001c672db0e06a27.JPG" style="background-size: cover; background-position: center center; background-repeat: no-repeat; "/>
+        </view>
+        <view class="c-minheight wx-view_WUvt7O" >
+            <text class="wx-text_JkhshF" >奔驰 奔驰S级 2012款 S 300 L 商务型 Grand Edition</text>
+            <text class="wx-text_3YNNM3" >奔驰 奔驰S级 2012款 S 300 L 商务型 Grand Edition
+                奔驰 奔驰S级 2012款 S 300 L 商务型 Grand Edition
+            </text>
+        </view>
+    </navigator>
+</view>
+<view class="c-minheight wx-view_TQ4nqD" >
+    <view class="_other_text_LxtT2c2" >
+        热销车型
+    </view>
+    <view class="c-minheight wx-view_tdlUCs">
+        <navigator class="bottomGrayboder rightGrayboder wx-navigator_n3vQYd" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car">
+            <image class="wx-image_HsAX8s" mode="aspectFit" src="{{car.url[0]}}" style="background-size: contain; background-position: center center; background-repeat: no-repeat; "/>
+            <view class="c-minheight wx-view_ZhdL6d" >
+                <text class="c-block wx-text_cjhm6S" >{{car.brand}}</text>
+                <text class="wx-text_JkhshF2" >{{car.model}}</text>
+                <text class="c-block wx-text_WEMSkk" >￥{{car.price}}</text>
+            </view>
+        </navigator>
+    </view>
+</view>
+</scroll-view>
+<button class="btn" bindtap="transitionToCar">Add Car</button>
