@@ -1,23 +1,32 @@
 <view class="page">
-    <view wx:for="{{cars}}" wx:for-item="car" wx:key="{{objectId}}">
-        <div>
-            <swiper indicator-dots="true" >
-                <block wx:for="{{car.url}}">
-                    <swiper-item>
-                        <image src="{{item}}" class="slide-image" mode="aspectFit"/>
-                    </swiper-item>
-                </block>
-            </swiper>
-            <view class="left">
-                <view>{{car.brand}}</view>
-                <view>{{car.model}}</view>
-                <view>{{car.price}}</view>
-            </view>
-            <view class="right">
-                <button size="mini" bindtap="transitionToUpdate" data-id="{{car.objectId}}">编辑</button>
-                <button size="mini" type="warn" data-id="{{car.objectId}}" bindtap="deleteCar">删除</button>
-            </view>
-        </div>
+    <view class="page__hd">
+        <view class="page__title">Car List</view>
     </view>
-    <button class="btn" bindtap="transitionToCar">Add Car</button>
+    <view class="page__bd">
+        <view class="weui-article">
+            <view class="weui-article__section">
+                <view class="weui-article__section" wx:for="{{cars}}" wx:for-item="car" wx:key="{{objectId}}">
+                    <view class="weui-article__p">
+                        <view>{{car.brand}}</view>
+                        <view>{{car.model}}</view>
+                        <view>{{car.price}}</view>
+                    </view>
+                    <view class="weui-article__p">
+                        <swiper indicator-dots="true">
+                            <block wx:for="{{car.url}}">
+                                <swiper-item>
+                                    <image src="{{item}}" mode="aspectFit"/>
+                                </swiper-item>
+                            </block>
+                        </swiper>
+                    </view>
+                    <view class="right">
+                        <button size="mini" bindtap="transitionToUpdate" data-id="{{car.objectId}}">编辑</button>
+                        <button size="mini" type="warn" data-id="{{car.objectId}}" bindtap="deleteCar">删除</button>
+                    </view>
+                </view>
+                <button class="btn" bindtap="transitionToCar">Add Car</button>
+            </view>
+        </view>
+    </view>
 </view>
