@@ -1,6 +1,5 @@
 <view>
     <view wx:for="{{cars}}" wx:for-item="car" wx:key="{{objectId}}" class="job">
-        <image src="{{car.url}}" mode="aspectFill"/>
         <div>
             <view class="left">
                 <view>{{car.brand}}</view>
@@ -11,7 +10,11 @@
                 <button size="mini" bindtap="transitionToUpdate" data-id="{{car.objectId}}">编辑</button>
                 <button size="mini" type="warn" data-id="{{car.objectId}}" bindtap="deleteCar">删除</button>
             </view>
+            <!--<image src="{{car.url}}" mode="aspectFill"/>-->
+            <view wx:for="{{car.url}}" wx:for-item="url" wx:key="{{objectId}}" class="job">
+                <image src="{{url}}" mode="aspectFill"/>
+            </view>
         </div>
     </view>
-    <button class="btn" bindtap="transitionToCar">创建内推职位</button>
+    <button class="btn" bindtap="transitionToCar">Add Car</button>
 </view>

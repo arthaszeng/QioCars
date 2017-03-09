@@ -59,25 +59,24 @@ Page({
 
     addImage: function () {
         var that = this;
+        var urlBuffer = [];
         wx.chooseImage({
-            count: 1,
+            count: 9,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: function (res) {
-                var tempFilePath = res.tempFilePaths[0];
-                new AV.File('file-name', {
+                res.tempFilePaths.map(tempFilePath => () => new AV.File('filename', {
                     blob: {
-                        uri: tempFilePath
-                    }
-                }).save().then(
-                    file => {
-                        console.log(file.url() + that.data.url)
-                        that.setData({
-                            url: file.url()
-                        })
-                    }
-                ).catch(console.error);
-
+                        uri: tempFilePath,
+                    },
+                }).save()).reduce(
+                    (m, p) => m.then(v => AV.Promise.all([...v, p()])),
+                    AV.Promise.resolve([])
+                ).then(files => {
+                    that.setData({
+                        url: files.map(file => file.url())
+                    });
+                }).catch(console.error);
             }
         });
     },
