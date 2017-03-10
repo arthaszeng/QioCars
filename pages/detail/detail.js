@@ -122,6 +122,13 @@ Page({
         })
     },
 
+    callPhone: function () {
+        //TODO, need to complete phone number func
+        wx.makePhoneCall({
+            phoneNumber: '15884373717' //仅为示例，并非真实的电话号码
+        })
+    },
+
     onLoad(query){
         const id = query.id;
 

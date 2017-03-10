@@ -6,13 +6,13 @@
             <text class="c-block wx-text_yvWBsn2">Boss & Sales Manager</text>
         </view>
     </view>
-    <navigator class="wx-navigator_2zAN7l" hover-class="navigator-hover">
-        <image class="wx-image_Sutyvo" mode="scaleToFill" src="../../icons/call.png"/>
-    </navigator>
+    <!--<navigator class="wx-navigator_2zAN7l" hover-class="navigator-hover" >-->
+        <image class="wx-image_Sutyvo" mode="scaleToFill" src="../../icons/call.png" bindtap="callPhone"/>
+    <!--</navigator>-->
 </view>
 <view class="wx-view_KHAWVZ">
 <swiper autoplay="True" class="wx-swiper_Mn3JMs" indicator-dots="True" lower-threshold="50">
-    <swiper-item class="c-full wx-swiper-item_F6vCx8" wx:for="{{url}}">
+    <swiper-item class="c-full" wx:for="{{url}}">
         <image bindtap="previewImage" class="wx-image_HsAX8s2" mode="aspectFill" src="{{item}}"/>
     </swiper-item>
 </swiper>
