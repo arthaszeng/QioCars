@@ -1,7 +1,5 @@
 const AV = require('../../libs/av-weapp-min.js');
 
-
-
 Page({
     data: {
         cars: []
@@ -36,17 +34,17 @@ Page({
         })
     },
 
-    transitionToUpdate(e){
+    transitionToEdit(e){
         wx.navigateTo({
             redirect: "true",
             url: `../car/car?id=${e.target.dataset.id}`
         });
     },
 
-    transitionToCar(){
+    transitionToDetail(e){
         wx.navigateTo({
             redirect: "true",
-            url: '../car/car'
+            url: `../detail/detail?id=${e.target.dataset.id}`
         });
     },
 

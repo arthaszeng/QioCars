@@ -116,7 +116,7 @@
     </view>
     <view class="c-minheight wx-view_tdlUCs">
         <navigator class="bottomGrayboder rightGrayboder wx-navigator_n3vQYd" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car" url="../detail/detail?id={{car.objectId}}">
-            <image class="wx-image_HsAX8s" mode="aspectFit" src="{{car.url[0]}}" style="background-size: contain; background-position: center center; background-repeat: no-repeat; "/>
+            <image class="wx-image_HsAX8s" mode="aspectFit" src="{{car.url[0]}}"/>
             <view class="c-minheight wx-view_ZhdL6d" >
                 <text class="c-block wx-text_cjhm6S" >{{car.brand}}</text>
                 <text class="wx-text_JkhshF2" >{{car.model}}</text>
@@ -126,4 +126,3 @@
     </view>
 </view>
 </scroll-view>
-<button class="btn" bindtap="transitionToEdit">Add Car</button>
