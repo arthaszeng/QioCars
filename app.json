@@ -4,6 +4,7 @@
     "pages/car/car",
     "pages/list/list",
     "pages/profile/profile",
+    "pages/detail/detail",
     "pages/promotion/promotion"
   ],
   "window": {
@@ -31,12 +32,6 @@
         "text": "车库",
         "iconPath": "icons/person.png",
         "selectedIconPath": "icons/person_green.png"
-      },
-      {
-        "pagePath": "pages/promotion/promotion",
-        "text": "活动",
-        "iconPath": "icons/compass.png",
-        "selectedIconPath": "icons/compass_green.png"
       },
       {
         "pagePath": "pages/profile/profile",

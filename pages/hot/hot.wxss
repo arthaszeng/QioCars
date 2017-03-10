@@ -1,47 +1,6 @@
-swiper {
-    margin-top: 1rpx;
-}
-
-.slide-image {
-    width: 100%;
-    height: 100%;
-}
-
-.hot-header {
-    padding: 1rem 0;
-    font-size: 15px;
-}
-.hot-brand-image {
-    position: relative;
-    display: inline-block;
-    width: 28%;
-    height: 120px;
-    padding-bottom: 1%;
-    margin: 0 2% 4%;
-    border: 1px solid #e5e3df;
-}
-
 .btn {
     border: none;
     background-color: #2DBE60;
     color: #fff;
     margin: 40rpx 80rpx 40rpx 80rpx;
-}
-.wrapper {
-    width: 100%;
-    position: relative;
-}
-.hot-brand{
-    font-size: 0;
-    padding-bottom: 1.25rem;
-    margin-top: 10px;
-    background-color: #FFF;
-}
-.hot-header {
-    padding: 1rem 0;
-    font-size: 15px;
-}
-
-.hot-vender-cont {
-    margin-bottom: 44%;
 }

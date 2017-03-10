@@ -1,38 +1,30 @@
 const AV = require('../../libs/av-weapp-min.js');
 
-
-
 Page({
     data: {
-        positions: [],
-        imgUrls: [
-            'http://asset.ibanquan.com/middle/26633/c/265/571f66a8f294396bf60022af/index_slide_1?design_theme_id=0&v=1461675688',
-            'http://asset.ibanquan.com/middle/26633/c/265/571f66a8f294396bf60022b2/index_slide_2?design_theme_id=0&v=1461675688',
-            'http://asset.ibanquan.com/middle/26633/c/265/571f66a9f294396bf60022b5/index_slide_3?design_theme_id=0&v=1461675689',
-            'http://asset.ibanquan.com/middle/26633/c/265/571f66a9f294396bf60022b8/index_slide_4?design_theme_id=0&v=1461675689'
-        ]
+        cars: []
     },
 
-    fetchPositions: function () {
-        return new AV.Query('Position')
+    fetchCars: function () {
+        return new AV.Query('Car')
             .descending('createdAt')
             .find()
-            .then(this.setPositions)
+            .then(this.setCars)
             .catch(console.error);
     },
 
     onPullDownRefresh: function () {
-        this.fetchPositions().then(wx.stopPullDownRefresh);
+        this.fetchCars().then(wx.stopPullDownRefresh);
     },
 
-    setPositions: function (positions) {
+    setCars: function (cars) {
         this.setData({
-            positions,
+            cars,
         });
     },
 
     onShow() {
-        this.fetchPositions();
+        this.fetchCars();
     },
 
     onLoad() {
@@ -42,28 +34,28 @@ Page({
         })
     },
 
-    transitionToUpdate(e){
+    transitionToEdit(e){
         wx.navigateTo({
             redirect: "true",
-            url: `../position/position?id=${e.target.dataset.id}`
+            url: `../car/car?id=${e.target.dataset.id}`
         });
     },
 
-    transitionToPosition(){
+    transitionToDetail(e){
         wx.navigateTo({
             redirect: "true",
-            url: '../position/position'
+            url: `../detail/detail?id=${e.target.dataset.id}`
         });
     },
 
-    deleteJobs(e){
-        AV.Query.doCloudQuery(`delete from Position where objectId="${e.target.dataset.id}"`).then(()=> {
+    deleteCar(e){
+        AV.Query.doCloudQuery(`delete from Car where objectId="${e.target.dataset.id}"`).then(()=> {
             wx.showToast({
                 title: "删除成功",
                 mask: true,
                 duration: 1000
             });
-            this.fetchPositions();
+            this.fetchCars();
         }).catch(()=> {
             wx.showToast({
                 title: '失败',
