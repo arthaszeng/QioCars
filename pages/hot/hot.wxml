@@ -23,52 +23,40 @@
 <view class="classifyiconWrap" >
     <view class="classifyicongrid" >
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/8.png"/>
-            <text class="wx-text_DGqVdA" >宝马</text>
+            <image class="wx-image_9GbZXI" src="../../icons/bmw.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/8.png"/>
-            <text class="wx-text_DGqVdA" >奔驰</text>
+            <image class="wx-image_9GbZXI" src="../../icons/maserati.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/10.png"/>
-            <text class="wx-text_DGqVdA" >悍马</text>
+            <image class="wx-image_9GbZXI" src="../../icons/bentley.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/18.png"/>
-            <text class="wx-text_DGqVdA" >牧马人</text>
+            <image class="wx-image_9GbZXI" src="../../icons/cadillac.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/21.png"/>
-            <text class="wx-text_DGqVdA" >奥迪</text>
+            <image class="wx-image_9GbZXI" src="../../icons/audi.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/25.png"/>
-            <text class="wx-text_DGqVdA" >路虎</text>
+            <image class="wx-image_9GbZXI" src="../../icons/landrover.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/34e153450034ebbd9166b38702e38f36e65a9e69/images/category-icon/12.png"/>
-            <text class="wx-text_DGqVdA" >保时捷</text>
+            <image class="wx-image_9GbZXI" src="../../icons/porsche.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/13.png"/>
-            <text class="wx-text_DGqVdA" >捷豹</text>
+            <image class="wx-image_9GbZXI" src="../../icons/jaguar.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/14.png"/>
-            <text class="wx-text_DGqVdA" >特斯拉</text>
+            <image class="wx-image_9GbZXI" src="../../icons/mercedes.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/20.png"/>
-            <text class="wx-text_DGqVdA" >大众</text>
+            <image class="wx-image_9GbZXI" src="../../icons/volkswagen.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/26.png"/>
-            <text class="wx-text_DGqVdA" >本田</text>
+            <image class="wx-image_9GbZXI" src="../../icons/honda.png"/>
         </navigator>
         <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
-            <image class="wx-image_9GbZXI" src="http://static.guoku.com/static/v4/789d3b7ce489b572bda5b6b791fcff7a3fcf7053/images/category-icon/37.png"/>
-            <text class="wx-text_DGqVdA" >福特</text>
+            <image class="wx-image_9GbZXI" src="../../icons/ford.png"/>
         </navigator>
     </view>
 </view>
