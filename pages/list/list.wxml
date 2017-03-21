@@ -11,13 +11,16 @@
 </navigator>
 <scroll-view class="wx-scroll-view_PmrL5K" lower-threshold="50" scroll-y="True" style="overflow-x: hidden; overflow-y: auto;" upper-threshold="50">
 <view class="wx-view_WjSmLp">
-    <navigator class="wx-navigator_csHYE8" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car" url="../detail/detail?id={{car.objectId}}">
+    <navigator class="wx-navigator_csHYE8" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car" url="../detail/detail?id={{car.objectId}}" catchlongtap="updateOptionToggle">
         <image class="wx-image_jfWp5t" mode="aspectFill" src="{{car.url[0]}}"/>
-        <view class="wx-view_9TxaXG">
+        <view class="navigator_bottom">
             <view class="wx-view_vnhcDJ">
                 <text class="c-block wx-text_6X8CEW">{{car.price}}</text>
             </view>
             <text class="c-block wx-text_VIqUJH">{{car.brand}}</text>
+        </view>
+        <view class="navigator_top" wx:if="{{toggle_option===true}}">
+            <image class="wx-image_jfWp5t" mode="aspectFill" src="../../icons/delete.png" catchtap="deleteCar" data-id="{{car.objectId}}"/>
         </view>
     </navigator>
 </view>

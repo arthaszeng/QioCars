@@ -29,14 +29,21 @@ App({
     },
 
     judgeRole: function () {
+        var that = this;
         var roleQuery = new AV.Query(AV.Role);
         roleQuery.equalTo('name', 'ADMIN');
         roleQuery.equalTo('users', AV.User.current());
         roleQuery.find().then(function (results) {
             if (results.length > 0) {
                 wx.setStorageSync('role', 'ADMIN');
+                that.setData({
+                    role: 'ADMIN'
+                })
             } else {
                 wx.setStorageSync('role', 'USER');
+                that.setData({
+                    role: 'USER'
+                })
             }
         }).then().catch(function (error) {
         });

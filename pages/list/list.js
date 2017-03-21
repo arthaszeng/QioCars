@@ -3,6 +3,7 @@ const AV = require('../../libs/av-weapp-min.js');
 Page({
     data: {
         cars: [],
+        toggle_option: false,
         lastSearch: ''
     },
 
@@ -50,7 +51,8 @@ Page({
     },
 
     deleteCar(e){
-        AV.Query.doCloudQuery(`delete from Car where objectId="${e.target.dataset.id}"`).then(()=> {
+        console.log(e.currentTarget.dataset.id);
+        AV.Query.doCloudQuery(`delete from Car where objectId="${e.currentTarget.dataset.id}"`).then(()=> {
             wx.showToast({
                 title: "删除成功",
                 mask: true,
@@ -66,9 +68,25 @@ Page({
         })
     },
 
+    updateOptionToggle(e) {
+        var oldOptionToggle = this.data.toggle_option;
+        var that = this
+        wx.getStorage({
+            key: 'role',
+            success: function(res) {
+                console.log(res)
+                if (res.data === 'ADMIN') {
+                    that.setData({
+                        toggle_option: !oldOptionToggle
+                    })
+                }
+            }
+        });
+    },
+
     performSearch() {
         var that = this;
-        console.log(this.data.lastSearch)
+        console.log(this.data.lastSearch);
         var query = new AV.Query('Car');
         query.contains('brand', this.data.lastSearch);
         query.contains('model', this.data.lastSearch);
