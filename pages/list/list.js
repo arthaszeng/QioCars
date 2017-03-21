@@ -2,7 +2,8 @@ const AV = require('../../libs/av-weapp-min.js');
 
 Page({
     data: {
-        cars: []
+        cars: [],
+        lastSearch: ''
     },
 
     fetchCars: function () {
@@ -63,5 +64,25 @@ Page({
                 duration: 1000
             })
         })
+    },
+
+    performSearch() {
+        var that = this;
+        console.log(this.data.lastSearch)
+        var query = new AV.Query('Car');
+        query.contains('brand', this.data.lastSearch);
+        query.contains('model', this.data.lastSearch);
+        query.find().then(function (results) {
+            that.setData({
+                cars: results
+            })
+        }, function (error) {
+        });
+    },
+    
+    updateSearch(e) {
+        this.setData({
+            lastSearch: e.detail.value
+        });
     }
 });

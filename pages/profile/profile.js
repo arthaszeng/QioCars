@@ -1,19 +1,8 @@
-//profile.js
-//获取应用实例
-var app = getApp();
-Page({
-    data: {
-        motto: 'Hello World',
-        userInfo: {}
-    },
-    //事件处理函数
-    bindViewTap: function () {
-        wx.navigateTo({
-            url: '../explore/explore'
-        })
-    },
+const AV = require('../../libs/av-weapp-min.js');
+var app = getApp()
 
+Page({
     onLoad: function () {
-        
+        console.log("username + " + app.globalData.userInfo.nickName);
     }
 });

@@ -22,8 +22,8 @@
     </swiper-item>
     <swiper-item class="c-full wx-swiper-item_TR9yQI" >
       <view class="wx-view_9AHgoU" >
-        <text class="c-block wx-text_lun8Np" >发现，购物正能量</text>
-        <text class="c-block wx-text_56NxjL" >热门商品懒人包，寻找好物不再盲目。
+        <text class="c-block wx-text_lun8Np" >Call me maybe</text>
+        <text class="c-block wx-text_56NxjL" >I'm waiting for you!
           工作再忙，也要跟紧潮流。</text>
         <view class="c-minheight wx-view_eJpe4z" >
           <image class="wx-image_rxdS0O" mode="aspectFit" src="http://asset.ibanquan.com/middle/26633/c/265/571f66a9f294396bf60022b5/index_slide_3?design_theme_id=0&v=1461675689"/>
@@ -33,10 +33,10 @@
   </swiper>
   <view class="c-minheight wx-view_JjAvLE" >
     <navigator class="wx-navigator_91rIxS" hover-class="navigator-hover">
-      <text class="c-block wx-text_T7Ctll" >登录</text>
+      <text class="c-block wx-text_T7Ctll" >Login</text>
     </navigator>
     <navigator class="wx-navigator_91rIxS" hover-class="navigator-hover">
-      <text class="c-block wx-text_T7Ctll" >注册</text>
+      <text class="c-block wx-text_T7Ctll" >Register</text>
     </navigator>
   </view>
 </view>
