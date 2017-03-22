@@ -1,27 +1,49 @@
-<view class="bottomGrayboder topSearchbar">
-    <view class="topsearchWrap">
-        <view class="wx-view_cc8qyh">
-            <input class="c-block c-eightywidth wx-input_aN3YXL" name="input1" placeholder="◎搜索爱车" placeholder-class="placeholderstyle" type="text" bindinput="updateSearch" maxlength="20"/>
-            <button bindtap="performSearch" class="c-twentywidth">搜索</button>
+<view class="page">
+    <view class="page-bottom" bindtap="closeSidebar">
+        <view class="page-content">
+            <view class="wc">
+                <text>第一个item1</text>
+            </view>
+            <view class="wc">
+                <text>第二个item2</text>
+            </view>
+            <view class="wc">
+                <text>第三个item3</text>
+            </view>
+            <view class="wc">
+                <text>第四个item4</text>
+            </view>
         </view>
     </view>
-</view>
-<navigator class="wx-navigator_iOsAsd" hover-class="navigator-hover" open-type="redirect">
-<image class="wx-image_SfQyMy" mode="aspectFit" src="../../icons/add.png" bindtap="transitionToEdit"/>
-</navigator>
-<scroll-view class="wx-scroll-view_PmrL5K" lower-threshold="50" scroll-y="True" style="overflow-x: hidden; overflow-y: auto;" upper-threshold="50">
-<view class="wx-view_WjSmLp">
-    <navigator class="wx-navigator_csHYE8" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car" url="../detail/detail?id={{car.objectId}}" catchlongtap="updateOptionToggle">
-        <image class="wx-image_jfWp5t" mode="aspectFill" src="{{car.url[0]}}"/>
-        <view class="navigator_bottom">
-            <view class="wx-view_vnhcDJ">
-                <text class="c-block wx-text_6X8CEW">{{car.price}}</text>
+    <view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top {{openSidebarToggle ? 'c-state1' : ''}}">
+        <view class="bottomGrayboder topSearchbar">
+            <view class="topsearchWrap">
+                <view class="wx-view_cc8qyh">
+                    <input class="c-block c-eightywidth wx-input_aN3YXL" name="input1" placeholder="◎搜索爱车" placeholder-class="placeholderstyle" type="text"
+                           bindinput="updateSearch" maxlength="20"/>
+                    <button bindtap="tap_ch" class="c-twentywidth">搜索</button>
+                </view>
             </view>
-            <text class="c-block wx-text_VIqUJH">{{car.brand}}</text>
         </view>
-        <view class="navigator_top" wx:if="{{toggle_option===true}}">
-            <image class="wx-image_jfWp5t" mode="aspectFill" src="../../icons/delete.png" catchtap="deleteCar" data-id="{{car.objectId}}"/>
-        </view>
-    </navigator>
+        <navigator class="wx-navigator_iOsAsd" hover-class="navigator-hover" open-type="redirect">
+            <image class="wx-image_SfQyMy" mode="aspectFit" src="../../icons/add.png" bindtap="transitionToEdit"/>
+        </navigator>
+        <scroll-view class="wx-scroll-view_PmrL5K" lower-threshold="50" scroll-y="True" style="overflow-x: hidden; overflow-y: auto;" upper-threshold="50">
+            <view class="wx-view_WjSmLp">
+                <navigator class="wx-navigator_csHYE8" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car"
+                           url="../detail/detail?id={{car.objectId}}" catchlongtap="updateOptionToggle">
+                    <image class="wx-image_jfWp5t" mode="aspectFill" src="{{car.url[0]}}"/>
+                    <view class="navigator_bottom">
+                        <view class="wx-view_vnhcDJ">
+                            <text class="c-block wx-text_6X8CEW">{{car.price}}</text>
+                        </view>
+                        <text class="c-block wx-text_VIqUJH">{{car.brand}}</text>
+                    </view>
+                    <view class="navigator_top" wx:if="{{toggle_option===true}}">
+                        <image class="wx-image_jfWp5t" mode="aspectFill" src="../../icons/delete.png" catchtap="deleteCar" data-id="{{car.objectId}}"/>
+                    </view>
+                </navigator>
+            </view>
+        </scroll-view>
+    </view>
 </view>
-</scroll-view>

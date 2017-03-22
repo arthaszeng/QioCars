@@ -4,7 +4,11 @@ Page({
     data: {
         cars: [],
         toggle_option: false,
-        lastSearch: ''
+        lastSearch: '',
+        openSidebarToggle : false,
+        mark: 0,
+        newMark: 0,
+        isMarkRight:true
     },
 
     fetchCars: function () {
@@ -26,6 +30,9 @@ Page({
     },
 
     onShow() {
+        this.setData({
+            openSidebarToggle: false
+        });
         this.fetchCars();
     },
 
@@ -84,7 +91,6 @@ Page({
             }
         });
     },
-
     performSearch() {
         var that = this;
         console.log(this.data.lastSearch);
@@ -98,10 +104,55 @@ Page({
         }, function (error) {
         });
     },
-    
     updateSearch(e) {
         this.setData({
             lastSearch: e.detail.value
         });
+    },
+
+    tap_ch: function(e){
+        if(this.data.openSidebarToggle){
+            this.setData({
+                openSidebarToggle : false
+            });
+        }else{
+            this.setData({
+                openSidebarToggle : true
+            });
+        }
+    },
+    tap_start:function(e){
+        this.data.mark = this.data.newMark = e.touches[0].pageX;
+    },
+    tap_drag: function(e){
+        this.data.newMark = e.touches[0].pageX;
+        if(this.data.mark < this.data.newMark){
+            this.isMarkRight = true;
+        }
+
+        if(this.data.mark > this.data.newMark){
+            this.isMarkRight = false;
+
+        }
+        this.data.mark = this.data.newMark;
+
+    },
+    tap_end: function(e){
+        this.data.mark = 0;
+        this.data.newMark = 0;
+        if(this.isMarkRight){
+            this.setData({
+                openSidebarToggle : true
+            });
+        }else{
+            this.setData({
+                openSidebarToggle : false
+            });
+        }
+    },
+    closeSidebar: function () {
+        this.setData({
+            openSidebarToggle : false
+        })
     }
 });
