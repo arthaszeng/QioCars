@@ -20,40 +20,40 @@
 </swiper>
 <view class="classifyiconWrap" >
     <view class="classifyicongrid" >
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover" catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/bmw.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/maserati.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/bentley.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/cadillac.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/audi.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/landrover.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/porsche.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/jaguar.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/mercedes.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/volkswagen.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/honda.png"/>
         </navigator>
-        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover">
+        <navigator class="wx-navigator_JBV5If" hover-class="navigator-hover"  catchtap="transitionToList">
             <image class="wx-image_9GbZXI" src="../../icons/ford.png"/>
         </navigator>
     </view>

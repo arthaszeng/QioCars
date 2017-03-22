@@ -29,10 +29,11 @@ Page({
         this.fetchCars();
     },
 
-    onLoad() {
+    onLoad(query) {
         const role = wx.getStorageSync('role');
+        console.log("brand: " + query.brand)
         this.setData({
-            role
+            role,
         })
     },
 

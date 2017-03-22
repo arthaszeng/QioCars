@@ -34,17 +34,9 @@ Page({
         })
     },
 
-    transitionToEdit(e){
-        wx.navigateTo({
-            redirect: "true",
-            url: `../car/car?id=${e.target.dataset.id}`
-        });
-    },
-
-    transitionToDetail(e){
-        wx.navigateTo({
-            redirect: "true",
-            url: `../detail/detail?id=${e.target.dataset.id}`
+    transitionToList(){
+        wx.switchTab({
+            url: `../list/list`
         });
     },
 
