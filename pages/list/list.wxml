@@ -1,20 +1,26 @@
 <view class="page">
     <view class="page-bottom" bindtap="closeSidebar">
-        <view class="page-content">
-            <view class="wc">
-                <text>第一个item1</text>
-            </view>
-            <view class="wc">
-                <text>第二个item2</text>
-            </view>
-            <view class="wc">
-                <text>第三个item3</text>
-            </view>
-            <view class="wc">
-                <text>第四个item4</text>
-            </view>
-        </view>
+        <scroll-view class="wxSortPickerViewList" scroll-y="true" style="height: {{wxSortPickerData.view.scrollHeight}}px;"
+                     bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower"
+                     scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0">
+            <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
+                <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.textArray.length >0}}">{{item.tag}}</view>
+                <block wx:for="{{item.textArray}}" wx:for-item="child" wx:key="">
+                    <view class="wxSortPickerViewItem" data-text="{{child}}" bindtap="wxSortPickerViewItemTap">
+                        <text>{{child}}</text>
+                    </view>
+                </block>
+            </block>
+            <!--</view>-->
+        </scroll-view>
+        <scroll-view style="width:20px;height: {{wxSortPickerData.view.scrollHeight}}px; background-color: blank;" class="wxSortPickerViewTemTags">
+            <block wx:for="{{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#']}}"
+                   wx:for-item="item" wx:key="">
+                <view catchtap="wxSortPickerViewTemTagTap" data-tag="{{item}}" class="wxSortPickerViewTemTag">{{item}}</view>
+            </block>
+        </scroll-view>
     </view>
+
     <view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top {{openSidebarToggle ? 'c-state1' : ''}}">
         <view class="bottomGrayboder topSearchbar">
             <view class="topsearchWrap">
@@ -27,6 +33,9 @@
         </view>
         <navigator class="wx-navigator_iOsAsd" hover-class="navigator-hover" open-type="redirect">
             <image class="wx-image_SfQyMy" mode="aspectFit" src="../../icons/add.png" bindtap="transitionToEdit"/>
+        </navigator>
+        <navigator class="wx-navigator_2" hover-class="navigator-hover" open-type="redirect">
+            <image class="wx-image_SfQyMy" mode="aspectFit" src="../../icons/add.png" bindtap="transitionToEditBrandList"/>
         </navigator>
         <scroll-view class="wx-scroll-view_PmrL5K" lower-threshold="50" scroll-y="True" style="overflow-x: hidden; overflow-y: auto;" upper-threshold="50">
             <view class="wx-view_WjSmLp">

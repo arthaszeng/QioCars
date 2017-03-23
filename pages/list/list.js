@@ -1,4 +1,5 @@
 const AV = require('../../libs/av-weapp-min.js');
+var wxSortPickerView = require('../../wxSortPickerView/wxSortPickerView.js');
 
 Page({
     data: {
@@ -41,7 +42,11 @@ Page({
         console.log("brand: " + query.brand)
         this.setData({
             role,
-        })
+        });
+
+        var that = this
+        wxSortPickerView.init(["宝马  BMW", "奥迪  Audi", "宾利  Bentley", "保时捷  Porsche", "捷豹  Jaguar", "福特  Ford", "凯迪拉克  Cadillac", "大众  Volkswagen", "路虎  Land Rover", "本田  Honda", "现代  Hyundai Motor", "兰博基尼  Lamborghini"],that);
+        console.log(this.data.wxSortPickerData)
     },
 
     transitionToEdit(e){
