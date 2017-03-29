@@ -3,7 +3,7 @@
         <scroll-view class="" scroll-y="true" bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower"
                      scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0" style="height: {{wxSortPickerData.view.scrollHeight}}px">
             <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
-                <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.textArray.length >0}}">{{item.tag}}</view>
+                <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.brandArray.length >0}}">{{item.tag}}</view>
                 <block wx:for="{{item.brandArray}}" wx:for-item="child" wx:key="">
                     <view class="wxSortPickerViewItem" data-id="{{child.id}}">
                         <image class="brandTrademark" src="{{child.url}}"/>
