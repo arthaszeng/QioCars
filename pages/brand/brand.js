@@ -13,8 +13,9 @@ Page({
 
         brandId: '',
         brands: [],
+        deleteToggle: false
     },
-
+    
     addBrand: function () {
         if (!this.isNoFieldBlank()) {
             wx.showToast({
@@ -38,8 +39,8 @@ Page({
 
         this.data.files.map(tempFilePath => () => new AV.File('filename', {
             blob: {
-                uri: tempFilePath,
-            },
+                uri: tempFilePath
+            }
         }).save()).reduce(
             (m, p) => m.then(v => AV.Promise.all([...v, p()])),
             AV.Promise.resolve([])
@@ -67,11 +68,28 @@ Page({
         }).catch(console.error);
     },
 
+    deleteBrand: function (e) {
+        AV.Query.doCloudQuery(`delete from Brand where objectId="${e.currentTarget.dataset.id}"`).then(()=> {
+            wx.showToast({
+                title: "删除成功",
+                mask: true,
+                duration: 1000
+            });
+            this.fetchBrands();
+        }).catch(()=> {
+            wx.showToast({
+                title: '失败',
+                mask: true,
+                duration: 1000
+            })
+        })  
+    },
+    
     addImage: function () {
         this.data.files.map(tempFilePath => () => new AV.File('filename', {
             blob: {
-                uri: tempFilePath,
-            },
+                uri: tempFilePath
+            }
         }).save()).reduce(
             (m, p) => m.then(v => AV.Promise.all([...v, p()])),
             AV.Promise.resolve([])
@@ -82,7 +100,7 @@ Page({
         }).catch(console.error);
     },
 
-    chooseImage: function (e) {
+    chooseImage: function () {
         var that = this;
         wx.chooseImage({
             sizeType: ['original', 'compressed'],
@@ -132,21 +150,25 @@ Page({
             brands
         });
 
+        console.log(this.data.brands);
         wxSortPickerView.init(this.data.brands, that);
     },
 
-    transferBrands: function () {
-        var brandsBuffer = [];
-        var brands = this.data.brands;
+    updateDeleteToggle() {
+        var oldDeleteToggle = this.data.deleteToggle;
         var that = this;
-
-        for (var x in brands) {
-            brandsBuffer[x] = brands[x].attributes.brandName + " / "  + brands[x].attributes.englishName;
-        }
-
-        wxSortPickerView.init(this.data.brands, that);
+        wx.getStorage({
+            key: 'role',
+            success: function(res) {
+                if (res.data === 'ADMIN') {
+                    that.setData({
+                        deleteToggle: !oldDeleteToggle
+                    })
+                }
+            }
+        });
     },
-
+    
     onLoad(query){
         const id = query.id;
 
@@ -177,7 +199,7 @@ Page({
     isNoFieldBlank: function () {
         return this.data.brandName && this.data.englishName
     },
-
+    
     transitionBack(){
         wx.navigateBack();
     }
