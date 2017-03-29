@@ -6,10 +6,10 @@ Page({
         cars: [],
         toggle_option: false,
         lastSearch: '',
-        openSidebarToggle : false,
+        openSidebarToggle: false,
         mark: 0,
         newMark: 0,
-        isMarkRight:true,
+        isMarkRight: true,
         brands: []
     },
 
@@ -105,7 +105,7 @@ Page({
         var that = this;
         wx.getStorage({
             key: 'role',
-            success: function(res) {
+            success: function (res) {
                 console.log(res);
                 if (res.data === 'ADMIN') {
                     that.setData({
@@ -124,36 +124,49 @@ Page({
         query.find().then(function (results) {
             that.setData({
                 cars: results
-            })
+            });
+            that.checkCarsIsEmpty();
         }, function (error) {
         });
     },
+
+    checkCarsIsEmpty: function () {
+        if (this.data.cars.length === 0) {
+            wx.showToast({
+                title: 'No Card Found!',
+                mask: true,
+                icon: 'loading',
+                duration: 1000
+            })
+        }
+    },
+
     updateSearch(e) {
         this.setData({
             lastSearch: e.detail.value
         });
     },
 
-    tap_start:function(e){
+    tap_start: function (e) {
         this.data.mark = this.data.newMark = e.touches[0].pageX;
 
     },
-    tap_drag: function(e){
+    tap_drag: function (e) {
         this.data.newMark = e.touches[0].pageX;
         this.isMarkRight = this.data.mark <= this.data.newMark - 2;
 
         this.data.mark = this.data.newMark;
 
     },
-    tap_end: function(){
+    tap_end: function () {
         this.setData({
-            openSidebarToggle : this.isMarkRight
+            openSidebarToggle: this.isMarkRight
         });
     },
 
     closeSidebar: function () {
         this.setData({
-            openSidebarToggle : false
+            openSidebarToggle: false
         })
     },
 
