@@ -1,5 +1,6 @@
 .page-top{
     height: 100%;
+    width: 100%;
     position: fixed;
     z-index: 0;
     transition: All 0.4s ease;

@@ -64,7 +64,7 @@ Page({
     onLoad() {
         const role = wx.getStorageSync('role');
         this.setData({
-            role,
+            role
         });
     },
 
@@ -100,13 +100,13 @@ Page({
         })
     },
 
-    updateOptionToggle(e) {
+    updateOptionToggle() {
         var oldOptionToggle = this.data.toggle_option;
-        var that = this
+        var that = this;
         wx.getStorage({
             key: 'role',
             success: function(res) {
-                console.log(res)
+                console.log(res);
                 if (res.data === 'ADMIN') {
                     that.setData({
                         toggle_option: !oldOptionToggle
@@ -134,46 +134,23 @@ Page({
         });
     },
 
-    tap_ch: function(e){
-        if(this.data.openSidebarToggle){
-            this.setData({
-                openSidebarToggle : false
-            });
-        }else{
-            this.setData({
-                openSidebarToggle : true
-            });
-        }
-    },
     tap_start:function(e){
         this.data.mark = this.data.newMark = e.touches[0].pageX;
+
     },
     tap_drag: function(e){
         this.data.newMark = e.touches[0].pageX;
-        if(this.data.mark < this.data.newMark){
-            this.isMarkRight = true;
-        }
+        this.isMarkRight = this.data.mark <= this.data.newMark - 2;
 
-        if(this.data.mark > this.data.newMark){
-            this.isMarkRight = false;
-
-        }
         this.data.mark = this.data.newMark;
 
     },
-    tap_end: function(e){
-        this.data.mark = 0;
-        this.data.newMark = 0;
-        if(this.isMarkRight){
-            this.setData({
-                openSidebarToggle : true
-            });
-        }else{
-            this.setData({
-                openSidebarToggle : false
-            });
-        }
+    tap_end: function(){
+        this.setData({
+            openSidebarToggle : this.isMarkRight
+        });
     },
+
     closeSidebar: function () {
         this.setData({
             openSidebarToggle : false
