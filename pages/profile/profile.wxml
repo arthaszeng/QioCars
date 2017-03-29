@@ -2,7 +2,7 @@
   <swiper autoplay="True" class="wx-swiper_8qGeIP" indicator-dots="True" lower-threshold="50">
     <swiper-item class="c-full wx-swiper-item_JUTo8U" >
       <view class="wx-view_9AHgoU" >
-        <text class="c-block wx-text_lun8Np" >MyCars, your cars</text>
+        <text class="c-block wx-text_lun8Np" >QioCars, your cars</text>
         <text class="c-block wx-text_56NxjL" >Don`t need to care about price or brands,
           Just, have a try!</text>
         <view class="wx-view_eJpe4z" >
@@ -13,7 +13,7 @@
     <swiper-item class="c-full wx-swiper-item_PyBVYt" >
       <view class="wx-view_9AHgoU" >
         <text class="c-block wx-text_lun8Np" >More choice, more chance</text>
-        <text class="c-block wx-text_56NxjL" >MyCars will be great to meet you picky taste!
+        <text class="c-block wx-text_56NxjL" >QioCars will be great to meet you picky taste!
           Unwilling ordinary!</text>
         <view class="c-minheight wx-view_eJpe4z" >
           <image class="wx-image_rxdS0O" mode="aspectFit" src="http://asset.ibanquan.com/middle/26633/c/265/571f66a8f294396bf60022b2/index_slide_2?design_theme_id=0&v=1461675688"/>

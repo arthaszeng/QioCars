@@ -11,7 +11,7 @@
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "My Cars",
+    "navigationBarTitleText": "QioCars",
     "backgroundColor": "#f6f8f9",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true
