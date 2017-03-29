@@ -57,6 +57,9 @@ Page({
                     title: "提交成功",
                     duration: 1000
                 });
+                this.setData({
+                    files: []
+                });
                 this.refreshBrands();
             }).catch(()=> {
                 wx.showToast({
@@ -66,6 +69,10 @@ Page({
                 })
             })
         }).catch(console.error);
+    },
+
+    clearInputForm: function () {
+
     },
 
     deleteBrand: function (e) {

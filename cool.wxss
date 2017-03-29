@@ -1138,7 +1138,7 @@ checkbox-group, radio-group {
 }
 
 .wxSortPickerViewTag {
-    background-color: #d6eaff;
+    background-color: #ebebeb;
     font-size: 16px;
     font-weight: bold;
     color: #000;

@@ -23,7 +23,7 @@
     <view class="add_brand_bottom" style="height: {{wxSortPickerData.view.scrollHeight*0.3}}px;">
         <view class="images">
             <view class="weui-uploader">
-                <view class="weui-uploader__bd">
+                <form class="weui-uploader__bd">
                     <view class="section">
                         <input
                                 name="brandName"
@@ -52,8 +52,8 @@
                             <view class="weui-uploader__input" bindtap="chooseImage"></view>
                         </view>
                     </view>
-                    <button bindtap="addBrand" class="submit-btn">Add</button>
-                </view>
+                    <button bindtap="addBrand" class="submit-btn" formType="reset">Add</button>
+                </form>
             </view>
         </view>
     </view>
