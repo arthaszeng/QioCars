@@ -49,7 +49,7 @@ Page({
 
     setCars: function (cars) {
         this.setData({
-            cars,
+            cars
         });
     },
 
