@@ -266,5 +266,6 @@ radio-group{
     width:40px;
     height:40px;
     display:inline-block;
+    padding: 2px 2px 2px 2px ;
 }
 

@@ -11,7 +11,8 @@ Page({
         oldBrandName: '',
         oldEnglishName: '',
 
-        brandId: ''
+        brandId: '',
+        brands: [],
     },
 
     addBrand: function () {
@@ -55,7 +56,7 @@ Page({
                     title: "提交成功",
                     duration: 1000
                 });
-                this.transitionBack();
+                this.refreshBrands();
             }).catch(()=> {
                 wx.showToast({
                     title: '提交失败',
@@ -111,7 +112,41 @@ Page({
             brandName: e.detail.value
         })
     },
-    
+
+    refreshBrands: function () {
+        this.fetchBrands();
+    },
+
+    fetchBrands: function () {
+        return new AV.Query('Brand')
+            .descending('createdAt')
+            .find()
+            .then(this.setBrands)
+            .catch(console.error);
+    },
+
+    setBrands: function (brands) {
+        var that = this;
+        
+        this.setData({
+            brands
+        });
+
+        wxSortPickerView.init(this.data.brands, that);
+    },
+
+    transferBrands: function () {
+        var brandsBuffer = [];
+        var brands = this.data.brands;
+        var that = this;
+
+        for (var x in brands) {
+            brandsBuffer[x] = brands[x].attributes.brandName + " / "  + brands[x].attributes.englishName;
+        }
+
+        wxSortPickerView.init(this.data.brands, that);
+    },
+
     onLoad(query){
         const id = query.id;
 
@@ -131,9 +166,7 @@ Page({
                 }))
             .catch(console.error);
 
-        var that = this
-        wxSortPickerView.init(["宝马  BMW", "奥迪  Audi", "宾利  Bentley", "保时捷  Porsche", "捷豹  Jaguar", "福特  Ford", "凯迪拉克  Cadillac", "大众  Volkswagen", "路虎  Land Rover", "本田  Honda", "现代  Hyundai Motor", "兰博基尼  Lamborghini"],that);
-        console.log(this.data.wxSortPickerData)
+        this.fetchBrands();
     },
 
     isNoFieldChanged: function () {

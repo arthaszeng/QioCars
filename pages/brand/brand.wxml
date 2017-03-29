@@ -5,15 +5,14 @@
                      scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0">
             <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
                 <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.textArray.length >0}}">{{item.tag}}</view>
-                <block wx:for="{{item.textArray}}" wx:for-item="child" wx:key="">
+                <block wx:for="{{item.textArray}}" wx:for-item="child" wx:for-index="idx" wx:key="">
                     <view class="wxSortPickerViewItem" data-text="{{child}}" bindtap="wxSortPickerViewItemTap">
-                        <image class="brandTrademark" src="../../icons/cadillac.png"/>
+                        <image class="brandTrademark" src="{{item.avatarArray[idx]}}"/>
                         <text class="brandText">{{child}}</text>
                     </view>
 
                 </block>
             </block>
-            <!--</view>-->
         </scroll-view>
         <scroll-view style="width:20px;height: 490px; background-color: blank;" class="wxSortPickerViewTemTags">
             <block wx:for="{{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#']}}"
