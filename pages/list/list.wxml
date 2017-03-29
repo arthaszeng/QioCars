@@ -7,7 +7,7 @@
                 <block wx:for="{{item.brandArray}}" wx:for-item="child" wx:key="">
                     <view class="wxSortPickerViewItem" data-id="{{child.id}}">
                         <image class="brandTrademark" src="{{child.url}}"/>
-                        <text class="brandText">{{child.brandName}}  /  {{child.englishName}}</text>
+                        <text class="brandText">{{child.brandName}}</text>
                     </view>
                 </block>
             </block>

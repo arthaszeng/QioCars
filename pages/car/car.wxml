@@ -53,5 +53,6 @@
     </view>
     <button bindtap="addCar" class="submit-btn">Add</button>
     <button bindtap="queryBrand" class="submit-btn">Query Car</button>
+    <button bindtap="query" class="submit-btn">Query Car</button>
 </view>
 </view>

@@ -5,11 +5,9 @@ var wxSortPickerView = require('../../wxSortPickerView/wxSortPickerView.js');
 Page({
     data: {
         brandName: '',
-        englishName: '',
         files: [],
 
         oldBrandName: '',
-        oldEnglishName: '',
 
         brandId: '',
         queryId: '',
@@ -51,7 +49,6 @@ Page({
             });
             new Brand({
                 brandName: this.data.brandName,
-                englishName: this.data.englishName,
                 url: this.data.url
             }).save().then(() => {
                 wx.showToast({
@@ -100,7 +97,6 @@ Page({
                 for (var i = 240; i < data.length; i++) {
                     new Brand({
                         brandName: data[i].name,
-                        englishName: "Unknown",
                         url: [data[i].logo],
                         queryId: data[i].id
                     }).save().then( () => {
@@ -145,12 +141,7 @@ Page({
             urls: this.data.files
         })
     },
-
-    updateEnglishName: function (e) {
-        this.setData({
-            englishName: e.detail.value
-        });
-    },
+    
     updateBrandName: function (e) {
         this.setData({
             brandName: e.detail.value
@@ -205,10 +196,8 @@ Page({
             .then(
                 brand => this.setData({
                     brandName: brand.get('brand_name'),
-                    englishName: brand.get('english_name'),
                     url: brand.get('url'),
                     oldBrandName: brand.get('brand_name'),
-                    oldEnglishName: brand.get('english_name'),
                     brandId: brand.get('objectId')
                 }))
             .catch(console.error);
@@ -217,12 +206,11 @@ Page({
     },
 
     isNoFieldChanged: function () {
-        return this.data.englishName === this.data.oldEnglishName &&
-            this.data.brandName === this.data.oldBrandName
+        return this.data.brandName === this.data.oldBrandName
     },
 
     isNoFieldBlank: function () {
-        return this.data.brandName && this.data.englishName
+        return this.data.brandName
     },
     
     transitionBack(){

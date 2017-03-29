@@ -133,7 +133,7 @@ function buildTextData(that,arr){
     var temABC = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#'];
       
     for (var i = 0; i < arr.length; i++ ){
-        var text = arr[i].attributes.brandName + " \ " + arr[i].attributes.englishName;
+        var text = arr[i].attributes.brandName;
         var firstChar = text.substr(0, 1);
         var reg = query(firstChar)[0];
         var temIndex = temABC.indexOf(reg);
@@ -141,7 +141,6 @@ function buildTextData(that,arr){
         //TODO: verify validation of url and name
         textData[temIndex].brandArray.push({
             brandName: arr[i].attributes.brandName,
-            englishName: arr[i].attributes.englishName,
             url: arr[i].attributes.url[0],
             id: arr[i].id
         });
