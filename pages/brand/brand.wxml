@@ -1,7 +1,6 @@
 <view class="brand">
     <view class="brand_list">
-        <scroll-view class="" scroll-y="true" style="height: 490px;"
-                     bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower"
+        <scroll-view class="" scroll-y="true" bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower"
                      scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0">
             <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
                 <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.textArray.length >0}}">{{item.tag}}</view>
@@ -10,7 +9,6 @@
                         <image class="brandTrademark" src="{{item.avatarArray[idx]}}"/>
                         <text class="brandText">{{child}}</text>
                     </view>
-
                 </block>
             </block>
         </scroll-view>

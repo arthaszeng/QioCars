@@ -9,7 +9,8 @@ Page({
         openSidebarToggle : false,
         mark: 0,
         newMark: 0,
-        isMarkRight:true
+        isMarkRight:true,
+        brands: []
     },
 
     fetchCars: function () {
@@ -18,6 +19,28 @@ Page({
             .find()
             .then(this.setCars)
             .catch(console.error);
+    },
+
+    refreshBrands: function () {
+        this.fetchBrands();
+    },
+
+    fetchBrands: function () {
+        return new AV.Query('Brand')
+            .descending('createdAt')
+            .find()
+            .then(this.setBrands)
+            .catch(console.error);
+    },
+
+    setBrands: function (brands) {
+        var that = this;
+
+        this.setData({
+            brands
+        });
+
+        wxSortPickerView.init(this.data.brands, that);
     },
 
     onPullDownRefresh: function () {
@@ -35,18 +58,14 @@ Page({
             openSidebarToggle: false
         });
         this.fetchCars();
+        this.fetchBrands();
     },
 
-    onLoad(query) {
+    onLoad() {
         const role = wx.getStorageSync('role');
-        console.log("brand: " + query.brand)
         this.setData({
             role,
         });
-
-        var that = this
-        wxSortPickerView.init(["宝马  BMW", "奥迪  Audi", "宾利  Bentley", "保时捷  Porsche", "捷豹  Jaguar", "福特  Ford", "凯迪拉克  Cadillac", "大众  Volkswagen", "路虎  Land Rover", "本田  Honda", "现代  Hyundai Motor", "兰博基尼  Lamborghini"],that);
-        console.log(this.data.wxSortPickerData)
     },
 
     transitionToEdit(e){

@@ -135,18 +135,6 @@ Page({
         wxSortPickerView.init(this.data.brands, that);
     },
 
-    transferBrands: function () {
-        var brandsBuffer = [];
-        var brands = this.data.brands;
-        var that = this;
-
-        for (var x in brands) {
-            brandsBuffer[x] = brands[x].attributes.brandName + " / "  + brands[x].attributes.englishName;
-        }
-
-        wxSortPickerView.init(this.data.brands, that);
-    },
-
     onLoad(query){
         const id = query.id;
 
