@@ -12,6 +12,7 @@ Page({
         oldEnglishName: '',
 
         brandId: '',
+        queryId: '',
         brands: [],
         deleteToggle: false
     },
@@ -71,10 +72,6 @@ Page({
         }).catch(console.error);
     },
 
-    clearInputForm: function () {
-
-    },
-
     deleteBrand: function (e) {
         AV.Query.doCloudQuery(`delete from Brand where objectId="${e.currentTarget.dataset.id}"`).then(()=> {
             wx.showToast({
@@ -91,7 +88,29 @@ Page({
             })
         })  
     },
-    
+
+    addAllBrands: function () {
+        wx.request({
+            url: "https://api.jisuapi.com/car/brand?appkey=15815ae2798d78fa",
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function(res) {
+                var data = res.data.result;
+                for (var i = 240; i < data.length; i++) {
+                    new Brand({
+                        brandName: data[i].name,
+                        englishName: "Unknown",
+                        url: [data[i].logo],
+                        queryId: data[i].id
+                    }).save().then( () => {
+                        return false
+                    })
+                }
+            }
+        })
+    },
+
     addImage: function () {
         this.data.files.map(tempFilePath => () => new AV.File('filename', {
             blob: {
@@ -157,7 +176,6 @@ Page({
             brands
         });
 
-        console.log(this.data.brands);
         wxSortPickerView.init(this.data.brands, that);
     },
 

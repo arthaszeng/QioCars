@@ -156,5 +156,17 @@ Page({
 
     transitionToPositions(){
         wx.navigateBack();
+    },
+
+    queryBrand: function () {
+        wx.request({
+            url: "https://api.jisuapi.com/car/brand?appkey=15815ae2798d78fa",
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function(res) {
+                console.log(res.data)
+            }
+        })
     }
 });

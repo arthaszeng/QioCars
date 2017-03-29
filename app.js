@@ -24,7 +24,6 @@ App({
             this.judgeRole();
             this.globalData.user = user.toJSON();
             this.getUserInfo()
-            console.log("user + " + this.globalData.user)
         }).catch(error => console.error(error.message));
     },
 
@@ -53,7 +52,6 @@ App({
         var that = this;
         if (this.globalData.userInfo) {
             typeof cb == "function" && cb(this.globalData.userInfo)
-            console.log("Exist: userinfo + " + this.globalData.userInfo);
         } else {
             wx.login({
                 success: function () {
@@ -61,7 +59,6 @@ App({
                         success: function (res) {
                             that.globalData.userInfo = res.userInfo;
                             typeof cb == "function" && cb(that.globalData.userInfo)
-                            console.log("userinfo + " + that.globalData.userInfo);
                         }
                     })
                 }
