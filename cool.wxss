@@ -43,14 +43,14 @@ radio-group{
     width: 100%;
 }
 .c-eightywidth {
-    width: 80%;
-    float: left;
+   flex: 4;
 }
 .c-twentywidth {
-    width: 20%;
-    height: 30px;
-    font-size: 13px;
-    float: right;
+  flex: 1;
+  height:1.4rem;
+  font-size: 13px;
+  line-height: 1.4rem;
+  min-height:1.4rem;
 }
 .c-fullheight {
     height: 100%;
@@ -87,7 +87,10 @@ radio-group{
 .wx-input_aN3YXL{background-color: rgb(245, 245, 245); padding-left: 10px; padding-right: 10px; text-align: center; position: relative; z-index: 2; transform: rotate(0deg) scale(1) translate(0%, 0%); transition: all 0.3s ease; font-family: georgia;
     border-style:none;
     outline:none;}
-.wx-view_cc8qyh{width: 100%;}
+.wx-view_cc8qyh {
+  width: 100%;
+  display: flex;
+}
 .wx-input_aN3YXL.c-state1{text-align: left; transform: rotate(0deg) scale(1) translate(0%,0%); transition: All 1s ease; -ms-transform: rotate(0deg) scale(1) translate(0%,0%); -o-transform: rotate(0deg) scale(1) translate(0%,0%); -moz-transform: rotate(0deg) scale(1) translate(0%,0%); -webkit-transform: rotate(0deg) scale(1) translate(0%,0%); -ms-transition: All 1s ease; -o-transition: All 1s ease; -moz-transition: All 1s ease; -webkit-transition: All 1s ease; }
 ._other_text_BWlAnA{font-size: 14px; line-height: 1em; width: 50px; text-align: center; color: rgb(135, 135, 135); margin-left: 5px; position: absolute; right: 0px; top: 7px; }
 .Wrapscroll-view{padding-top: 40px; padding-bottom: 0px; height: 100%; }
@@ -262,4 +265,3 @@ radio-group{
     display:inline-block;
     padding: 2px 2px 2px 2px ;
 }
-
