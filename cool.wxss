@@ -9,16 +9,10 @@ page {
     font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
 }
 
-
-
-
 checkbox-group,
 radio-group{
     display:block;
 }
-
-
-
 
 :before,
 :after ,
