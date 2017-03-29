@@ -1,25 +1,26 @@
 <view class="brand">
     <view class="brand_list">
         <scroll-view class="" scroll-y="true" bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower"
-                     scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0">
+                     scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0" catchlongtap="updateDeleteToggle" style="height: {{wxSortPickerData.view.scrollHeight*0.7}}px;">
             <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
-                <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.textArray.length >0}}">{{item.tag}}</view>
-                <block wx:for="{{item.textArray}}" wx:for-item="child" wx:for-index="idx" wx:key="">
-                    <view class="wxSortPickerViewItem" data-text="{{child}}" bindtap="wxSortPickerViewItemTap">
-                        <image class="brandTrademark" src="{{item.avatarArray[idx]}}"/>
-                        <text class="brandText">{{child}}</text>
+                <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.brandArray.length >0}}">{{item.tag}}</view>
+                <block wx:for="{{item.brandArray}}" wx:for-item="child"  wx:key="">
+                    <view class="wxSortPickerViewItem" catchtap="deleteBrand" data-id="{{child.id}}">
+                        <image class="brandTrademark" src="{{child.url}}"/>
+                        <text class="brandText">{{child.brandName}}  /  {{child.englishName}}</text>
+                        <image wx:if="{{deleteToggle===true}}" mode="aspectFit" catchTap="deleteBrand" class="brandTrademark" src="../../icons/delete.png"/>
                     </view>
                 </block>
             </block>
         </scroll-view>
-        <scroll-view style="width:20px;height: 490px; background-color: blank;" class="wxSortPickerViewTemTags">
+        <scroll-view style="width:20px;height: {{wxSortPickerData.view.scrollHeight*0.7}}px; background-color: blank;" class="wxSortPickerViewTemTags">
             <block wx:for="{{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#']}}"
                    wx:for-item="item" wx:key="">
                 <view catchtap="wxSortPickerViewTemTagTap" data-tag="{{item}}" class="wxSortPickerViewTemTag">{{item}}</view>
             </block>
         </scroll-view>
     </view>
-    <view class="add_brand_bottom">
+    <view class="add_brand_bottom" style="height: {{wxSortPickerData.view.scrollHeight*0.3}}px;">
         <view class="images">
             <view class="weui-uploader">
                 <view class="weui-uploader__bd">

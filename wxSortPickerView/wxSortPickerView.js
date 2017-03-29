@@ -102,46 +102,49 @@ function init(array, that, callback) {
 }
 
 function buildTextData(that,arr){
-    var textData = [{ tag: "A", textArray: [], avatarArray: [] },
-               { tag: "B", textArray: [], avatarArray: [] },
-               { tag: "C", textArray: [], avatarArray: [] },
-               { tag: "D", textArray: [], avatarArray: [] },
-               { tag: "E", textArray: [], avatarArray: [] },
-               { tag: "F", textArray: [], avatarArray: [] },
-               { tag: "G", textArray: [], avatarArray: [] },
-               { tag: "H", textArray: [], avatarArray: [] },
-               { tag: "I", textArray: [], avatarArray: [] },
-               { tag: "J", textArray: [], avatarArray: [] },
-               { tag: "K", textArray: [], avatarArray: [] },
-               { tag: "L", textArray: [], avatarArray: [] },
-               { tag: "M", textArray: [], avatarArray: [] },
-               { tag: "N", textArray: [], avatarArray: [] },
-               { tag: "O", textArray: [], avatarArray: [] },
-               { tag: "P", textArray: [], avatarArray: [] },
-               { tag: "Q", textArray: [], avatarArray: [] },
-               { tag: "R", textArray: [], avatarArray: [] },
-               { tag: "S", textArray: [], avatarArray: [] },
-               { tag: "T", textArray: [], avatarArray: [] },
-               { tag: "U", textArray: [], avatarArray: [] },
-               { tag: "V", textArray: [], avatarArray: [] },
-               { tag: "W", textArray: [], avatarArray: [] },
-               { tag: "X", textArray: [], avatarArray: [] },
-               { tag: "Y", textArray: [], avatarArray: [] },
-               { tag: "Z", textArray: [], avatarArray: [] },
-               { tag: "#", textArray: [], avatarArray: [] }];
+    var textData = [{ tag: "A", brandArray: [] },
+               { tag: "B", brandArray: [] },
+               { tag: "C", brandArray: [] },
+               { tag: "D", brandArray: [] },
+               { tag: "E", brandArray: [] },
+               { tag: "F", brandArray: [] },
+               { tag: "G", brandArray: [] },
+               { tag: "H", brandArray: [] },
+               { tag: "I", brandArray: [] },
+               { tag: "J", brandArray: [] },
+               { tag: "K", brandArray: [] },
+               { tag: "L", brandArray: [] },
+               { tag: "M", brandArray: [] },
+               { tag: "N", brandArray: [] },
+               { tag: "O", brandArray: [] },
+               { tag: "P", brandArray: [] },
+               { tag: "Q", brandArray: [] },
+               { tag: "R", brandArray: [] },
+               { tag: "S", brandArray: [] },
+               { tag: "T", brandArray: [] },
+               { tag: "U", brandArray: [] },
+               { tag: "V", brandArray: [] },
+               { tag: "W", brandArray: [] },
+               { tag: "X", brandArray: [] },
+               { tag: "Y", brandArray: [] },
+               { tag: "Z", brandArray: [] },
+               { tag: "#", brandArray: [] }];
     
     var temABC = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#'];
       
     for (var i = 0; i < arr.length; i++ ){
         var text = arr[i].attributes.brandName + " \ " + arr[i].attributes.englishName;
-        var avatar = arr[i].attributes.url[0];
         var firstChar = text.substr(0, 1);
         var reg = query(firstChar)[0];
         var temIndex = temABC.indexOf(reg);
 
         //TODO: verify validation of url and name
-        textData[temIndex].textArray.push(text);
-        textData[temIndex].avatarArray.push(avatar);
+        textData[temIndex].brandArray.push({
+            brandName: arr[i].attributes.brandName,
+            englishName: arr[i].attributes.englishName,
+            url: arr[i].attributes.url[0],
+            id: arr[i].id
+        });
     }
     var temData = that.data.wxSortPickerData;
     if(typeof temData == 'undefined'){
@@ -150,8 +153,7 @@ function buildTextData(that,arr){
     temData.textData = textData;
     that.setData({
         wxSortPickerData: temData
-    })
-    console.log(that.data.wxSortPickerData)
+    });
 }
 
 function wxSortPickerViewUpper(e) {
