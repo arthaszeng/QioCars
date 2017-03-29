@@ -1,8 +1,8 @@
 <view class="bottomGrayboder topSearchbar">
     <view class="topsearchWrap">
         <view class="wx-view_cc8qyh">
-            <input class="c-block c-eightywidth wx-input_aN3YXL" name="input1" placeholder="◎搜索爱车" placeholder-class="placeholderstyle" type="text" bindinput="updateSearch" maxlength="20"/>
-            <button bindtap="performSearch" class="c-twentywidth" confirm-type="搜索" bindconfirm="performSearch">搜索</button>
+            <input class="c-block c-eightywidth wx-input_aN3YXL" placeholder="◎搜索爱车" placeholder-class="placeholderstyle" type="text" bindinput="updateSearch" bindconfirm="performSearch" confirm-type="搜索" maxlength="20"/>
+            <button bindtap="performSearch" class="c-twentywidth" >搜索</button>
         </view>
     </view>
 </view>
