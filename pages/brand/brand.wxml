@@ -1,0 +1,62 @@
+<view class="brand">
+    <view class="brand_list">
+        <scroll-view class="" scroll-y="true" style="height: 490px;"
+                     bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower"
+                     scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0">
+            <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
+                <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.textArray.length >0}}">{{item.tag}}</view>
+                <block wx:for="{{item.textArray}}" wx:for-item="child" wx:key="">
+                    <view class="wxSortPickerViewItem" data-text="{{child}}" bindtap="wxSortPickerViewItemTap">
+                        <image class="brandTrademark" src="../../icons/cadillac.png"/>
+                        <text class="brandText">{{child}}</text>
+                    </view>
+
+                </block>
+            </block>
+            <!--</view>-->
+        </scroll-view>
+        <scroll-view style="width:20px;height: 490px; background-color: blank;" class="wxSortPickerViewTemTags">
+            <block wx:for="{{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#']}}"
+                   wx:for-item="item" wx:key="">
+                <view catchtap="wxSortPickerViewTemTagTap" data-tag="{{item}}" class="wxSortPickerViewTemTag">{{item}}</view>
+            </block>
+        </scroll-view>
+    </view>
+    <view class="add_brand_bottom">
+        <view class="images">
+            <view class="weui-uploader">
+                <view class="weui-uploader__bd">
+                    <view class="section">
+                        <input
+                                name="brandName"
+                                value="{{brandName}}"
+                                bindinput="updateBrandName"
+                                placeholder="Brand Name"
+                        />
+                        <input
+                                name="englishName"
+                                value="{{englishName}}"
+                                bindinput="updateEnglishName"
+                                placeholder="English Name"
+                        />
+                    </view>
+                    <view class="weui-uploader__hd">
+                        <view class="upload_trademark_title_left">Upload Trademark</view>
+                        <view class="upload_trademark_title_right">{{files.length}}/1</view>
+                    </view>
+                    <view class="image_view">
+                        <view class="weui-uploader__files" id="uploaderFiles" wx:if="{{files[0]}}">
+                            <view class="weui-uploader__file" bindtap="previewImage" id="{{files[0]}}">
+                                <image class="weui-uploader__img" src="{{files[0]}}" mode="aspectFill"/>
+                            </view>
+                        </view>
+                        <view class="weui-uploader__input-box">
+                            <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                        </view>
+                    </view>
+                    <button bindtap="addBrand" class="submit-btn">Add</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

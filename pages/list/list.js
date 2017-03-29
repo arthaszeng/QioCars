@@ -159,5 +159,12 @@ Page({
         this.setData({
             openSidebarToggle : false
         })
+    },
+
+    transitionToBrand: function () {
+        wx.navigateTo({
+            redirect: "true",
+            url: `../brand/brand`
+        });
     }
 });

@@ -222,7 +222,7 @@ radio-group{
 
 .wxSortPickerViewTemTags{
     position: absolute;
-    top: 1px;
+    top: 0px;
     bottom: 5px;
     right: 0;
     background-color: #fff;
@@ -249,10 +249,22 @@ radio-group{
 }
 
 .wxSortPickerViewItem{
+    margin-top: 0px;
     height: 40px;
+    background-color: white;
     line-height: 40px;
     border-bottom: 1px solid #eee;
-    margin-left: 5px;
+}
+.brandText{
+    margin-left: 30px;
     font-size: 14px;
+    display:inline-block;
+    vertical-align: top;
+}
+.brandTrademark{
+    margin-left: 15px;
+    width:40px;
+    height:40px;
+    display:inline-block;
 }
 

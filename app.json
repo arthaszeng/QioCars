@@ -5,12 +5,13 @@
     "pages/list/list",
     "pages/profile/profile",
     "pages/detail/detail",
+    "pages/brand/brand",
     "pages/promotion/promotion"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "成都锦宏二手名车",
+    "navigationBarTitleText": "My Cars",
     "backgroundColor": "#f6f8f9",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true
