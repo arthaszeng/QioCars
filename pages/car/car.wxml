@@ -1,58 +1,58 @@
 <view class="page">
-<view class="page__hd">
-    <view class="section">
-        <input
-                name="brand"
-                value="{{brand}}"
-                bindinput="updateBrand"
-                placeholder="Brand"
-        />
+    <view class="page__hd">
+        <view class="section">
+            <input
+                    name="brand"
+                    value="{{brand}}"
+                    bindinput="updateBrand"
+                    placeholder="Brand"
+            />
+        </view>
+        <view class="section">
+            <input
+                    name="model"
+                    value="{{model}}"
+                    bindinput="updateModel"
+                    placeholder="Model"
+            />
+        </view>
+        <view class="section">
+            <textarea
+                    name="price"
+                    value="{{price}}"
+                    bindinput="updatePrice"
+                    placeholder="Price"
+                    auto-height="true"
+            />
+        </view>
     </view>
-    <view class="section">
-        <input
-                name="model"
-                value="{{model}}"
-                bindinput="updateModel"
-                placeholder="Model"
-        />
-    </view>
-    <view class="section">
-        <textarea
-                name="price"
-                value="{{price}}"
-                bindinput="updatePrice"
-                placeholder="Price"
-                auto-height="true"
-        />
-    </view>
-</view>
-<view class="page__bd">
-    <view class="weui-cells">
-        <view class="weui-cell">
-            <view class="weui-cell__bd">
-                <view class="weui-uploader">
-                    <view class="weui-uploader__hd">
-                        <view class="weui-uploader__title">Upload Images</view>
-                        <view class="weui-uploader__info">{{files.length}}/9</view>
-                    </view>
-                    <view class="weui-uploader__bd">
-                        <view class="weui-uploader__files" id="uploaderFiles">
-                            <block wx:for-items="{{files}}" wx:key="{{index}}">
-                                <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill"/>
-                                </view>
-                            </block>
+    <view class="page__bd">
+        <view class="weui-cells">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title">Upload Images</view>
+                            <view class="weui-uploader__info">{{files.length}}/9</view>
                         </view>
-                        <view class="weui-uploader__input-box">
-                            <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for-items="{{files}}" wx:key="{{index}}">
+                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill"/>
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
                         </view>
                     </view>
                 </view>
             </view>
         </view>
+        <button bindtap="addCar" class="submit-btn">Add</button>
+        <button bindtap="queryBrand" class="submit-btn">Query Car</button>
+        <button bindtap="query" class="submit-btn">Query Car</button>
     </view>
-    <button bindtap="addCar" class="submit-btn">Add</button>
-    <button bindtap="queryBrand" class="submit-btn">Query Car</button>
-    <button bindtap="query" class="submit-btn">Query Car</button>
-</view>
 </view>

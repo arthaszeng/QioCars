@@ -6,6 +6,7 @@
     "pages/profile/profile",
     "pages/detail/detail",
     "pages/brand/brand",
+    "pages/query/query",
     "pages/promotion/promotion"
   ],
   "window": {

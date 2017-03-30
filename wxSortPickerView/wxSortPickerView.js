@@ -170,7 +170,6 @@ function wxSortPickerViewScroll(e) {
 function setViewWH(that) {
     wx.getSystemInfo({
         success: function (res) {
-            // console.dir(res);
             var windowWidth = res.windowWidth;
             var windowHeight = res.windowHeight;
             var temData = that.data.wxSortPickerData;

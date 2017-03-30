@@ -19,7 +19,7 @@ Page({
 
     setPositions: function (positions) {
         this.setData({
-            positions,
+            positions
         });
     },
 
