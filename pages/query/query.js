@@ -6,11 +6,17 @@ Page({
         cars: [],
         toggle_option: false,
         lastSearch: '',
-        openSidebarToggle: false,
+        openSidebarToggle: true,
         mark: 0,
         newMark: 0,
         isMarkRight: true,
-        brands: []
+        brands: [],
+
+        brand: 0,
+        series: 0,
+        subSeries: 0,
+        car: 0,
+        logo: ''
     },
 
     fetchCars: function () {
@@ -55,7 +61,7 @@ Page({
 
     onShow() {
         this.setData({
-            openSidebarToggle: false
+            openSidebarToggle: true
         });
         this.fetchCars();
         this.fetchBrands();
@@ -66,6 +72,7 @@ Page({
         this.setData({
             role
         });
+        this.querySeries();
     },
 
     transitionToEdit(e){
@@ -175,5 +182,57 @@ Page({
             redirect: "true",
             url: `../brand/brand`
         });
+    },
+
+    querySeries: function () {
+        var that = this;
+        wx.request({
+            url: "https://api.jisuapi.com/car/carlist?appkey=15815ae2798d78fa&parentid=1",
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+                console.log(res.data);
+
+                that.setData({
+                    queryData: res.data.result
+                });
+
+                console.log(that.data.seriesData)
+            }
+        })
+    },
+
+    bindChange: function (e) {
+        var value = e.detail.value;
+        this.setData({
+            series: value[0],
+            subSeries: value[1],
+            car: value[2]
+        })
+    },
+
+    selectCar: function () {
+        var that = this
+        this.setData({
+            carId: this.data.queryData[this.data.series]
+                .carlist[this.data.subSeries]
+                .list[this.data.car].id
+        });
+        wx.request({
+            url: "https://api.jisuapi.com/car/detail?appkey=15815ae2798d78fa&carid="+this.data.carId,
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+                console.log(res.data);
+
+                that.setData({
+                    selectedCar: res.data.result,
+                    logo: that.data.queryData[that.data.series]
+                        .carlist[that.data.subSeries].logo
+                });
+            }
+        })
     }
 });

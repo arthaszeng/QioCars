@@ -36,6 +36,13 @@
         "selectedIconPath": "icons/person_green.png"
       },
       {
+        "pagePath": "pages/query/query",
+        "text": "查询",
+        "iconPath": "icons/search_selected.png",
+        "selectedColor": "green",
+        "selectedIconPath": "icons/search.png"
+      },
+      {
         "pagePath": "pages/profile/profile",
         "text": "我",
         "iconPath": "icons/person.png",
