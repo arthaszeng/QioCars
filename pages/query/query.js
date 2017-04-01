@@ -203,6 +203,24 @@ Page({
         })
     },
 
+    solveColors: function () {
+        var colorString = this.data.selectedCar.body.color;
+        var subString = colorString.split('|');
+        var colors = [];
+
+        for (var i = 0; i < subString.length; i++) {
+            var color = subString[i].split(',')[1];
+            if (color !== undefined) {
+                colors.push(color)
+            }
+        }
+
+        this.setData({
+            colors
+        });
+        console.log(this.data.colors)
+    },
+
     bindChange: function (e) {
         var value = e.detail.value;
         this.setData({
@@ -232,6 +250,8 @@ Page({
                     logo: that.data.queryData[that.data.series]
                         .carlist[that.data.subSeries].logo
                 });
+
+                that.solveColors()
             }
         })
     }

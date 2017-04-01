@@ -1,20 +1,20 @@
 <view class="page">
-    <view class="page-bottom" bindtap="closeSidebar">
+    <scoll-view class="page-bottom" bindtap="closeSidebar" scroll-y="true">
         <view>
             <view>选择型号</view>
             <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
                 <picker-view-column>
-                    <view wx:for="{{queryData}}" style="line-height: 50px" wx:key="">{{item.name}}</view>
+                    <view class="picker-view-item" wx:for="{{queryData}}" wx:key="">{{item.name}}</view>
                 </picker-view-column>
                 <picker-view-column>
-                    <view wx:for="{{queryData[series].carlist}}" style="line-height: 50px;" mode="aspectFit" wx:key="">{{item.name}}"</view>
+                    <view class="picker-view-item" wx:for="{{queryData[series].carlist}}" mode="aspectFit" wx:key="">{{item.name}}"</view>
                 </picker-view-column>
                 <picker-view-column bindtap="selectCar">
-                    <view wx:for="{{queryData[series].carlist[subSeries].list}}" style="line-height: 50px" wx:key="">{{item.name}}</view>
+                    <view class="picker-view-item" wx:for="{{queryData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}</view>
                 </picker-view-column>
             </picker-view>
         </view>
-    </view>
+    </scoll-view>
 
     <view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top {{openSidebarToggle ? 'c-state1' : ''}}">
         <view>
@@ -31,14 +31,64 @@
             <view class="wx-view_KHAWVZ">
                 <image bindtap="previewImage" class="logo" mode="aspectFill" src="{{logo}}"/>
                 <text class="c-block wx-text_V55JEt">{{selectedCar.name}}</text>
-                <view class="wx-view_Ipiy3Y">
+                <view class="wx-brief_view">
                     <navigator class="wx-navigator_8s8V9p" hover-class="navigator-hover">
-                        <text class="c-block wx-text_EPMInA">￥{{selectedCar.price}}</text>
+                        <text class="c-block wx-text_EPMInA">￥{{selectedCar.basic.saleprice}}</text>
                     </navigator>
                     <view class="wx-view_q8yXI9">
                         <image class="wx-image_YAG40m" mode="aspectFit"
                                src="http://qty83k.creatby.com/materials/origin/c5656ef00d38d89eae437c5a9102f8fa_origin.png"
                                style="background-image: background-size: contain; background-position: center center; background-repeat: no-repeat; "/>
+                    </view>
+                </view>
+                <view class="detail_info">
+                    <view class="page__bd page__bd_spacing">
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.yeartype}}</view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.productionstate}}</view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.salestate}}</view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.gearbox.gearbox}}</view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.basic.displacement}}</view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item"  wx:for="{{colors}}" wx:key="">
+                                <view class="placeholder" style="background-color:{{item}}; border-radius:5px"/>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view>
+                                <view class="placeholder">{{selectedCar.body.len}}mm/{{selectedCar.body.width}}mm/{{selectedCar.body.height}}mm</view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.doormirror.skylightstype}}</view>
+                            </view>
+                            <view>
+                                <view class="placeholder">{{selectedCar.doormirror.skylightopeningmode}}</view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.drivingauxiliary.frontparkingradar}}</view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.drivingauxiliary.reversingradar}}</view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="placeholder">{{selectedCar.seat.driverseatadjustmentmode}}</view>
+                            </view>
+                        </view>
                     </view>
                 </view>
                 <view class="likelist">

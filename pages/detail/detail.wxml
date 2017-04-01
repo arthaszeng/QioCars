@@ -16,7 +16,7 @@
             </swiper-item>
         </swiper>
         <text class="c-block wx-text_V55JEt">{{brand}} {{model}}</text>
-        <view class="wx-view_Ipiy3Y">
+        <view class="wx-brief_view">
             <navigator class="wx-navigator_8s8V9p" hover-class="navigator-hover">
                 <text class="c-block wx-text_EPMInA">￥{{price}}</text>
             </navigator>
