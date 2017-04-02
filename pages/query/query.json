@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "Garage"
+  "navigationBarTitleText": "Garage",
+  "enablePullDownRefresh": false
 }

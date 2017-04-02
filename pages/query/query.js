@@ -4,6 +4,7 @@ var wxSortPickerView = require('../../wxSortPickerView/wxSortPickerView.js');
 Page({
     data: {
         cars: [],
+        charIndex: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#'],
         toggle_option: false,
         lastSearch: '',
         openSidebarToggle: true,
@@ -251,7 +252,8 @@ Page({
                         .carlist[that.data.subSeries].logo
                 });
 
-                that.solveColors()
+                that.solveColors();
+                that.closeSidebar();
             }
         })
     }
