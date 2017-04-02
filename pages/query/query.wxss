@@ -8,9 +8,19 @@
     -webkit-transition: All 0.4s ease;
 }
 
+.page {
+    background-color: #1e1e1e;
+}
+
 .c-state1 {
     transform: rotate(0deg) scale(1) translate(100%, 0%);
     -webkit-transform: rotate(0deg) scale(1) translate(100%, 0%);
+}
+
+.indicator {
+    height: 45px;
+    opacity: 0.3;
+    background-color: rgba(255, 6, 49, 0);
 }
 
 .page-bottom {
@@ -25,7 +35,10 @@
 }
 
 .picker-view-item {
-    overflow-wrap: break-word
+    overflow-wrap: break-word;
+    color: white;
+    line-height: 45px;
+    line-break: auto;
 }
 
 .brand-view {
@@ -36,13 +49,23 @@
 }
 
 .brand-picker-view-tag {
-    background-color: #ebebeb;
+    background-color: #dcdcdc;
     font-size: 10px;
     font-weight: bold;
-    color: #000;
+    color: #000000;
     height: 15px;
     line-height: 15px;
     padding-left: 10px;
+    text-align: justify;
+}
+.wxSortPickerViewTemTags {
+    position: absolute;
+    bottom: 5px;
+    height: 95%;
+    width: 20px;
+    right: 0;
+    background-color: black;
+    color: white;
 }
 
 .brand-picker-view-item {
@@ -50,6 +73,7 @@
     background-color: white;
     line-height: 22px;
     border-bottom: 1px solid #eee;
+    font-family: Helvetica, serif;
 }
 
 .brand-text {
@@ -68,12 +92,13 @@
 
 .car-picker-view {
     width: 70%;
-    height: 400px;
+    height: 100%;
     margin-left: 30%;
-    margin-top: 60px;
+    /*margin-top: 60px;*/
     position: fixed;
     text-align: center;
 }
+
 .navigator {
     width: 40px;
     height: 40px;
@@ -88,7 +113,11 @@
     z-index: 10;
 }
 
-.navigator-image{
+.navigator-image {
     width: 25px;
     height: 25px;
+}
+
+.picker-view-column{
+    background-color: black;
 }

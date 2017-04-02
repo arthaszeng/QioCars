@@ -14,20 +14,20 @@
                         </block>
                     </block>
                 </scroll-view>
-                <scroll-view style="width:20px;height: {{wxSortPickerData.view.scrollHeight}}px; background-color: blank;" class="wxSortPickerViewTemTags">
+                <scroll-view class="wxSortPickerViewTemTags">
                     <block wx:for="{{charIndex}}" wx:for-item="item" wx:key="">
                         <view catchtap="wxSortPickerViewTemTagTap" data-tag="{{item}}" class="wxSortPickerViewTemTag">{{item}}</view>
                     </block>
                 </scroll-view>
             </view>
-            <picker-view indicator-style="height: 50px;" class="car-picker-view" value="{{value}}" bindchange="bindChange">
-                <picker-view-column>
+            <picker-view indicator-class="indicator" class="car-picker-view" value="{{value}}" bindchange="bindChange">
+                <picker-view-column class="picker-view-column">
                     <view class="picker-view-item" wx:for="{{queryData}}" wx:key="">{{item.name}}</view>
                 </picker-view-column>
                 <picker-view-column>
                     <view class="picker-view-item" wx:for="{{queryData[series].carlist}}" mode="aspectFit" wx:key="">{{item.name}}"</view>
                 </picker-view-column>
-                <picker-view-column bindtap="selectCar">
+                <picker-view-column bindtap="selectCar" class="picker-view-column">
                     <view class="picker-view-item" style="font-size:10px" wx:for="{{queryData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}
                     </view>
                 </picker-view-column>
