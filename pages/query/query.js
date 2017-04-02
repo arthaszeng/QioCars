@@ -12,7 +12,6 @@ Page({
         newMark: 0,
         isMarkRight: true,
         brands: [],
-
         brand: 0,
         series: 0,
         subSeries: 0,
@@ -42,18 +41,12 @@ Page({
 
     setBrands: function (brands) {
         var that = this;
-
         this.setData({
             brands
         });
-
         wxSortPickerView.init(this.data.brands, that);
     },
-
-    onPullDownRefresh: function () {
-        this.fetchCars().then(wx.stopPullDownRefresh);
-    },
-
+    
     setCars: function (cars) {
         this.setData({
             cars
@@ -72,86 +65,6 @@ Page({
         const role = wx.getStorageSync('role');
         this.setData({
             role
-        });
-        this.querySeries();
-    },
-
-    transitionToEdit(e){
-        wx.navigateTo({
-            redirect: "true",
-            url: `../car/car?id=${e.target.dataset.id}`
-        });
-    },
-
-    transitionToDetail(e){
-        wx.navigateTo({
-            redirect: "true",
-            url: `../detail/detail?id=${e.target.dataset.id}`
-        });
-    },
-
-    deleteCar(e){
-        console.log(e.currentTarget.dataset.id);
-        AV.Query.doCloudQuery(`delete from Car where objectId="${e.currentTarget.dataset.id}"`).then(()=> {
-            wx.showToast({
-                title: "删除成功",
-                mask: true,
-                duration: 1000
-            });
-            this.fetchCars();
-        }).catch(()=> {
-            wx.showToast({
-                title: '失败',
-                mask: true,
-                duration: 1000
-            })
-        })
-    },
-
-    updateOptionToggle() {
-        var oldOptionToggle = this.data.toggle_option;
-        var that = this;
-        wx.getStorage({
-            key: 'role',
-            success: function (res) {
-                console.log(res);
-                if (res.data === 'ADMIN') {
-                    that.setData({
-                        toggle_option: !oldOptionToggle
-                    })
-                }
-            }
-        });
-    },
-    performSearch() {
-        var that = this;
-        console.log(this.data.lastSearch);
-        var query = new AV.Query('Car');
-        query.contains('brand', this.data.lastSearch);
-        query.contains('model', this.data.lastSearch);
-        query.find().then(function (results) {
-            that.setData({
-                cars: results
-            });
-            that.checkCarsIsEmpty();
-        }, function (error) {
-        });
-    },
-
-    checkCarsIsEmpty: function () {
-        if (this.data.cars.length === 0) {
-            wx.showToast({
-                title: 'No Card Found!',
-                mask: true,
-                icon: 'loading',
-                duration: 1000
-            })
-        }
-    },
-
-    updateSearch(e) {
-        this.setData({
-            lastSearch: e.detail.value
         });
     },
 
@@ -178,17 +91,10 @@ Page({
         })
     },
 
-    transitionToBrand: function () {
-        wx.navigateTo({
-            redirect: "true",
-            url: `../brand/brand`
-        });
-    },
-
     querySeries: function () {
         var that = this;
         wx.request({
-            url: "https://api.jisuapi.com/car/carlist?appkey=15815ae2798d78fa&parentid=1",
+            url: "https://api.jisuapi.com/car/carlist?appkey=15815ae2798d78fa&parentid=" + that.data.brandId,
             header: {
                 'content-type': 'application/json'
             },
@@ -256,5 +162,13 @@ Page({
                 that.closeSidebar();
             }
         })
+    },
+    
+    selectBrand: function (e) {
+        var brandId = e.currentTarget.dataset.id;
+        this.setData({
+            brandId: brandId
+        });
+        this.querySeries();
     }
 });

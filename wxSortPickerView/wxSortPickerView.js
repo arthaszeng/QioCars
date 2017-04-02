@@ -142,7 +142,7 @@ function buildTextData(that,arr){
         textData[temIndex].brandArray.push({
             brandName: arr[i].attributes.brandName,
             url: arr[i].attributes.url[0],
-            id: arr[i].id
+            id: arr[i].attributes.queryId
         });
     }
     var temData = that.data.wxSortPickerData;
