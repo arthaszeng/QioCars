@@ -1,20 +1,40 @@
 <view class="page">
-    <scoll-view class="page-bottom" bindtap="closeSidebar" scroll-y="true">
-        <view>
-            <view>选择型号</view>
-            <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-                <picker-view-column>
-                    <view class="picker-view-item" wx:for="{{queryData}}" wx:key="">{{item.name}}</view>
-                </picker-view-column>
-                <picker-view-column>
-                    <view class="picker-view-item" wx:for="{{queryData[series].carlist}}" mode="aspectFit" wx:key="">{{item.name}}"</view>
-                </picker-view-column>
-                <picker-view-column bindtap="selectCar">
-                    <view class="picker-view-item" wx:for="{{queryData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}</view>
-                </picker-view-column>
-            </picker-view>
+    <view class="page-bottom" bindtap="closeSidebar">
+        <view style="position:relative">
+                <view class="brand-view">
+                    <scroll-view class="brand-scroll-view" scroll-y="true" bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower"
+                                 scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0" style="height: {{wxSortPickerData.view.scrollHeight}}px">
+                        <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
+                            <view id="{{item.tag}}" class="brand-picker-view-tag" wx:if="{{item.brandArray.length >0}}">{{item.tag}}</view>
+                            <block wx:for="{{item.brandArray}}" wx:for-item="child" wx:key="">
+                                <view class="brand-picker-view-item" data-id="{{child.id}}">
+                                    <image class="brand-trademark" src="{{child.url}}"/>
+                                    <text class="brand-text">{{child.brandName}}</text>
+                                </view>
+                            </block>
+                        </block>
+                    </scroll-view>
+                    <scroll-view style="width:20px;height: {{wxSortPickerData.view.scrollHeight}}px; background-color: blank;" class="wxSortPickerViewTemTags">
+                        <block wx:for="{{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#']}}"
+                               wx:for-item="item" wx:key="">
+                            <view catchtap="wxSortPickerViewTemTagTap" data-tag="{{item}}" class="wxSortPickerViewTemTag">{{item}}</view>
+                        </block>
+                    </scroll-view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 70%; height: 400px; padding-left:30%; padding-top: 60px; position:fixed; text-align:center" value="{{value}}" bindchange="bindChange">
+                    <picker-view-column>
+                        <view class="picker-view-item" wx:for="{{queryData}}" wx:key="">{{item.name}}</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view class="picker-view-item" wx:for="{{queryData[series].carlist}}" mode="aspectFit" wx:key="">{{item.name}}"</view>
+                    </picker-view-column>
+                    <picker-view-column bindtap="selectCar">
+                        <view class="picker-view-item" style="font-size:10px" wx:for="{{queryData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}
+                        </view>
+                    </picker-view-column>
+                </picker-view>
         </view>
-    </scoll-view>
+    </view>
 
     <view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top {{openSidebarToggle ? 'c-state1' : ''}}">
         <view>
@@ -63,7 +83,7 @@
                             </view>
                         </view>
                         <view class="weui-flex">
-                            <view class="weui-flex__item"  wx:for="{{colors}}" wx:key="">
+                            <view class="weui-flex__item" wx:for="{{colors}}" wx:key="">
                                 <view class="placeholder" style="background-color:{{item}}; border-radius:5px"/>
                             </view>
                         </view>
