@@ -90,6 +90,11 @@ Page({
             openSidebarToggle: false
         })
     },
+    openSidebar: function () {
+        this.setData({
+            openSidebarToggle: true
+        })
+    },
 
     querySeries: function () {
         var that = this;

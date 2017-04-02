@@ -35,7 +35,7 @@
         </view>
     </view>
 
-    <view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top {{openSidebarToggle ? 'c-state1' : ''}}">
+    <view class="page-top {{openSidebarToggle ? 'c-state1' : ''}}">
         <view>
             <view class="wx-view_IfJZkK">
                 <view class="wx-view_u7aIQl">
@@ -253,6 +253,11 @@
                     </button>
                 </view>
             </view>
+            <navigator class="navigator" hover-class="navigator-hover" open-type="redirect">
+                <image class="navigator-image" mode="aspectFit" src="../../icons/search.png" catchtap="openSidebar"/>
+            </navigator>
         </view>
     </view>
+
+
 </view>
