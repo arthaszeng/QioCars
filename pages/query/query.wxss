@@ -18,7 +18,7 @@
 }
 
 .indicator {
-    height: 45px;
+    height: 47px;
     opacity: 0.3;
     background-color: rgba(255, 6, 49, 0);
 }
@@ -37,8 +37,15 @@
 .picker-view-item {
     overflow-wrap: break-word;
     color: white;
-    line-height: 45px;
+    line-height: 47px;
     line-break: auto;
+}
+
+.picker-view-item-car {
+    overflow-wrap: break-word;
+    color: white;
+    line-break: auto;
+    font-size:10px;
 }
 
 .brand-view {

@@ -28,7 +28,7 @@
                     <view class="picker-view-item" wx:for="{{queryData[series].carlist}}" mode="aspectFit" wx:key="">{{item.name}}"</view>
                 </picker-view-column>
                 <picker-view-column bindtap="selectCar" class="picker-view-column">
-                    <view class="picker-view-item" style="font-size:10px" wx:for="{{queryData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}
+                    <view class="picker-view-item-car" wx:for="{{queryData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}
                     </view>
                 </picker-view-column>
             </picker-view>
