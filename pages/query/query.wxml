@@ -22,13 +22,13 @@
             </view>
             <picker-view indicator-class="indicator" class="car-picker-view" value="{{value}}" bindchange="bindChange">
                 <picker-view-column class="picker-view-column">
-                    <view class="picker-view-item" wx:for="{{queryData}}" wx:key="">{{item.name}}</view>
+                    <view class="picker-view-item" wx:for="{{seriesData}}" wx:key="">{{item.name}}</view>
                 </picker-view-column>
                 <picker-view-column>
-                    <view class="picker-view-item" wx:for="{{queryData[series].carlist}}" mode="aspectFit" wx:key="">{{item.name}}"</view>
+                    <view class="picker-view-item" wx:for="{{seriesData[series].carlist}}" mode="aspectFit" wx:key="">{{item.name}}"</view>
                 </picker-view-column>
                 <picker-view-column bindtap="selectCar" class="picker-view-column">
-                    <view class="picker-view-item-car" wx:for="{{queryData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}
+                    <view class="picker-view-item-car" wx:for="{{seriesData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}
                     </view>
                 </picker-view-column>
             </picker-view>
@@ -85,7 +85,7 @@
                             </view>
                             <view class="weui-flex__item">
                                 <view class="detailed-item">
-                                    <view class="detailed-item-description">商家报价</view>
+                                    <view class="detailed-item-description">报价</view>
                                     <view class="detailed-item-data">{{selectedCar.basic.saleprice}}</view>
                                 </view>
                             </view>

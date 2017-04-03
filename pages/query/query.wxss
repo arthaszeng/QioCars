@@ -68,8 +68,8 @@
 .wxSortPickerViewTemTags {
     position: absolute;
     bottom: 5px;
-    height: 95%;
-    width: 20px;
+    height: 100%;
+    width: 12px;
     right: 0;
     background-color: black;
     color: white;
@@ -91,7 +91,7 @@
 }
 
 .brand-trademark {
-    margin: 2px 2px 2px 10px;
+    margin: 2px 2px 2px 4px;
     width: 18px;
     height: 18px;
     display: inline-block;
@@ -151,7 +151,8 @@
 .detailed-item-data {
     text-align:right;
     color:black;
-    font-size:16px;
+    flex-wrap: wrap;
+    font-size:14px;
 }
 .detailed-item-color {
     text-align:center;
@@ -159,4 +160,9 @@
     overflow: hidden;
     height: 30px;
     padding:0 10px;
+}
+.wxSortPickerViewTemTag {
+    text-align: center;
+    padding: 3px;
+    font-size: 9px;
 }

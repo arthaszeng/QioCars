@@ -19,19 +19,27 @@ Page({
         logo: ''
     },
 
-    fetchCars: function () {
-        return new AV.Query('Car')
-            .descending('createdAt')
-            .find()
-            .then(this.setCars)
-            .catch(console.error);
-    },
-
     refreshBrands: function () {
         this.fetchBrands();
     },
 
     fetchBrands: function () {
+        var that = this;
+        try {
+            console.log("Fetching Brands Info From Local Storage");
+            var value = wx.getStorageSync('brands');
+            if (value) {
+                wxSortPickerView.initFromLocal(value, that);
+            } else {
+                that.fetchBrandsViaAV;
+            }
+        } catch (e) {
+            console.log("Fetching Brands Info");
+            that.fetchBrandsViaAV;
+        }
+    },
+
+    fetchBrandsViaAV: function () {
         return new AV.Query('Brand')
             .descending('createdAt')
             .find()
@@ -44,21 +52,14 @@ Page({
         this.setData({
             brands
         });
+        try {
+            console.log("Set Local Storage: Brands");
+            console.log(that.data.brands);
+            wx.setStorageSync('brands', that.data.brands);
+        } catch (e) {
+            console.log(e)
+        }
         wxSortPickerView.init(this.data.brands, that);
-    },
-    
-    setCars: function (cars) {
-        this.setData({
-            cars
-        });
-    },
-
-    onShow() {
-        this.setData({
-            openSidebarToggle: true
-        });
-        this.fetchCars();
-        this.fetchBrands();
     },
 
     onLoad() {
@@ -66,6 +67,10 @@ Page({
         this.setData({
             role
         });
+        this.setData({
+            openSidebarToggle: true
+        });
+        this.fetchBrands();
     },
 
     tap_start: function (e) {
@@ -95,8 +100,24 @@ Page({
             openSidebarToggle: true
         })
     },
-
     querySeries: function () {
+        var that = this;
+        try {
+            var value = wx.getStorageSync("brandId" + that.data.brandId);
+            if (value) {
+                that.setData({
+                    seriesData: value
+                });
+            } else {
+                that.querySeriesViaApi();
+            }
+        } catch (e) {
+            console.log("Error when fetching series info form local storage" + e);
+            that.querySeriesViaApi();
+        }
+    },
+
+    querySeriesViaApi: function () {
         var that = this;
         wx.request({
             url: "https://api.jisuapi.com/car/carlist?appkey=15815ae2798d78fa&parentid=" + that.data.brandId,
@@ -104,13 +125,18 @@ Page({
                 'content-type': 'application/json'
             },
             success: function (res) {
+                console.log("Fetch Brand Info For: " + that.data.brandId);
                 console.log(res.data);
 
                 that.setData({
-                    queryData: res.data.result
+                    seriesData: res.data.result
                 });
 
-                console.log(that.data.seriesData)
+                try {
+                    wx.setStorageSync("brandId" + that.data.brandId, res.data.result)
+                } catch (e) {
+                    console.log("Error when setting series data" + e)
+                }
             }
         })
     },
@@ -145,12 +171,12 @@ Page({
     selectCar: function () {
         var that = this
         this.setData({
-            carId: this.data.queryData[this.data.series]
+            carId: this.data.seriesData[this.data.series]
                 .carlist[this.data.subSeries]
                 .list[this.data.car].id
         });
         wx.request({
-            url: "https://api.jisuapi.com/car/detail?appkey=15815ae2798d78fa&carid="+this.data.carId,
+            url: "https://api.jisuapi.com/car/detail?appkey=15815ae2798d78fa&carid=" + this.data.carId,
             header: {
                 'content-type': 'application/json'
             },
@@ -159,7 +185,7 @@ Page({
 
                 that.setData({
                     selectedCar: res.data.result,
-                    logo: that.data.queryData[that.data.series]
+                    logo: that.data.seriesData[that.data.series]
                         .carlist[that.data.subSeries].logo
                 });
 
@@ -168,7 +194,7 @@ Page({
             }
         })
     },
-    
+
     selectBrand: function (e) {
         var brandId = e.currentTarget.dataset.id;
         this.setData({
