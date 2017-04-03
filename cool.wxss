@@ -499,7 +499,7 @@ checkbox-group, radio-group {
     height: 100%;
 }
 
-.wx-view_Ipiy3Y {
+.wx-brief_view {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;

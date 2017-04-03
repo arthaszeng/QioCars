@@ -1038,3 +1038,17 @@ icon {
     color: #09BB07;
     white-space: nowrap;
 }
+.placeholder{
+    margin:2px 5px 2px 5px;
+    padding:0 10px;
+    text-align:center;
+    background-color: white;
+    border-radius:20px;
+    border:1px solid silver;
+    height:30px;
+    overflow: hidden;
+    font-size:18px;
+}
+.page__bd_spacing {
+    margin-bottom: 20px;
+}

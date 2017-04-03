@@ -101,6 +101,20 @@ function init(array, that, callback) {
     buildTextData(that,array);
 }
 
+function initFromLocal(array, that, callback) {
+    var temData = that.data.wxSortPickerData;
+    if(typeof temData == 'undefined'){
+        temData = {};
+    }
+    that.wxSortPickerViewUpper = wxSortPickerViewUpper;
+    that.wxSortPickerViewLower = wxSortPickerViewLower;
+    that.wxSortPickerViewScroll = wxSortPickerViewScroll;
+    that.wxSortPickerViewTemTagTap = wxSortPickerViewTemTagTap;
+    setViewWH(that);
+
+    buildTextDataFromLocal(that,array);
+}
+
 function buildTextData(that,arr){
     var textData = [{ tag: "A", brandArray: [] },
                { tag: "B", brandArray: [] },
@@ -133,7 +147,7 @@ function buildTextData(that,arr){
     var temABC = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#'];
       
     for (var i = 0; i < arr.length; i++ ){
-        var text = arr[i].attributes.brandName + " \ " + arr[i].attributes.englishName;
+        var text = arr[i].attributes.brandName;
         var firstChar = text.substr(0, 1);
         var reg = query(firstChar)[0];
         var temIndex = temABC.indexOf(reg);
@@ -141,9 +155,62 @@ function buildTextData(that,arr){
         //TODO: verify validation of url and name
         textData[temIndex].brandArray.push({
             brandName: arr[i].attributes.brandName,
-            englishName: arr[i].attributes.englishName,
             url: arr[i].attributes.url[0],
-            id: arr[i].id
+            id: arr[i].attributes.queryId
+        });
+    }
+    var temData = that.data.wxSortPickerData;
+    if(typeof temData == 'undefined'){
+            temData = {};
+    }
+    temData.textData = textData;
+    that.setData({
+        wxSortPickerData: temData
+    });
+}
+
+function buildTextDataFromLocal(that,arr){
+    var textData = [{ tag: "A", brandArray: [] },
+               { tag: "B", brandArray: [] },
+               { tag: "C", brandArray: [] },
+               { tag: "D", brandArray: [] },
+               { tag: "E", brandArray: [] },
+               { tag: "F", brandArray: [] },
+               { tag: "G", brandArray: [] },
+               { tag: "H", brandArray: [] },
+               { tag: "I", brandArray: [] },
+               { tag: "J", brandArray: [] },
+               { tag: "K", brandArray: [] },
+               { tag: "L", brandArray: [] },
+               { tag: "M", brandArray: [] },
+               { tag: "N", brandArray: [] },
+               { tag: "O", brandArray: [] },
+               { tag: "P", brandArray: [] },
+               { tag: "Q", brandArray: [] },
+               { tag: "R", brandArray: [] },
+               { tag: "S", brandArray: [] },
+               { tag: "T", brandArray: [] },
+               { tag: "U", brandArray: [] },
+               { tag: "V", brandArray: [] },
+               { tag: "W", brandArray: [] },
+               { tag: "X", brandArray: [] },
+               { tag: "Y", brandArray: [] },
+               { tag: "Z", brandArray: [] },
+               { tag: "#", brandArray: [] }];
+
+    var temABC = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#'];
+
+    for (var i = 0; i < arr.length; i++ ){
+        var text = arr[i].brandName;
+        var firstChar = text.substr(0, 1);
+        var reg = query(firstChar)[0];
+        var temIndex = temABC.indexOf(reg);
+
+        //TODO: verify validation of url and name
+        textData[temIndex].brandArray.push({
+            brandName: arr[i].brandName,
+            url: arr[i].url[0],
+            id: arr[i].queryId
         });
     }
     var temData = that.data.wxSortPickerData;
@@ -171,7 +238,6 @@ function wxSortPickerViewScroll(e) {
 function setViewWH(that) {
     wx.getSystemInfo({
         success: function (res) {
-            // console.dir(res);
             var windowWidth = res.windowWidth;
             var windowHeight = res.windowHeight;
             var temData = that.data.wxSortPickerData;
@@ -199,5 +265,6 @@ function wxSortPickerViewTemTagTap(e) {
 
 module.exports = {
     init: init,
-    query: query
+    query: query,
+    initFromLocal: initFromLocal
 }

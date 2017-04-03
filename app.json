@@ -6,39 +6,48 @@
     "pages/profile/profile",
     "pages/detail/detail",
     "pages/brand/brand",
+    "pages/query/query",
     "pages/promotion/promotion"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "black",
     "navigationBarTitleText": "QioCars",
-    "backgroundColor": "#f6f8f9",
+    "backgroundColor": "white",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true
   },
   "tabBar": {
-    "color": "#7F8389",
-    "selectedColor": "#000000",
+    "color": "white",
+    "selectedColor": "#97D5FF",
+    "backgroundColor": "black",
     "borderStyle": "white",
-    "backgroundColor": "white",
+    "height":"50px",
     "list": [
       {
         "pagePath": "pages/hot/hot",
         "text": "热门",
         "iconPath": "icons/home.png",
-        "selectedIconPath": "icons/home_green.png"
+        "selectedIconPath": "icons/home_selected.png"
       },
       {
         "pagePath": "pages/list/list",
         "text": "车库",
-        "iconPath": "icons/person.png",
-        "selectedIconPath": "icons/person_green.png"
+        "iconPath": "icons/garage.png",
+        "selectedIconPath": "icons/garage_selected.png"
+      },
+      {
+        "pagePath": "pages/query/query",
+        "text": "查询",
+        "iconPath": "icons/search_selected.png",
+        "selectedColor": "green",
+        "selectedIconPath": "icons/search.png"
       },
       {
         "pagePath": "pages/profile/profile",
         "text": "我",
-        "iconPath": "icons/person.png",
-        "selectedIconPath": "icons/person_green.png"
+        "iconPath": "icons/profile.png",
+        "selectedIconPath": "icons/profile_selected.png"
       }
     ]
   },

@@ -40,8 +40,8 @@ Page({
 
         this.data.files.map(tempFilePath => () => new AV.File('filename', {
             blob: {
-                uri: tempFilePath,
-            },
+                uri: tempFilePath
+            }
         }).save()).reduce(
             (m, p) => m.then(v => AV.Promise.all([...v, p()])),
             AV.Promise.resolve([])
@@ -73,8 +73,8 @@ Page({
     addImage: function () {
         this.data.files.map(tempFilePath => () => new AV.File('filename', {
             blob: {
-                uri: tempFilePath,
-            },
+                uri: tempFilePath
+            }
         }).save()).reduce(
             (m, p) => m.then(v => AV.Promise.all([...v, p()])),
             AV.Promise.resolve([])
@@ -85,13 +85,12 @@ Page({
         }).catch(console.error);
     },
 
-    chooseImage: function (e) {
+    chooseImage: function () {
         var that = this;
         wx.chooseImage({
-            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
             success: function (res) {
-                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                 that.setData({
                     files: that.data.files.concat(res.tempFilePaths)
                 });
@@ -101,8 +100,8 @@ Page({
 
     previewImage: function (e) {
         wx.previewImage({
-            current: e.currentTarget.id, // 当前显示图片的http链接
-            urls: this.data.url // 需要预览的图片http链接列表
+            current: e.currentTarget.id,
+            urls: this.data.url
         })
     },
 
@@ -125,7 +124,7 @@ Page({
     callPhone: function () {
         //TODO, need to complete phone number func
         wx.makePhoneCall({
-            phoneNumber: '15884373717' //仅为示例，并非真实的电话号码
+            phoneNumber: '15884373717'
         })
     },
 

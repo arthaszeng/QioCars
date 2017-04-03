@@ -7,7 +7,7 @@
                 <block wx:for="{{item.brandArray}}" wx:for-item="child"  wx:key="">
                     <view class="wxSortPickerViewItem" catchtap="deleteBrand" data-id="{{child.id}}">
                         <image class="brandTrademark" src="{{child.url}}"/>
-                        <text class="brandText">{{child.brandName}}  /  {{child.englishName}}</text>
+                        <text class="brandText">{{child.brandName}}</text>
                         <image wx:if="{{deleteToggle===true}}" mode="aspectFit" catchTap="deleteBrand" class="brandTrademark" src="../../icons/delete.png"/>
                     </view>
                 </block>
@@ -30,12 +30,6 @@
                                 value="{{brandName}}"
                                 bindinput="updateBrandName"
                                 placeholder="Brand Name"
-                        />
-                        <input
-                                name="englishName"
-                                value="{{englishName}}"
-                                bindinput="updateEnglishName"
-                                placeholder="English Name"
                         />
                     </view>
                     <view class="weui-uploader__hd">

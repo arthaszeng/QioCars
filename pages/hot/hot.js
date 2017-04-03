@@ -19,7 +19,7 @@ Page({
 
     setCars: function (cars) {
         this.setData({
-            cars,
+            cars
         });
     },
 
@@ -59,7 +59,7 @@ Page({
 
     performSearch() {
         var that = this;
-        console.log(this.data.lastSearch)
+        console.log(this.data.lastSearch);
         var query = new AV.Query('Car');
         query.contains('brand', this.data.lastSearch);
         query.contains('model', this.data.lastSearch);
