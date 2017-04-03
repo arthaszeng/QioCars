@@ -10,7 +10,8 @@ Page({
         mark: 0,
         newMark: 0,
         isMarkRight: true,
-        brands: []
+        brands: [],
+        lastIndex: [1, 1]
     },
 
     fetchCars: function () {
@@ -175,5 +176,43 @@ Page({
             redirect: "true",
             url: `../brand/brand`
         });
-    }
+    },
+
+    initSelectedBrand: function () {
+        this.selectBrand({
+            currentTarget: {
+                dataset: {
+                    id: 3,
+                    tag: [0,0]
+                }
+            }})
+    },
+
+    selectBrand: function (e) {
+        console.log(e)
+
+        var brandId = e.currentTarget.dataset.id;
+        this.setData({
+            brandId: brandId
+        });
+
+        console.log("Start change selected brand");
+
+        var sortPickerData = this.data.wxSortPickerData;
+        var index1 = e.currentTarget.dataset.tag[0];
+        var index2 = e.currentTarget.dataset.tag[1];
+        var lastIndex1 = this.data.lastIndex[0];
+        var lastIndex2 = this.data.lastIndex[1];
+
+        sortPickerData.textData[index1].brandArray[index2].selectedToggle = true;
+        sortPickerData.textData[lastIndex1].brandArray[lastIndex2].selectedToggle = false;
+
+        this.setData({
+            wxSortPickerData: sortPickerData,
+            lastIndex: e.currentTarget.dataset.tag
+        });
+
+        console.log("End change selected brand");
+        
+    },
 });

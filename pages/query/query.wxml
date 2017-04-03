@@ -55,7 +55,7 @@
                     <navigator class="wx-navigator_8s8V9p" hover-class="navigator-hover">
                         <text class="c-block wx-text_EPMInA">￥{{selectedCar.basic.saleprice}}</text>
                     </navigator>
-                    <view class="wx-view_q8yXI9">
+                    <view class="favorite">
                         <image class="wx-image_YAG40m" mode="aspectFit"
                                src="http://qty83k.creatby.com/materials/origin/c5656ef00d38d89eae437c5a9102f8fa_origin.png"
                                style="background-image: background-size: contain; background-position: center center; background-repeat: no-repeat; "/>
@@ -417,6 +417,9 @@
             </view>
             <navigator class="navigator" hover-class="navigator-hover" open-type="redirect">
                 <image class="navigator-image" mode="aspectFit" src="../../icons/search.png" catchtap="openSidebar"/>
+            </navigator>
+            <navigator class="wx-navigator_iOsAsd" hover-class="navigator-hover" open-type="redirect">
+                <image class="wx-image_SfQyMy" mode="aspectFit" src="../../icons/add.png" catchtap="transitionToCar"/>
             </navigator>
         </view>
     </view>

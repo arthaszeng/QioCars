@@ -3,18 +3,86 @@ const Car = require('../../model/car');
 
 Page({
     data: {
-        model: '',
-        brand: '',
-        price: '',
         url: [],
         files: [],
+        parameters: {},
 
-        oldModel: '',
-        oldBrand: '',
-        oldPrice: '',
+        oldTitel: '',
+        oldSalePrice: '',
+        oldTravelledDistance: '',
+        oldDate: '',
 
-        carId: ''
+        titel: '',
+        salePrice: '',
+        travelledDistance: '',
+        date: '',
+
+        objectId: '',
+        queryId: ''
     },
+
+    selectCar2: function () {
+        var that = this;
+        this.data.queryId = '3531';
+        wx.request({
+            url: "https://api.jisuapi.com/car/detail?appkey=15815ae2798d78fa&carid=" + this.data.queryId,
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+                console.log(res.data);
+
+                that.setData({
+                    parameters: res.data.result
+                });
+
+                that.solveColors(res.data.result.body.color);
+            }
+        })
+    },
+
+    transitionToQuery: function () {
+        wx.switchTab({
+            url: '../query/query'
+        })
+    },
+
+    selectCar: function () {
+        var that = this;
+        wx.request({
+            url: "https://api.jisuapi.com/car/detail?appkey=15815ae2798d78fa&carid=" + this.data.queryId,
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+                console.log(res.data);
+
+                that.setData({
+                    parameters: res.data.result
+                });
+
+                that.solveColors(res.data.result.body.color);
+            }
+        })
+    },
+
+    solveColors: function (e) {
+        var subString = e.split('|');
+        var colors = [];
+
+        for (var i = 0; i < subString.length; i++) {
+            var color = subString[i].split(',')[1];
+            if (color !== undefined) {
+                colors.push(color)
+            }
+        }
+
+        this.setData({
+            colors
+        });
+        console.log(this.data.colors)
+    },
+
 
     addCar: function () {
         if (!this.isNoFieldBlank()) {
@@ -36,7 +104,6 @@ Page({
             });
             return;
         }
-        console.log(this.data.url);
 
         this.data.files.map(tempFilePath => () => new AV.File('filename', {
             blob: {
@@ -49,11 +116,17 @@ Page({
             this.setData({
                 url: files.map(file => file.url())
             });
+
+            console.log(this.data.parameters)
+
             new Car({
-                model: this.data.model,
-                brand: this.data.brand,
-                price: this.data.price,
-                url: this.data.url
+                titel: this.data.titel,
+                travelledDistance: this.data.travelledDistance,
+                salePrice: this.data.salePrice,
+                date: this.data.date,
+                url: this.data.url,
+                queryId: this.data.queryId,
+                parameters: this.data.parameters
             }).save().then(() => {
                 wx.showToast({
                     title: "提交成功",
@@ -105,67 +178,76 @@ Page({
         })
     },
 
-    updateModel: function (e) {
+    updateTitel: function (e) {
         this.setData({
-            model: e.detail.value
+            titel: e.detail.value
         });
     },
-    updateBrand: function (e) {
+    updateTravelledDistance: function (e) {
         this.setData({
-            brand: e.detail.value
+            travelledDistance: e.detail.value
         })
     },
-    updatePrice: function (e) {
+    updateSalePrice: function (e) {
         this.setData({
-            price: e.detail.value
+            salePrice: e.detail.value
         })
+    },
+    bindDateChange: function (e) {
+        this.setData({
+            date: e.detail.value
+        });
     },
 
     onLoad(query){
-        const id = query.id;
-
         const role = wx.getStorageSync('role');
         this.setData({role});
 
-        var car = AV.Object.createWithoutData('Car', id);
-        car.fetch()
-            .then(
-                car => this.setData({
-                    brand: car.get('brand'),
-                    model: car.get('model'),
-                    price: car.get('price'),
-                    url: car.get('url'),
-                    oldBrand: car.get('brand'),
-                    oldModel: car.get('model'),
-                    oldPrice: car.get('price'),
-                    carId: car.get('objectId')
-                }))
-            .catch(console.error);
+        console.log(query);
+        if ('queryid' in query) {
+            this.setData({
+                queryId: query.queryid
+            });
+            this.selectCar();
+        }
+
+        if ('id' in query) {
+            var car = AV.Object.createWithoutData('Car', query.id);
+            car.fetch()
+                .then(
+                    car => this.setData({
+                        travelledDistance: car.get('travelledDistance'),
+                        titel: car.get('titel'),
+                        salePrice: car.get('salePrice'),
+                        date: car.get('date'),
+
+                        oldTravelledDistance: car.get('travelledDistance'),
+                        oldTitel: car.get('titel'),
+                        oldSalePrice: car.get('salePrice'),
+                        oldDate: car.get('date'),
+
+                        url: car.get('url'),
+                        parameters: car.get('parameters'),
+                        queryId: car.get('queryId'),
+                        objectId: car.get('objectId')
+                    }))
+                .catch(console.error);
+        }
     },
 
     isNoFieldChanged: function () {
-        return this.data.price === this.data.oldPrice &&
-            this.data.model === this.data.oldModel &&
-            this.data.brand === this.data.oldBrand
+        return this.data.salePrice === this.data.oldSalePrice &&
+            this.data.titel === this.data.oldTitel &&
+            this.data.travelledDistance === this.data.oldTravelledDistance &&
+            this.data.date === this.data.oldDate;
     },
 
     isNoFieldBlank: function () {
-        return this.data.price && this.data.model && this.data.brand
+        return this.data.salePrice && this.data.titel && this.data.travelledDistance && this.data.date;
     },
 
     transitionToPositions(){
         wx.navigateBack();
-    },
-
-    queryBrand: function () {
-        wx.request({
-            url: "https://api.jisuapi.com/car/brand?appkey=15815ae2798d78fa",
-            header: {
-                'content-type': 'application/json'
-            },
-            success: function (res) {
-                console.log(res.data)
-            }
-        })
     }
+
 });

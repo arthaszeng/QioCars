@@ -238,5 +238,11 @@ Page({
         console.log("End change selected brand");
 
         this.querySeries();
+    },
+
+    transitionToCar: function () {
+        wx.navigateTo({
+            url: '../car/car?queryid=' + this.data.carId
+        })
     }
 });

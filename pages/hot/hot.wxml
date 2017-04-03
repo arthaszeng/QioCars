@@ -104,9 +104,8 @@
         <navigator class="bottomGrayboder rightGrayboder wx-navigator_n3vQYd" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car" url="../detail/detail?id={{car.objectId}}">
             <image class="wx-image_HsAX8s" mode="aspectFit" src="{{car.url[0]}}"/>
             <view class="c-minheight c-padding-top" >
-                <text class="c-block wx-text_cjhm6S" >{{car.brand}}</text>
-                <text class="wx-text_JkhshF2" >{{car.model}}</text>
-                <text class="c-block wx-text_WEMSkk" >￥{{car.price}}</text>
+                <text class="c-block wx-text_cjhm6S" >{{car.titel}}</text>
+                <text class="c-block wx-text_WEMSkk" >￥{{car.salePrice}}</text>
             </view>
         </navigator>
     </view>

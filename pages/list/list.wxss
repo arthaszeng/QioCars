@@ -17,3 +17,19 @@
     position: fixed;
     z-index: 0;
 }
+
+.brand-picker-view-item {
+    margin-top: 0px;
+    height: 40px;
+    background-color: white;
+    line-height: 40px;
+    border-bottom: 1px solid #eee;
+    font-family: Helvetica, serif;
+}
+.brand-picker-view-item-selected {
+    height: 40px;
+    background-color: white;
+    line-height: 40px;
+    font-family: Helvetica, serif;
+    border: 1px solid black;
+}

@@ -1,29 +1,243 @@
 <view class="page">
-    <view class="page__hd">
-        <view class="section">
-            <input
-                    name="brand"
-                    value="{{brand}}"
-                    bindinput="updateBrand"
-                    placeholder="Brand"
-            />
+    <view class="basic-info-view">
+
+        <view class="weui-cells__title">基本信息</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd weui-label">品牌/型号</view>
+                <input class="weui-input weui-cell__bd" placeholder="请输入车辆品牌型号" bindinput="updateTitel"/>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd weui-label">价格</view>
+                <input class="weui-input weui-cell__bd" placeholder="请输入价格/万" bindinput="updateSalePrice"/>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd weui-label">里程</view>
+                <input class="weui-input weui-cell__bd" placeholder="请输入已行驶里程" bindinput="updateTravelledDistance"/>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd weui-label">上牌日期</view>
+                <view class="weui-cell__bd">
+                    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                        <view class="weui-input">{{date}}</view>
+                    </picker>
+                </view>
+            </view>
         </view>
-        <view class="section">
-            <input
-                    name="model"
-                    value="{{model}}"
-                    bindinput="updateModel"
-                    placeholder="Model"
-            />
-        </view>
-        <view class="section">
-            <textarea
-                    name="price"
-                    value="{{price}}"
-                    bindinput="updatePrice"
-                    placeholder="Price"
-                    auto-height="true"
-            />
+
+        <view class="weui-cells__title">配置参数</view>
+        <view class="detail_info">
+            <view class="weui-select" catchtap="transitionToQuery">导入配置</view>
+            <view class="page__bd page__bd_spacing">
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">年款</view>
+                            <view class="detailed-item-data">{{parameters.yeartype}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">尺寸类型</view>
+                            <view class="detailed-item-data">{{parameters.sizetype}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">厂家指导价</view>
+                            <view class="detailed-item-data">{{parameters.price}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">报价</view>
+                            <view class="detailed-item-data">{{parameters.basic.saleprice}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">生产状态</view>
+                            <view class="detailed-item-data">{{parameters.productionstate}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">销售状态</view>
+                            <view class="detailed-item-data">{{parameters.salestate}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">排量</view>
+                            <view class="detailed-item-data">{{parameters.engine.displacement}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">进气方式</view>
+                            <view class="detailed-item-data">{{parameters.engine.intakeform}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">综合油耗</view>
+                            <view class="detailed-item-data">{{parameters.basic.comfuelconsumption}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">网友油耗</view>
+                            <view class="detailed-item-data">{{parameters.basic.userfuelconsumption}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">0-100公里加速(s)</view>
+                            <view class="detailed-item-data">{{parameters.basic.officialaccelerationtime100}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">最高车速(km/h)</view>
+                            <view class="detailed-item-data">{{parameters.basic.maxspeed}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">车长(mm)</view>
+                            <view class="detailed-item-data">{{parameters.body.len}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">车宽(mm)</view>
+                            <view class="detailed-item-data">{{parameters.body.width}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">车高(mm)</view>
+                            <view class="detailed-item-data">{{parameters.body.height}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">燃油箱容积</view>
+                            <view class="detailed-item-data">{{parameters.engine.fueltankcapacity}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">环保标准</view>
+                            <view class="detailed-item-data">{{parameters.engine.environmentalstandards}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">最大马力</view>
+                            <view class="detailed-item-data">{{parameters.engine.maxhorsepower}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">最大扭矩(Nm)</view>
+                            <view class="detailed-item-data">{{parameters.engine.maxtorque}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">燃油标号</view>
+                            <view class="detailed-item-data">{{parameters.engine.fuelgrade}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">燃料类型</view>
+                            <view class="detailed-item-data">{{parameters.engine.fueltype}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">泊车雷达(车前)</view>
+                            <view class="detailed-item-data">{{parameters.drivingauxiliary.frontparkingradar}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">倒车雷达(车后)</view>
+                            <view class="detailed-item-data">{{parameters.drivingauxiliary.reversingradar}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">天窗开合方式</view>
+                            <view class="detailed-item-data">{{parameters.doormirror.skylightopeningmode}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">天窗型式</view>
+                            <view class="detailed-item-data">{{parameters.doormirror.skylightstype}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">运动座椅</view>
+                            <view class="detailed-item-data">{{parameters.seat.sportseat}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">座椅材料</view>
+                            <view class="detailed-item-data">{{parameters.seat.seatmaterial}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex__item">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">座椅高低调节</view>
+                            <view class="detailed-item-data">{{parameters.seat.seatheightadjustment}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-flex">
+                    <view class="weui-flex__item" style="-webkit-flex:2.5;">
+                        <view class="detailed-item">
+                            <view class="detailed-item-description">车体颜色</view>
+                        </view>
+                    </view>
+                    <view class="weui-flex">
+                        <view class="weui-flex__item" wx:for="{{colors}}" wx:key="">
+                            <view class="detailed-item">
+                                <view class="detailed-item-color" style="background-color:{{item}}; border-radius:0px"/>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
     <view class="page__bd">
@@ -44,15 +258,14 @@
                                 </block>
                             </view>
                             <view class="weui-uploader__input-box">
-                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                                <view class="weui-uploader__input" bindtap="chooseImage"/>
                             </view>
                         </view>
                     </view>
                 </view>
             </view>
         </view>
-        <button bindtap="addCar" class="submit-btn">Add</button>
-        <button bindtap="queryBrand" class="submit-btn">Query Car</button>
-        <button bindtap="query" class="submit-btn">Query Car</button>
     </view>
+    <button bindtap="addCar" class="submit-btn">Add</button>
+    <button bindtap="selectCar2" class="submit-btn">Query</button>
 </view>

@@ -2,10 +2,10 @@
     <view class="page-bottom" bindtap="closeSidebar">
         <scroll-view class="" scroll-y="true" bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower"
                      scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0" style="height: {{wxSortPickerData.view.scrollHeight}}px">
-            <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
+            <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="" wx:for-index="index1">
                 <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.brandArray.length >0}}">{{item.tag}}</view>
-                <block wx:for="{{item.brandArray}}" wx:for-item="child" wx:key="">
-                    <view class="wxSortPickerViewItem" data-id="{{child.id}}">
+                <block wx:for="{{item.brandArray}}" wx:for-item="child" wx:key="" wx:for-index="index2">
+                    <view class="{{child.selectedToggle ? 'brand-picker-view-item-selected' : 'brand-picker-view-item'}}" catchtap="selectBrand" data-tag="{{[index1,index2,child.selectedToggle]}}" data-id="{{child.id}}">
                         <image class="brandTrademark" src="{{child.url}}"/>
                         <text class="brandText">{{child.brandName}}</text>
                     </view>
@@ -42,9 +42,9 @@
                     <image class="wx-image_jfWp5t" mode="aspectFill" src="{{car.url[0]}}"/>
                     <view class="navigator_bottom">
                         <view class="wx-view_vnhcDJ">
-                            <text class="c-block wx-text_6X8CEW">{{car.price}}</text>
+                            <text class="c-block wx-text_6X8CEW">{{car.salePrice}}</text>
                         </view>
-                        <text class="c-block wx-text_VIqUJH">{{car.brand}}</text>
+                        <text class="c-block wx-text_VIqUJH">{{car.titel}}</text>
                     </view>
                     <view class="navigator_top" wx:if="{{toggle_option===true}}">
                         <image class="wx-image_jfWp5t" mode="aspectFill" src="../../icons/delete.png" catchtap="deleteCar" data-id="{{car.objectId}}"/>
