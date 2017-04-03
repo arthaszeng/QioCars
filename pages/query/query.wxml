@@ -64,48 +64,210 @@
                     <view class="page__bd page__bd_spacing">
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.yeartype}}</view>
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">年款</view>
+                                    <view class="detailed-item-data">{{selectedCar.yeartype}}</view>
+                                </view>
                             </view>
                             <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.productionstate}}</view>
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">尺寸类型</view>
+                                    <view class="detailed-item-data">{{selectedCar.sizetype}}</view>
+                                </view>
                             </view>
                         </view>
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.salestate}}</view>
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">厂家指导价</view>
+                                    <view class="detailed-item-data">{{selectedCar.price}}</view>
+                                </view>
                             </view>
                             <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.gearbox.gearbox}}</view>
-                            </view>
-                            <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.basic.displacement}}</view>
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">商家报价</view>
+                                    <view class="detailed-item-data">{{selectedCar.basic.saleprice}}</view>
+                                </view>
                             </view>
                         </view>
                         <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">生产状态</view>
+                                    <view class="detailed-item-data">{{selectedCar.productionstate}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">销售状态</view>
+                                    <view class="detailed-item-data">{{selectedCar.salestate}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">排量</view>
+                                    <view class="detailed-item-data">{{selectedCar.engine.displacement}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">进气方式</view>
+                                    <view class="detailed-item-data">{{selectedCar.engine.intakeform}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">综合油耗</view>
+                                    <view class="detailed-item-data">{{selectedCar.basic.comfuelconsumption}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">网友油耗</view>
+                                    <view class="detailed-item-data">{{selectedCar.basic.userfuelconsumption}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">0-100公里加速(s)</view>
+                                    <view class="detailed-item-data">{{selectedCar.basic.officialaccelerationtime100}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">最高车速(km/h)</view>
+                                    <view class="detailed-item-data">{{selectedCar.basic.maxspeed}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">车长(mm)</view>
+                                    <view class="detailed-item-data">{{selectedCar.body.len}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">车宽(mm)</view>
+                                    <view class="detailed-item-data">{{selectedCar.body.width}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">车高(mm)</view>
+                                    <view class="detailed-item-data">{{selectedCar.body.height}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">燃油箱容积</view>
+                                    <view class="detailed-item-data">{{selectedCar.engine.fueltankcapacity}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">环保标准</view>
+                                    <view class="detailed-item-data">{{selectedCar.engine.environmentalstandards}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">最大马力</view>
+                                    <view class="detailed-item-data">{{selectedCar.engine.maxhorsepower}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">最大扭矩(Nm)</view>
+                                    <view class="detailed-item-data">{{selectedCar.engine.maxtorque}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">燃油标号</view>
+                                    <view class="detailed-item-data">{{selectedCar.engine.fuelgrade}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">燃料类型</view>
+                                    <view class="detailed-item-data">{{selectedCar.engine.fueltype}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">泊车雷达(车前)</view>
+                                    <view class="detailed-item-data">{{selectedCar.drivingauxiliary.frontparkingradar}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">倒车雷达(车后)</view>
+                                    <view class="detailed-item-data">{{selectedCar.drivingauxiliary.reversingradar}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">天窗开合方式</view>
+                                    <view class="detailed-item-data">{{selectedCar.doormirror.skylightopeningmode}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">天窗型式</view>
+                                    <view class="detailed-item-data">{{selectedCar.doormirror.skylightstype}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">运动座椅</view>
+                                    <view class="detailed-item-data">{{selectedCar.seat.sportseat}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">座椅材料</view>
+                                    <view class="detailed-item-data">{{selectedCar.seat.seatmaterial}}</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex__item">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">座椅高低调节</view>
+                                    <view class="detailed-item-data">{{selectedCar.seat.seatheightadjustment}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-flex">
+                            <view class="weui-flex__item" style="-webkit-flex:2.5;">
+                                <view class="detailed-item">
+                                    <view class="detailed-item-description">车体颜色</view>
+                                </view>
+                            </view>
+                            <view class="weui-flex">
                             <view class="weui-flex__item" wx:for="{{colors}}" wx:key="">
-                                <view class="placeholder" style="background-color:{{item}}; border-radius:5px"/>
+                                <view class="detailed-item" >
+                                    <view class="detailed-item-color" style="background-color:{{item}}; border-radius:0px"/>
+                                </view>
                             </view>
-                        </view>
-                        <view class="weui-flex">
-                            <view>
-                                <view class="placeholder">{{selectedCar.body.len}}mm/{{selectedCar.body.width}}mm/{{selectedCar.body.height}}mm</view>
-                            </view>
-                            <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.doormirror.skylightstype}}</view>
-                            </view>
-                            <view>
-                                <view class="placeholder">{{selectedCar.doormirror.skylightopeningmode}}</view>
-                            </view>
-                        </view>
-                        <view class="weui-flex">
-                            <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.drivingauxiliary.frontparkingradar}}</view>
-                            </view>
-                            <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.drivingauxiliary.reversingradar}}</view>
-                            </view>
-                            <view class="weui-flex__item">
-                                <view class="placeholder">{{selectedCar.seat.driverseatadjustmentmode}}</view>
                             </view>
                         </view>
                     </view>
