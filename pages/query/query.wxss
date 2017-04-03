@@ -82,6 +82,13 @@
     border-bottom: 1px solid #eee;
     font-family: Helvetica, serif;
 }
+.brand-picker-view-item-selected {
+    height: 22px;
+    background-color: white;
+    line-height: 22px;
+    font-family: Helvetica, serif;
+    border: 1px solid black;
+}
 
 .brand-text {
     font-size: 10px;
@@ -127,6 +134,7 @@
 
 .picker-view-column{
     background-color: black;
+    height: 100%;
 }
 .detailed-item{
     padding:5px 12px;
@@ -165,4 +173,19 @@
     text-align: center;
     padding: 3px;
     font-size: 9px;
+}
+.search-button{
+    position:fixed;
+    bottom:0;
+    right:0%;
+    background-color:black;
+    color:white;
+    width:20%;
+    border-radius:25px;
+    height:25px;
+    font-size: 10px;
+    line-height:25px;
+    align-items:center;
+    text-align:center;
+    margin: 2px 5px 10px 5px;
 }

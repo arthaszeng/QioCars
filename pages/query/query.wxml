@@ -4,10 +4,10 @@
             <view class="brand-view">
                 <scroll-view class="brand-scroll-view" scroll-y="true" scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="0"
                              style="height: {{wxSortPickerData.view.scrollHeight}}px">
-                    <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
+                    <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:for-index="index1" wx:key="">
                         <view id="{{item.tag}}" class="brand-picker-view-tag" wx:if="{{item.brandArray.length >0}}">{{item.tag}}</view>
-                        <block wx:for="{{item.brandArray}}" wx:for-item="child" wx:key="">
-                            <view class="brand-picker-view-item" catchtap="selectBrand" data-id="{{child.id}}">
+                        <block wx:for="{{item.brandArray}}" wx:for-item="child" wx:for-index="index2" wx:key="">
+                            <view class="{{child.selectedToggle ? 'brand-picker-view-item-selected' : 'brand-picker-view-item'}}" catchtap="selectBrand" data-tag="{{[index1,index2,child.selectedToggle]}}" data-id="{{child.id}}">
                                 <image class="brand-trademark" src="{{child.url}}"/>
                                 <text class="brand-text">{{child.brandName}}</text>
                             </view>
@@ -27,11 +27,12 @@
                 <picker-view-column>
                     <view class="picker-view-item" wx:for="{{seriesData[series].carlist}}" mode="aspectFit" wx:key="">{{item.name}}"</view>
                 </picker-view-column>
-                <picker-view-column bindtap="selectCar" class="picker-view-column">
+                <picker-view-column catchtap="selectCar" class="picker-view-column">
                     <view class="picker-view-item-car" wx:for="{{seriesData[series].carlist[subSeries].list}}" wx:key="">{{item.name}}
                     </view>
                 </picker-view-column>
             </picker-view>
+            <button class="search-button" catchtap="selectCar">点击搜索</button>
         </view>
     </view>
 
@@ -408,7 +409,6 @@
                             ×
                         </view>
                     </view>
-                    <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入点评" type="textarea"/>
                     <button bindtap="tap_d6c84484" class="wx-button_V2eIJ4" data-c_act_id="M_17d89e86c5b99fa2" hover-class="button-hover" size="mini"
                             type="default">
                         点 评

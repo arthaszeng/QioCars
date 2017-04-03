@@ -16,7 +16,8 @@ Page({
         series: 0,
         subSeries: 0,
         car: 0,
-        logo: ''
+        logo: '',
+        lastIndex: [1, 1]
     },
 
     refreshBrands: function () {
@@ -30,17 +31,32 @@ Page({
             var value = wx.getStorageSync('brands');
             if (value) {
                 wxSortPickerView.initFromLocal(value, that);
+                that.initSelectedBrand();
             } else {
-                that.fetchBrandsViaAV;
+                console.log("Fetching Brands Info");
+                that.fetchBrandsViaAV();
+
             }
         } catch (e) {
-            console.log("Fetching Brands Info");
+            console.log("Fetching Brands Info When Catch an error");
+            console.log(e);
             that.fetchBrandsViaAV;
         }
     },
 
+    initSelectedBrand: function () {
+        this.selectBrand({
+            currentTarget: {
+                dataset: {
+                    id: 3,
+                    tag: [0,0]
+                }
+            }})
+    },
+    
     fetchBrandsViaAV: function () {
-        return new AV.Query('Brand')
+        console.log("Query brand info via AV")
+        new AV.Query('Brand')
             .descending('createdAt')
             .find()
             .then(this.setBrands)
@@ -196,10 +212,31 @@ Page({
     },
 
     selectBrand: function (e) {
+        console.log(e)
+
         var brandId = e.currentTarget.dataset.id;
         this.setData({
             brandId: brandId
         });
+
+        console.log("Start change selected brand");
+
+        var sortPickerData = this.data.wxSortPickerData;
+        var index1 = e.currentTarget.dataset.tag[0];
+        var index2 = e.currentTarget.dataset.tag[1];
+        var lastIndex1 = this.data.lastIndex[0];
+        var lastIndex2 = this.data.lastIndex[1];
+
+        sortPickerData.textData[index1].brandArray[index2].selectedToggle = true;
+        sortPickerData.textData[lastIndex1].brandArray[lastIndex2].selectedToggle = false;
+
+        this.setData({
+            wxSortPickerData: sortPickerData,
+            lastIndex: e.currentTarget.dataset.tag
+        });
+
+        console.log("End change selected brand");
+
         this.querySeries();
     }
 });

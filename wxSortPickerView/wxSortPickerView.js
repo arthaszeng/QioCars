@@ -156,7 +156,8 @@ function buildTextData(that,arr){
         textData[temIndex].brandArray.push({
             brandName: arr[i].attributes.brandName,
             url: arr[i].attributes.url[0],
-            id: arr[i].attributes.queryId
+            id: arr[i].attributes.queryId,
+            selectedToggle: false
         });
     }
     var temData = that.data.wxSortPickerData;
@@ -167,6 +168,8 @@ function buildTextData(that,arr){
     that.setData({
         wxSortPickerData: temData
     });
+
+    that.initSelectedBrand();
 }
 
 function buildTextDataFromLocal(that,arr){
@@ -210,7 +213,8 @@ function buildTextDataFromLocal(that,arr){
         textData[temIndex].brandArray.push({
             brandName: arr[i].brandName,
             url: arr[i].url[0],
-            id: arr[i].queryId
+            id: arr[i].queryId,
+            selectedToggle: false
         });
     }
     var temData = that.data.wxSortPickerData;
@@ -218,8 +222,10 @@ function buildTextDataFromLocal(that,arr){
             temData = {};
     }
     temData.textData = textData;
+
+    console.log(textData)
     that.setData({
-        wxSortPickerData: temData
+        wxSortPickerData: temData,
     });
 }
 
