@@ -28,6 +28,20 @@
         </view>
         <view class="weui-cells__title">基本信息</view>
         <view class="detail_info">
+            <view class="weui-flex">
+                <view class="weui-flex__item">
+                    <view class="detailed-item">
+                        <view class="detailed-item-description">品牌</view>
+                        <view class="detailed-item-data">{{brandName}}</view>
+                    </view>
+                </view>
+                <view class="weui-flex__item">
+                    <view class="detailed-item">
+                        <view class="detailed-item-description">挂牌价格</view>
+                        <view class="detailed-item-data">{{salePrice}}</view>
+                    </view>
+                </view>
+            </view>
             <view class="weui-flex__item">
                 <view class="detailed-item">
                     <view class="detailed-item-description">车辆型号</view>

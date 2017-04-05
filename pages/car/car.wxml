@@ -4,15 +4,15 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd weui-label">品牌/型号</view>
-                <input class="weui-input weui-cell__bd" placeholder="请输入车辆品牌型号" bindinput="updateTitel"/>
+                <input class="weui-input weui-cell__bd" placeholder="请输入车辆品牌型号" bindinput="updateTitel" value="{{titel}}"/>
             </view>
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd weui-label">价格</view>
-                <input class="weui-input weui-cell__bd" placeholder="请输入价格/万" bindinput="updateSalePrice"/>
+                <input class="weui-input weui-cell__bd" placeholder="请输入价格/万" bindinput="updateSalePrice" value="{{salePrice}}"/>
             </view>
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd weui-label">里程</view>
-                <input class="weui-input weui-cell__bd" placeholder="请输入已行驶里程" bindinput="updateTravelledDistance"/>
+                <input class="weui-input weui-cell__bd" placeholder="请输入已行驶里程" bindinput="updateTravelledDistance" value="{{travelledDistance}}"/>
             </view>
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd weui-label">上牌日期</view>
@@ -27,6 +27,12 @@
         <view class="detail_info">
             <view class="import-data-view" catchtap="transitionToQuery">导入配置</view>
             <view class="page__bd page__bd_spacing">
+                <view class="weui-flex__item">
+                    <view class="detailed-item">
+                        <view class="detailed-item-description">车辆型号</view>
+                        <view class="detailed-item-data">{{parameters.name}}</view>
+                    </view>
+                </view>
                 <view class="weui-flex">
                     <view class="weui-flex__item">
                         <view class="detailed-item">
@@ -259,5 +265,4 @@
         </view>
     </view>
     <button bindtap="addCar" class="submit-btn">Add</button>
-    <button bindtap="selectCar2" class="submit-btn">Query</button>
 </view>

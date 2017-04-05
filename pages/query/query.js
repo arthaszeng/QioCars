@@ -189,11 +189,12 @@ Page({
     },
 
     selectBrand: function (e) {
-        console.log(e)
+        console.log(e);
 
         var brandId = e.currentTarget.dataset.id;
         this.setData({
-            brandId: brandId
+            brandId: brandId,
+            currentBrandName: e.currentTarget.dataset.tag[2]
         });
 
         console.log("Start change selected brand");
@@ -219,7 +220,7 @@ Page({
 
     transitionToCar: function () {
         wx.navigateTo({
-            url: '../car/car?queryid=' + this.data.carId
+            url: '../car/car?queryid=' + this.data.carId+"&brandname=" + this.data.currentBrandName
         })
     }
 });

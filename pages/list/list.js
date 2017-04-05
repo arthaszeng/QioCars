@@ -53,16 +53,19 @@ Page({
         });
     },
 
-    onLoad() {
-        const role = wx.getStorageSync('role');
-        this.setData({
-            role
-        });
+    onShow() {
         this.setData({
             openSidebarToggle: false
         });
         this.fetchCars();
         this.fetchBrands();
+    },
+
+    onLoad() {
+        const role = wx.getStorageSync('role');
+        this.setData({
+            role
+        });
     },
 
     transitionToEdit(e){

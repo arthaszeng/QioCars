@@ -20,12 +20,6 @@ Page({
         objectId: '',
         queryId: ''
     },
-    
-    transitionToQuery: function () {
-        wx.switchTab({
-            url: '../query/query'
-        })
-    },
 
     selectCar: function () {
         var that = this;
@@ -97,10 +91,9 @@ Page({
                 url: files.map(file => file.url())
             });
 
-            console.log(this.data.parameters)
-
             new Car({
                 titel: this.data.titel,
+                brandName: this.data.brandName,
                 travelledDistance: this.data.travelledDistance,
                 salePrice: this.data.salePrice,
                 date: this.data.date,
@@ -112,7 +105,10 @@ Page({
                     title: "提交成功",
                     duration: 1000
                 });
-                this.transitionToPositions();
+                wx.removeStorage({
+                    key: 'carInputCache'
+                });
+                this.transitionToList();
             }).catch(()=> {
                 wx.showToast({
                     title: '提交失败',
@@ -179,14 +175,46 @@ Page({
         });
     },
 
+    onUnload() {
+        wx.setStorage({
+            key:"carInputCache",
+            data:[this.data.titel, this.data.travelledDistance, this.data.salePrice, this.data.date, this.data.files]
+        });
+    },
+
+    onHide() {
+        wx.setStorage({
+            key:"carInputCache",
+            data:[this.data.titel, this.data.travelledDistance, this.data.salePrice, this.data.date, this.data.files]
+        });
+    },
+
+    onShow() {
+        var that = this;
+        wx.getStorage({
+            key: 'carInputCache',
+            success: function(res) {
+                console.log(res);
+                that.setData({
+                    titel: res.data[0],
+                    travelledDistance: res.data[1],
+                    salePrice: res.data[2],
+                    date: res.data[3],
+                    files: res.data[4]
+                })
+            }
+        })
+    },
+
     onLoad(query){
         const role = wx.getStorageSync('role');
         this.setData({role});
 
         console.log(query);
-        if ('queryid' in query) {
+        if ('queryid' in query && 'brandname' in query) {
             this.setData({
-                queryId: query.queryid
+                queryId: query.queryid,
+                brandName: query.brandName
             });
             this.selectCar();
         }
@@ -226,8 +254,15 @@ Page({
         return this.data.salePrice && this.data.titel && this.data.travelledDistance && this.data.date;
     },
 
-    transitionToPositions(){
-        wx.navigateBack();
-    }
+    transitionToList(){
+        wx.switchTab({
+            url: '../list/list'
+        })
+    },
 
+    transitionToQuery: function () {
+        wx.switchTab({
+            url: '../query/query'
+        })
+    }
 });
