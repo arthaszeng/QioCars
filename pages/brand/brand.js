@@ -6,9 +6,7 @@ Page({
     data: {
         brandName: '',
         files: [],
-
         oldBrandName: '',
-
         brandId: '',
         queryId: '',
         brands: [],
@@ -190,7 +188,6 @@ Page({
 
         const role = wx.getStorageSync('role');
         this.setData({role});
-
         var brand = AV.Object.createWithoutData('Brand', id);
         brand.fetch()
             .then(

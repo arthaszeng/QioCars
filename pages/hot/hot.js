@@ -23,15 +23,12 @@ Page({
         });
     },
 
-    onShow() {
-        this.fetchCars();
-    },
-
     onLoad() {
         const role = wx.getStorageSync('role');
         this.setData({
             role
-        })
+        });
+        this.fetchCars();
     },
 
     transitionToList(){

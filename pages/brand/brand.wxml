@@ -43,7 +43,7 @@
                             </view>
                         </view>
                         <view class="weui-uploader__input-box">
-                            <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            <view class="weui-uploader__input" bindtap="chooseImage"/>
                         </view>
                     </view>
                     <button bindtap="addBrand" class="submit-btn" formType="reset">Add</button>

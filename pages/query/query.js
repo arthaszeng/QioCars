@@ -45,17 +45,11 @@ Page({
     },
 
     initSelectedBrand: function () {
-        this.selectBrand({
-            currentTarget: {
-                dataset: {
-                    id: 3,
-                    tag: [0,0]
-                }
-            }})
+        this.selectBrand({currentTarget: {dataset: {id: 3, tag: [0,0]}}})
     },
     
     fetchBrandsViaAV: function () {
-        console.log("Query brand info via AV")
+        console.log("Query brand info via AV");
         new AV.Query('Brand')
             .descending('createdAt')
             .find()
@@ -88,24 +82,7 @@ Page({
         });
         this.fetchBrands();
     },
-
-    tap_start: function (e) {
-        this.data.mark = this.data.newMark = e.touches[0].pageX;
-
-    },
-    tap_drag: function (e) {
-        this.data.newMark = e.touches[0].pageX;
-        this.isMarkRight = this.data.mark <= this.data.newMark - 2;
-
-        this.data.mark = this.data.newMark;
-
-    },
-    tap_end: function () {
-        this.setData({
-            openSidebarToggle: this.isMarkRight
-        });
-    },
-
+    
     closeSidebar: function () {
         this.setData({
             openSidebarToggle: false

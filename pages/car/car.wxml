@@ -1,6 +1,5 @@
 <view class="page">
     <view class="basic-info-view">
-
         <view class="weui-cells__title">基本信息</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
@@ -24,10 +23,9 @@
                 </view>
             </view>
         </view>
-
         <view class="weui-cells__title">配置参数</view>
         <view class="detail_info">
-            <view class="weui-select" catchtap="transitionToQuery">导入配置</view>
+            <view class="import-data-view" catchtap="transitionToQuery">导入配置</view>
             <view class="page__bd page__bd_spacing">
                 <view class="weui-flex">
                     <view class="weui-flex__item">
@@ -214,12 +212,6 @@
                         <view class="detailed-item">
                             <view class="detailed-item-description">座椅材料</view>
                             <view class="detailed-item-data">{{parameters.seat.seatmaterial}}</view>
-                        </view>
-                    </view>
-                    <view class="weui-flex__item">
-                        <view class="detailed-item">
-                            <view class="detailed-item-description">座椅高低调节</view>
-                            <view class="detailed-item-data">{{parameters.seat.seatheightadjustment}}</view>
                         </view>
                     </view>
                 </view>

@@ -250,12 +250,6 @@
                                     <view class="detailed-item-data">{{selectedCar.seat.seatmaterial}}</view>
                                 </view>
                             </view>
-                            <view class="weui-flex__item">
-                                <view class="detailed-item">
-                                    <view class="detailed-item-description">座椅高低调节</view>
-                                    <view class="detailed-item-data">{{selectedCar.seat.seatheightadjustment}}</view>
-                                </view>
-                            </view>
                         </view>
                         <view class="weui-flex">
                             <view class="weui-flex__item" style="-webkit-flex:2.5;">

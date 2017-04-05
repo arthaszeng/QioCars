@@ -35,12 +35,11 @@ Page({
     },
 
     setBrands: function (brands) {
-        var that = this;
-
         this.setData({
             brands
         });
 
+        var that = this;
         wxSortPickerView.init(this.data.brands, that);
     },
 
@@ -54,19 +53,16 @@ Page({
         });
     },
 
-    onShow() {
-        this.setData({
-            openSidebarToggle: false
-        });
-        this.fetchCars();
-        this.fetchBrands();
-    },
-
     onLoad() {
         const role = wx.getStorageSync('role');
         this.setData({
             role
         });
+        this.setData({
+            openSidebarToggle: false
+        });
+        this.fetchCars();
+        this.fetchBrands();
     },
 
     transitionToEdit(e){
@@ -116,6 +112,7 @@ Page({
             }
         });
     },
+
     performSearch() {
         var that = this;
         console.log(this.data.lastSearch);
@@ -179,18 +176,10 @@ Page({
     },
 
     initSelectedBrand: function () {
-        this.selectBrand({
-            currentTarget: {
-                dataset: {
-                    id: 3,
-                    tag: [0,0]
-                }
-            }})
+        this.selectBrand({currentTarget: {dataset: {id: 3, tag: [0, 0]}}});
     },
 
     selectBrand: function (e) {
-        console.log(e)
-
         var brandId = e.currentTarget.dataset.id;
         this.setData({
             brandId: brandId
@@ -211,8 +200,6 @@ Page({
             wxSortPickerData: sortPickerData,
             lastIndex: e.currentTarget.dataset.tag
         });
-
         console.log("End change selected brand");
-        
-    },
+    }
 });

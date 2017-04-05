@@ -50,7 +50,7 @@ Page({
         console.log(this.data.parameters);
     },
 
-    transitionToPositions(){
+    transitionBack(){
         wx.navigateBack();
-    },
+    }
 });

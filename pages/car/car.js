@@ -20,27 +20,7 @@ Page({
         objectId: '',
         queryId: ''
     },
-
-    selectCar2: function () {
-        var that = this;
-        this.data.queryId = '3531';
-        wx.request({
-            url: "https://api.jisuapi.com/car/detail?appkey=15815ae2798d78fa&carid=" + this.data.queryId,
-            header: {
-                'content-type': 'application/json'
-            },
-            success: function (res) {
-                console.log(res.data);
-
-                that.setData({
-                    parameters: res.data.result
-                });
-
-                that.solveColors(res.data.result.body.color);
-            }
-        })
-    },
-
+    
     transitionToQuery: function () {
         wx.switchTab({
             url: '../query/query'

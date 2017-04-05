@@ -39,6 +39,7 @@ icon {
     padding-right: 15px;
     color: #999999;
     font-size: 14px;
+    border-bottom:1rpx solid rgb(230,230,230);
 }
 .weui-cells_after-title {
     margin-top: 0;
@@ -322,7 +323,7 @@ icon {
     height: 2.58823529em;
     min-height: 2.58823529em;
     line-height: 2.58823529em;
-    border-right: 1rpx solid #D9D9D9;
+    border-right: 1 px solid #D9D9D9;
 }
 .weui-select:before {
     content: " ";
