@@ -46,8 +46,10 @@ Page({
                     objectId: car.get('objectId')
                 }))
             .catch(console.error);
+
+        console.log(this.data.parameters);
     },
-    
+
     transitionToPositions(){
         wx.navigateBack();
     },

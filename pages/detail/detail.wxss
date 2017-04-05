@@ -234,3 +234,28 @@
   background-size:cover;
 
 }
+
+.basic-info-view{
+  border: 1px solid darkgray;
+}
+
+.basic-info-titel {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+.basic-info-data{
+  text-align: right;
+  color: #999999;
+}
+
+.basic-info-item{
+  padding:10px 15px;
+  position:relative;
+  display:-webkit-box;
+}
+
+
+.detail_info {
+}

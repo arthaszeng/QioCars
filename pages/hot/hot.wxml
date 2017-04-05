@@ -101,7 +101,7 @@
         热销车型
     </view>
     <view class="c-minheight wx-view_tdlUCs">
-        <navigator class="bottomGrayboder rightGrayboder wx-navigator_n3vQYd" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car" url="../detail/detail?id={{car.objectId}}">
+        <navigator class="bottomGrayboder rightGrayboder wx-navigator_n3vQYd" hover-class="navigator-hover" wx:for="{{cars}}" wx:for-item="car" url="../detail/detail?id={{car.objectId}}" wx:key="">
             <image class="wx-image_HsAX8s" mode="aspectFit" src="{{car.url[0]}}"/>
             <view class="c-minheight c-padding-top" >
                 <text class="c-block wx-text_cjhm6S" >{{car.titel}}</text>

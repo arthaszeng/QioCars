@@ -35,7 +35,7 @@ icon {
 .weui-cells__title {
     margin-top: .77em;
     margin-bottom: .3em;
-    padding-left: 15px;
+    padding-left: 5px;
     padding-right: 15px;
     color: #999999;
     font-size: 14px;

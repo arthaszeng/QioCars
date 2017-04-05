@@ -15,7 +15,7 @@
                 <image bindtap="previewImage" class="swiper-image" mode="aspectFill" src="{{item}}"/>
             </swiper-item>
         </swiper>
-        <text class="c-block wx-text_V55JEt">{{parameters.brand}} {{parameters.name}}</text>
+        <text class="c-block wx-text_V55JEt">{{titel}}</text>
         <view class="wx-brief_view">
             <navigator class="wx-navigator_8s8V9p" hover-class="navigator-hover">
                 <text class="c-block wx-text_EPMInA">￥{{salePrice}}</text>
@@ -26,7 +26,30 @@
                        style="background-image: background-size: contain; background-position: center center; background-repeat: no-repeat; "/>
             </view>
         </view>
-
+        <view class="weui-cells__title">基本信息</view>
+        <view class="detail_info">
+            <view class="weui-flex__item">
+                <view class="detailed-item">
+                    <view class="detailed-item-description">车辆型号</view>
+                    <view class="detailed-item-data">{{parameters.name}}</view>
+                </view>
+            </view>
+            <view class="weui-flex">
+                <view class="weui-flex__item">
+                    <view class="detailed-item">
+                        <view class="detailed-item-description">已行驶里程</view>
+                        <view class="detailed-item-data">{{travelledDistance}}</view>
+                    </view>
+                </view>
+                <view class="weui-flex__item">
+                    <view class="detailed-item">
+                        <view class="detailed-item-description">首次上牌日期</view>
+                        <view class="detailed-item-data">{{date}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-cells__title">配置参数</view>
         <view class="detail_info">
             <view class="page__bd page__bd_spacing">
                 <view class="weui-flex">
@@ -231,7 +254,7 @@
                     </view>
                     <view class="weui-flex">
                         <view class="weui-flex__item" wx:for="{{colors}}" wx:key="">
-                            <view class="detailed-item" >
+                            <view class="detailed-item">
                                 <view class="detailed-item-color" style="background-color:{{item}}; border-radius:0px"/>
                             </view>
                         </view>
