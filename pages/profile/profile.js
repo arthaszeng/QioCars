@@ -3,6 +3,5 @@ var app = getApp();
 
 Page({
     onLoad: function () {
-        console.log("username + " + app.globalData.userInfo.nickName);
     }
 });

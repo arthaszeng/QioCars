@@ -18,7 +18,8 @@ Page({
         date: '',
 
         objectId: '',
-        queryId: ''
+        queryId: '',
+        brandName: ''
     },
 
     selectCar: function () {
@@ -212,9 +213,10 @@ Page({
 
         console.log(query);
         if ('queryid' in query && 'brandname' in query) {
+            console.log("fetched brand name and query ID");
             this.setData({
                 queryId: query.queryid,
-                brandName: query.brandName
+                brandName: query.brandname
             });
             this.selectCar();
         }

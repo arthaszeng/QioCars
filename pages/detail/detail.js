@@ -43,7 +43,8 @@ Page({
                     url: car.get('url'),
                     parameters: car.get('parameters'),
                     queryId: car.get('queryId'),
-                    objectId: car.get('objectId')
+                    objectId: car.get('objectId'),
+                    brandName: car.get('brandName')
                 }))
             .catch(console.error);
 

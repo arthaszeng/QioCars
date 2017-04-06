@@ -45,7 +45,7 @@ Page({
     },
 
     initSelectedBrand: function () {
-        this.selectBrand({currentTarget: {dataset: {id: 3, tag: [0,0]}}})
+        this.selectBrand({currentTarget: {dataset: {id: 3, tag: [0,0,'阿尔法·罗密欧']}}});
     },
     
     fetchBrandsViaAV: function () {
