@@ -16,3 +16,42 @@
 .userinfo-nickname {
   color: #aaa;
 }
+
+.section_gap {
+  margin-top: 10px;
+}
+
+.section {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.section__title {
+ height: 35px;
+ line-height: 35px;
+ border-bottom: 1px lightgray solid; 
+ font-size: 15px;
+ width: 94%;
+ margin-left: 3%;
+ margin-right: 3%; 
+}
+
+.setction_item {
+  display: flex;
+  flex-flow: column wrap;
+  align-items:center;
+  flex: 25%;
+}
+
+.item_img{
+  height: 25px;
+  width: 25px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+}
+
+.setction_item label{
+  color: darkgray;
+  font-size: 11px;
+}

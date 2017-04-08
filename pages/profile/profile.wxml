@@ -3,4 +3,39 @@
 <image class="userinfo-avatar" mode="{{item.mode}}" src="{{src}}"></image>
 <label class="userinfo-nickname">{{nickName}}</label>
 </view>
+
+<form class="mine">
+ <view class="section__title">我的</view>
+  <view class="section section_gap">
+   
+    <view class="setction_item">
+      <image src="{{src}}" class="item_img"></image>
+      <label>我的评论</label>
+    </view>
+    <view class="setction_item">
+      <image src="{{src}}" class="item_img"></image>
+      <label>我的点赞</label>
+    </view>
+    <view class="setction_item">
+      <image src="{{src}}" class="item_img"></image>
+      <label>我的收藏</label>
+    </view>
+    <view class="setction_item">
+      <image src="{{src}}" class="item_img"></image>
+      <label>浏览记录</label>
+    </view>
+  </view>
+
+  <view class="section section_gap">
+    <view class="section__title">设置</view>
+    <view class="setction_item">
+      <image src="{{src}}" class="item_img"></image>
+      <label>关于</label>
+    </view>
+    <view class="setction_item">
+      <image src="{{src}}" class="item_img"></image>
+      <label>清除缓存</label>
+    </view>
+  </view>
+</form>
 </view>
