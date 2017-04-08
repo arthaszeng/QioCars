@@ -7,7 +7,7 @@
 <form class="mine">
  <view class="section__title">我的</view>
   <view class="section section_gap">
-   
+
     <view class="setction_item">
       <image src="{{src}}" class="item_img"></image>
       <label>我的评论</label>

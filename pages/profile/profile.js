@@ -7,10 +7,7 @@ Page({
         nickName: ''
     },
     onLoad: function () {
-        console.log("username + " + app.globalData.userInfo.nickName);
-        console.log("username + " + app.globalData.userInfo.avataUrl);
-        this.setBasicUserInfo(app.globalData.userInfo);
-        
+      this.setBasicUserInfo(app.globalData.userInfo);
     },
     setBasicUserInfo(userInfo) {
         this.setData({
