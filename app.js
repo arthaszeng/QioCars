@@ -21,6 +21,10 @@ App({
         ).then(user =>
             user ? user : AV.User.loginWithWeapp()
         ).then((user) => {
+            wx.setStorage({
+                key: 'user',
+                data: user.toJSON()
+            });
             this.judgeRole();
             this.globalData.user = user.toJSON();
             this.getUserInfo()

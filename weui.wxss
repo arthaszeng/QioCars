@@ -19,7 +19,7 @@ icon {
     top: 0;
     right: 0;
     height: 1px;
-    border-top: 1rpx solid #D9D9D9;
+    /*border-top: 1rpx solid #D9D9D9;*/
     color: #D9D9D9;
 }
 .weui-cells:after {

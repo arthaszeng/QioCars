@@ -8,7 +8,7 @@
     border: none;
     background-color: #000000;
     color: #fff;
-    margin: 40 rpx 80 rpx 40 rpx 80 rpx;
+    border-radius: 0px;
 }
 
 .detail-box {
