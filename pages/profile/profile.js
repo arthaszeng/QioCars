@@ -7,7 +7,7 @@ Page({
         nickName: ''
     },
     onLoad: function () {
-      this.setBasicUserInfo(app.globalData.userInfo);  
+      this.setBasicUserInfo(app.globalData.userInfo);
     },
     setBasicUserInfo(userInfo) {
         this.setData({
